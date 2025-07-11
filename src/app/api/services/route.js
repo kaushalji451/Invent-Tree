@@ -1,6 +1,6 @@
 import connectMongo from "../../../lib/db";
 import cloudinary from "../../../lib/cloudinary";
-import Blog from "../../../models/blog"
+import Service from "../../../models/service";
 import { writeFile } from "fs/promises";
 import path from "path";
 import os from "os";
@@ -13,7 +13,7 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
     await connectMongo();
     try {
-        let data = await Blog.find({});
+        let data = await Service.find({});
         if (!data) {
             return NextResponse.json({ message: "Not found." }, { status: 404 });
         }
@@ -50,37 +50,29 @@ export async function POST(req) {
         await writeFile(tmpPath, buffer);
 
         const uploadRes = await cloudinary.uploader.upload(tmpPath, {
-            folder: "blogs",
+            folder: "services",
         });
 
         uploadedImageUrl = uploadRes.secure_url;
     }
 
-    const blogData = {
+
+    const serviceData = {
         title: {
             en: formData.get("titleEn"),
             hi: formData.get("titleHi"),
         },
-        slug: formData.get("slug"),
-        content: {
-            en: formData.get("contentEn"),
-            hi: formData.get("contentHi"),
+        description: {
+            en: formData.get("descriptionEn"),
+            hi: formData.get("descriptionHi"),
         },
-        excerpt: {
-            en: formData.get("excerptEn"),
-            hi: formData.get("excerptHi"),
-        },
-        image: uploadedImageUrl,
         category: formData.get("category"),
-        tags: formData.get("tags")?.split(",") || [],
-        author: formData.get("author"),
-        published: formData.get("published") === "true",
-        publishedAt: new Date(),
-        language: formData.get("language"),
-    };
-    console.log("this is test ", blogData);
+        image: uploadedImageUrl,
+        isActive: formData.get("isActive"),
+    }
+    console.log("this is test ", serviceData);
     try {
-        const saved = await Blog.create(blogData);
+        const saved = await Service.create(serviceData);
         console.log("this is saved", saved);
         return NextResponse.json({ message: "Blog created", data: saved }, { status: 200 });
     } catch (err) {
@@ -98,10 +90,10 @@ export async function DELETE(req) {
         return NextResponse.json({ message: 'Invalid blog ID' }, { status: 400 });
     }
     try {
-        let data = await Blog.findByIdAndDelete({ _id: id });
+        let data = await Service.findByIdAndDelete({ _id: id });
         console.log("this is deleted", data);
         if (data.image == undefined) {
-            console.log("no blog found");
+            console.log("no Service found");
             return NextResponse.json({ message: "No Blog Found. " }, { status: 400 });
         }
         await deleteImage(data.image);
@@ -117,7 +109,7 @@ export async function PATCH(req) {
 
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
-    console.log("this is id",id);
+    console.log("this is id", id);
 
     const formData = await req.formData();
     const imageFile = formData.get("image");
@@ -136,56 +128,47 @@ export async function PATCH(req) {
         await writeFile(tmpPath, buffer);
 
         const uploadRes = await cloudinary.uploader.upload(tmpPath, {
-            folder: "blogs",
+            folder: "services",
         });
 
         uploadedImageUrl = uploadRes.secure_url;
     }
-    console.log("this is upload image",uploadedImageUrl);
+    console.log("this is upload image", uploadedImageUrl);
 
     // Construct updated blog data
-    const blogData = {
+    const serviceData = {
         title: {
             en: formData.get("titleEn"),
             hi: formData.get("titleHi"),
         },
-        slug: formData.get("slug"),
-        content: {
-            en: formData.get("contentEn"),
-            hi: formData.get("contentHi"),
-        },
-        excerpt: {
-            en: formData.get("excerptEn"),
-            hi: formData.get("excerptHi"),
+        description: {
+            en: formData.get("titleEn"),
+            hi: formData.get("titleHi"),
         },
         category: formData.get("category"),
-        tags: formData.get("tags")?.split(",") || [],
-        author: formData.get("author"),
-        published: formData.get("published") === "true",
-        publishedAt: new Date(),
-        language: formData.get("language"),
-    };
+        isActive: formData.get("isActive"),
+    }
 
     if (uploadedImageUrl) {
-        blogData.image = uploadedImageUrl;
+        serviceData.image = uploadedImageUrl;
     }
-    console.log("this is blog data",blogData);
+    console.log("this is serviceData data", serviceData);
     try {
-        // Get current blog before updating (to access old image)
-        const oldBlog = await Blog.findById(id);
-        console.log("this is old blog",oldBlog);
-        if (!oldBlog) {
-            return NextResponse.json({ message: "No Blog Found." }, { status: 404 });
+        // Get current serviceData before updating (to access old image)
+        const oldservice = await Service.findById(id);
+        console.log("this is old service", oldservice);
+        if (!oldservice) {
+            return NextResponse.json({ message: "No serviceData Found." }, { status: 404 });
         }
 
         // Delete old image if a new one was uploaded
-        if (uploadedImageUrl && oldBlog.image) {
-            await deleteImage(oldBlog.image);
+        if (uploadedImageUrl && oldservice.image) {
+            await deleteImage(oldservice.image);
         }
 
-        const updatedBlog = await Blog.findByIdAndUpdate(id, blogData, { new: true });
-        console.log("this is updatedBlog",updatedBlog);
-        return NextResponse.json({ message: "Blog Updated.", data: updatedBlog }, { status: 200 });
+        const updatedserive = await Service.findByIdAndUpdate(id, serviceData, { new: true });
+        console.log("this is updatedserive", updatedserive);
+        return NextResponse.json({ message: "Serive Updated.", data: updatedserive }, { status: 200 });
     } catch (err) {
         console.log(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
