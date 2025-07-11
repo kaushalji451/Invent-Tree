@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 # exapme data for blog 
-<!-- {
+{
   "title": {
     "en": "Booth-Level Analytics in 2024 Elections",
     "hi": "2024 चुनावों में बूथ-स्तरीय विश्लेषण"
@@ -58,11 +58,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
   "published": true,
   "publishedAt": "2025-07-11T10:20:00Z",
   "language": "both",
-} -->
+}
 
 
 # exapme data for contact form 
-<!-- {
+{
   "name": "Rahul Singh",
   "email": "rahul@newvision.in",
   "phone": "7891234567",
@@ -72,4 +72,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
   "language": "en",
   "createdAt": "2025-07-11T08:57:03.718Z",
   "updatedAt": "2025-07-11T08:57:03.718Z"
-}  -->
+} 
