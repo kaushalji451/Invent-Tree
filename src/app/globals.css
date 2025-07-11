@@ -1,2 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-persian-green-50: #effefa;
+  --color-persian-green-100: #cafdf2;
+  --color-persian-green-200: #95fae8;
+  --color-persian-green-300: #58f0d9;
+  --color-persian-green-400: #26dbc6;
+  --color-persian-green-500: #0dbfad;
+  --color-persian-green-600: #07998d;
+  --color-persian-green-700: #0a7b73;
+  --color-persian-green-800: #0e615d;
+  --color-persian-green-900: #10514c;
+  --color-persian-green-950: #023130;
+}
