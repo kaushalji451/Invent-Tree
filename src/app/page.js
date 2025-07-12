@@ -6,7 +6,11 @@ const Home = () => {
     <div>
       <Navbar
       ></Navbar>
-      <h1>this is page</h1>
+      <div className="flex h-screen w-full items-center justify-center">
+        <h1 className="text-4xl text-center font-regular">
+          OSWALD
+        </h1>
+        </div>
     </div>
   );
 };
