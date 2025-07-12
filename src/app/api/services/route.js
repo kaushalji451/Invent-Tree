@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Types } from 'mongoose';
 import deleteImage from "../../../utils/destroyImage"
 import { NextResponse } from "next/server";
+import { validateFormData } from "../../../lib/middleware/validateFormData";
 
 
 export async function GET(req) {
@@ -34,8 +35,16 @@ export async function GET(req) {
 
 export async function POST(req) {
     await connectMongo();
+    const validationResult = await validateFormData(req);
 
-    const formData = await req.formData();
+    if (validationResult.error) {
+        return NextResponse.json(
+            { error: validationResult.message },
+            { status: 400 }
+        );
+    }
+
+    const formData = validationResult.data;
 
     const imageFile = formData.get("image");
 
@@ -110,8 +119,16 @@ export async function PATCH(req) {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     console.log("this is id", id);
+    const validationResult = await validateFormData(req);
 
-    const formData = await req.formData();
+    if (validationResult.error) {
+        return NextResponse.json(
+            { error: validationResult.message },
+            { status: 400 }
+        );
+    }
+
+    const formData = validationResult.data;
     const imageFile = formData.get("image");
 
     console.log(formData);

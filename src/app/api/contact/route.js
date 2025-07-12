@@ -3,16 +3,18 @@ import connectMongo from "../../../lib/db"
 import Contact from "../../../models/contact"
 import { NextResponse } from "next/server";
 import sendEmailforContactus from "../../../utils/email";
+import { validateFormData } from "../../../lib/middleware/validateFormData"
+
 
 export async function GET(req) {
   await connectMongo();
   try {
     let data = await Contact.find({});
     if (!data) {
-      return NextResponse.json({ message: "Not found." }, { status: 404 });
+      return NextResponse.json({ message: "Contacts Not found." }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "Data Fetched Successfully.",data : data },
+      { message: "Data Fetched Successfully.", data: data },
       { status: 200 }
     );
   } catch (err) {
@@ -26,15 +28,23 @@ export async function GET(req) {
 
 export async function POST(req) {
   await connectMongo();
-  const formData = await req.formData();
-  const dataObj = Object.fromEntries(formData.entries());
+  const validationResult = await validateFormData(req);
+
+  if (validationResult.error) {
+    return NextResponse.json(
+      { error: validationResult.message },
+      { status: 400 }
+    );
+  }
+
+  const dataObj = validationResult.data;
   try {
     let data = await Contact.create(dataObj);
-    if(data){
-    await sendEmailforContactus(data);
+    if (data) {
+      await sendEmailforContactus(data);
     }
     return NextResponse.json(
-      { message: "Data Added Successfully.", data : data },
+      { message: "Data Added Successfully.", data: data },
       { status: 200 }
     );
   } catch (error) {

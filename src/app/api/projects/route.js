@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Types } from 'mongoose';
 import deleteImage from "../../../utils/destroyImage"
 import { NextResponse } from "next/server";
-
+import { validateFormData } from "../../../lib/middleware/validateFormData";
 
 export async function GET(req) {
     await connectMongo();
@@ -18,7 +18,7 @@ export async function GET(req) {
             return NextResponse.json({ message: "Not found." }, { status: 404 });
         }
         return NextResponse.json(
-            { message: "Data Fetched Successfully.",data: data },
+            { message: "Data Fetched Successfully.", data: data },
             { status: 200 }
         );
     } catch (err) {
@@ -35,7 +35,16 @@ export async function GET(req) {
 export async function POST(req) {
     await connectMongo();
 
-    const formData = await req.formData();
+    const validationResult = await validateFormData(req);
+
+    if (validationResult.error) {
+        return NextResponse.json(
+            { error: validationResult.message },
+            { status: 400 }
+        );
+    }
+
+    const formData = validationResult.data;
 
     const imageFile = formData.get("image");
 
@@ -108,9 +117,17 @@ export async function PATCH(req) {
 
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
-    console.log("this is id",id);
+    console.log("this is id", id);
+    const validationResult = await validateFormData(req);
 
-    const formData = await req.formData();
+    if (validationResult.error) {
+        return NextResponse.json(
+            { error: validationResult.message },
+            { status: 400 }
+        );
+    }
+
+    const formData = validationResult.data;
     const imageFile = formData.get("image");
 
     console.log(formData);
@@ -132,7 +149,7 @@ export async function PATCH(req) {
 
         uploadedImageUrl = uploadRes.secure_url;
     }
-    console.log("this is upload image",uploadedImageUrl);
+    console.log("this is upload image", uploadedImageUrl);
 
     // Construct updated Project data
     const projectData = {
@@ -152,11 +169,11 @@ export async function PATCH(req) {
     if (uploadedImageUrl) {
         projectData.image = uploadedImageUrl;
     }
-    console.log("this is Project data",projectData);
+    console.log("this is Project data", projectData);
     try {
         // Get current Project before updating (to access old image)
         const oldProject = await Project.findById(id);
-        console.log("this is old Project",oldProject);
+        console.log("this is old Project", oldProject);
         if (!oldProject) {
             return NextResponse.json({ message: "No Project Found." }, { status: 404 });
         }
@@ -167,7 +184,7 @@ export async function PATCH(req) {
         }
 
         const updatedProject = await Project.findByIdAndUpdate(id, projectData, { new: true });
-        console.log("this is updatedProject",updatedProject);
+        console.log("this is updatedProject", updatedProject);
         return NextResponse.json({ message: "Project Updated.", data: updatedProject }, { status: 200 });
     } catch (err) {
         console.log(err);

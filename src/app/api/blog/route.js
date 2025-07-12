@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Types } from 'mongoose';
 import deleteImage from "../../../utils/destroyImage"
 import { NextResponse } from "next/server";
+import { validateFormData } from "../../../lib/middleware/validateFormData"
 
 
 export async function GET(req) {
@@ -35,7 +36,16 @@ export async function GET(req) {
 export async function POST(req) {
     await connectMongo();
 
-    const formData = await req.formData();
+    const validationResult = await validateFormData(req);
+
+    if (validationResult.error) {
+        return NextResponse.json(
+            { error: validationResult.message },
+            { status: 400 }
+        );
+    }
+
+    const formData = validationResult.data;
 
     const imageFile = formData.get("image");
 
@@ -117,9 +127,17 @@ export async function PATCH(req) {
 
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
-    console.log("this is id",id);
+    console.log("this is id", id);
+    const validationResult = await validateFormData(req);
 
-    const formData = await req.formData();
+    if (validationResult.error) {
+        return NextResponse.json(
+            { error: validationResult.message },
+            { status: 400 }
+        );
+    }
+
+    const formData = validationResult.data;
     const imageFile = formData.get("image");
 
     console.log(formData);
@@ -141,7 +159,7 @@ export async function PATCH(req) {
 
         uploadedImageUrl = uploadRes.secure_url;
     }
-    console.log("this is upload image",uploadedImageUrl);
+    console.log("this is upload image", uploadedImageUrl);
 
     // Construct updated blog data
     const blogData = {
@@ -169,11 +187,11 @@ export async function PATCH(req) {
     if (uploadedImageUrl) {
         blogData.image = uploadedImageUrl;
     }
-    console.log("this is blog data",blogData);
+    console.log("this is blog data", blogData);
     try {
         // Get current blog before updating (to access old image)
         const oldBlog = await Blog.findById(id);
-        console.log("this is old blog",oldBlog);
+        console.log("this is old blog", oldBlog);
         if (!oldBlog) {
             return NextResponse.json({ message: "No Blog Found." }, { status: 404 });
         }
@@ -184,7 +202,7 @@ export async function PATCH(req) {
         }
 
         const updatedBlog = await Blog.findByIdAndUpdate(id, blogData, { new: true });
-        console.log("this is updatedBlog",updatedBlog);
+        console.log("this is updatedBlog", updatedBlog);
         return NextResponse.json({ message: "Blog Updated.", data: updatedBlog }, { status: 200 });
     } catch (err) {
         console.log(err);
