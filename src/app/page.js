@@ -1,13 +1,18 @@
-import Navbar from '../components/Navbar'
-import React from 'react'
+import Navbar from "../components/Navbar";
+import React from "react";
 
 const Home = () => {
   return (
     <div>
-      <Navbar className={"h-10 w-full bg-slate-300"}></Navbar>
-      <h1>this is page</h1>
+      <Navbar
+      ></Navbar>
+      <div className="flex h-screen w-full items-center justify-center">
+        <h1 className="text-4xl text-center font-regular">
+          OSWALD
+        </h1>
+        </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
