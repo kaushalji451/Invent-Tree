@@ -14,7 +14,7 @@ const navItems = [
   { title: "About", href: "/about" },
   { title: "Services", href: "/services" },
   { title: "Case Study", href: "/caseStudy" },
-  { title: "Blog", href: "/blog" },
+  { title: "Blog", href: "/blogs" },
 ];
 
 const Navbar = ({ className }) => {
@@ -23,7 +23,7 @@ const Navbar = ({ className }) => {
   return (
     <div
       className={cn(
-        "absolute flex h-24 w-full items-center justify-between px-4 md:px-6 ",
+        "fixed top-0 left-0 z-50 flex h-24 w-full items-center justify-between px-4 md:px-6  ",
         className,
       )}
     >
@@ -60,13 +60,15 @@ const Navbar = ({ className }) => {
 
               <div className="mt-12 flex w-full flex-col items-start justify-center gap-y-3 p-4 md:flex-row md:items-center md:justify-center md:gap-x-6">
                 {navItems.map((item) => (
-                  <div
+                  <Link
+                  href={item.href}
                     key={item.title}
+                    onClick={() => setOpen(false)}
                     className="hover:text-persian-green-600 flex w-full cursor-pointer items-center justify-between p-2 text-2xl font-semibold text-neutral-700 transition-all duration-200 hover:scale-105 md:w-auto md:justify-center md:text-xl  dark:text-neutral-100"
                   >
                     {item.title}
                     <SlArrowRight className="ml-2 inline md:hidden" />
-                  </div>
+                  </Link>
                 ))}
               </div>
               {/* */}
@@ -74,6 +76,7 @@ const Navbar = ({ className }) => {
                 <Link
                   href="#"
                   className="flex items-center justify-start gap-x-3 text-base font-medium text-neutral-700 transition-transform duration-200 hover:scale-105"
+                  onclick={() => setOpen(false)}
                 >
                   <FaMessage className="text-persian-green-700 dark:text-persian-green-100 text-xl" />
                   <span className="md:text-2xl text-persian-green-700 dark:text-persian-green-100 text-xl">Contact Us By Email</span>
