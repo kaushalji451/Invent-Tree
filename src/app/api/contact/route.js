@@ -12,13 +12,13 @@ export async function GET(req) {
       return NextResponse.json({ message: "Not found." }, { status: 404 });
     }
     return NextResponse.json(
-      { message: data },
+      { message: "Data Fetched Successfully.",data : data },
       { status: 200 }
     );
   } catch (err) {
-    console.error("Fetch contact details error:", err);
+    console.error("Fetch Contact Details Error:", err);
     return NextResponse.json(
-      { error: "Failed to fetch contact details" },
+      { error: "Failed to Fetch Contact Details" },
       { status: 500 }
     );
   }
@@ -34,7 +34,7 @@ export async function POST(req) {
     await sendEmailforContactus(data);
     }
     return NextResponse.json(
-      { message: data },
+      { message: "Data Added Successfully.", data : data },
       { status: 200 }
     );
   } catch (error) {

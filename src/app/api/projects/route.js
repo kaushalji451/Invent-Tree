@@ -18,13 +18,13 @@ export async function GET(req) {
             return NextResponse.json({ message: "Not found." }, { status: 404 });
         }
         return NextResponse.json(
-            { message: data },
+            { message: "Data Fetched Successfully.",data: data },
             { status: 200 }
         );
     } catch (err) {
-        console.error("Fetch Project posts error:", err);
+        console.error("Error While Fetching Project Posts", err);
         return NextResponse.json(
-            { error: "Failed to fetch Project posts." },
+            { error: "Failed to Fetch Project Posts." },
             { status: 500 }
         );
     }
@@ -73,7 +73,7 @@ export async function POST(req) {
     try {
         const saved = await Project.create(projectData);
         console.log("this is saved", saved);
-        return NextResponse.json({ message: "Project created", data: saved }, { status: 200 });
+        return NextResponse.json({ message: "Project Created Successully.", data: saved }, { status: 200 });
     } catch (err) {
         console.log(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
