@@ -39,7 +39,6 @@ export async function GET(req) {
 export async function POST(req) {
   await connectMongo();
   const body = await req.json();
-  console.log("this is body", body);
   const parsedData = blogPostSchema.safeParse(body);
   if (!parsedData.success) {
     return NextResponse.json(
@@ -61,7 +60,6 @@ export async function POST(req) {
       published: true,
     });
 
-    console.log("this is blogcreated", blogcreated);
     return NextResponse.json(
       {
         message: "blog is created",
@@ -85,9 +83,7 @@ export async function DELETE(req) {
   }
   try {
     let data = await Blog.findByIdAndDelete({ _id: id });
-    console.log("this is deleted", data);
     if (data.image == undefined) {
-      console.log("no blog found");
       return NextResponse.json({ message: "No Blog Found. " }, { status: 400 });
     }
     await deleteImage(data.image);
@@ -96,7 +92,7 @@ export async function DELETE(req) {
       { status: 200 },
     );
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json({ error: err.message }, { status: 400 });
   }
 }
@@ -106,7 +102,7 @@ export async function PATCH(req) {
 
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
-  console.log("this is id", id);
+  console.error("this is id", id);
   const validationResult = await validateFormData(req);
 
   if (validationResult.error) {
@@ -119,7 +115,6 @@ export async function PATCH(req) {
   const formData = validationResult.data;
   const imageFile = formData.get("image");
 
-  console.log(formData);
 
   let uploadedImageUrl = "";
 
@@ -138,7 +133,6 @@ export async function PATCH(req) {
 
     uploadedImageUrl = uploadRes.secure_url;
   }
-  console.log("this is upload image", uploadedImageUrl);
 
   // Construct updated blog data
   const blogData = {
@@ -166,11 +160,9 @@ export async function PATCH(req) {
   if (uploadedImageUrl) {
     blogData.image = uploadedImageUrl;
   }
-  console.log("this is blog data", blogData);
   try {
     // Get current blog before updating (to access old image)
     const oldBlog = await Blog.findById(id);
-    console.log("this is old blog", oldBlog);
     if (!oldBlog) {
       return NextResponse.json({ message: "No Blog Found." }, { status: 404 });
     }
@@ -183,13 +175,12 @@ export async function PATCH(req) {
     const updatedBlog = await Blog.findByIdAndUpdate(id, blogData, {
       new: true,
     });
-    console.log("this is updatedBlog", updatedBlog);
     return NextResponse.json(
       { message: "Blog Updated.", data: updatedBlog },
       { status: 200 },
     );
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

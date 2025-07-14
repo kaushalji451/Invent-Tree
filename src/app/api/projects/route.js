@@ -78,13 +78,11 @@ export async function POST(req) {
         category: formData.get("category"),
         featured: formData.get("featured") === "true",
     };
-    console.log("this is test ", projectData);
     try {
         const saved = await Project.create(projectData);
-        console.log("this is saved", saved);
         return NextResponse.json({ message: "Project Created Successully.", data: saved }, { status: 200 });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
@@ -99,7 +97,6 @@ export async function DELETE(req) {
     }
     try {
         let data = await Project.findByIdAndDelete({ _id: id });
-        console.log("this is deleted", data);
         if (data.image == undefined) {
             console.log("no Project found");
             return NextResponse.json({ message: "No Project Found. " }, { status: 400 });
@@ -107,7 +104,7 @@ export async function DELETE(req) {
         await deleteImage(data.image);
         return NextResponse.json({ message: "Project Deleted Successfully." }, { status: 200 });
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return NextResponse.json({ error: err.message }, { status: 400 });
     }
 }
@@ -187,7 +184,7 @@ export async function PATCH(req) {
         console.log("this is updatedProject", updatedProject);
         return NextResponse.json({ message: "Project Updated.", data: updatedProject }, { status: 200 });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }

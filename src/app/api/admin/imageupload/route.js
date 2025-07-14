@@ -17,10 +17,9 @@ import { v2 as cloudinary } from 'cloudinary';
            }
        )
        .catch((error) => {
-           console.log(error);
+           console.error(error);
        });
     
-    console.log(uploadResult);
     
     // Optimize delivery by resizing and applying auto-format and auto-quality
     const optimizeUrl = cloudinary.url('shoes', {
@@ -28,7 +27,6 @@ import { v2 as cloudinary } from 'cloudinary';
         quality: 'auto'
     });
     
-    console.log(optimizeUrl);
     
     // Transform the image: auto-crop to square aspect_ratio
     const autoCropUrl = cloudinary.url('shoes', {
@@ -38,5 +36,4 @@ import { v2 as cloudinary } from 'cloudinary';
         height: 500,
     });
     
-    console.log(autoCropUrl);    
 })();

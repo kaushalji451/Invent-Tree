@@ -3,7 +3,7 @@
 import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { signupSchema } from "../../../schema/auth.schema";
+import { signupSchema } from "../../../../schema/auth.schema";
 const SignUp = () => {
   const form = useForm({
     resolver: zodResolver(signupSchema),
