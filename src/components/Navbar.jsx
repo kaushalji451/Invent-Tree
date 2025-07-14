@@ -1,8 +1,6 @@
 "use client";
 import cn from "../utils/cn";
 import React, { useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoClose } from "react-icons/io5";
 import { motion, AnimatePresence } from "motion/react";
 import { SlArrowRight } from "react-icons/sl";
 import { FaMessage } from "react-icons/fa6";
@@ -23,16 +21,16 @@ const Navbar = ({ className }) => {
   return (
     <div
       className={cn(
-        "fixed top-0 left-0 z-50 flex h-24 w-full items-center justify-between px-4 md:px-6  ",
+        "fixed top-0 left-0 z-50 flex h-24 w-full items-center justify-between px-4 md:px-6",
         className,
       )}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-semibold ">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-semibold dark:bg-black dark:text-white">
         logo
       </div>
 
-      <div className="z-50 cursor-pointer flex justify-center items-center gap-x-3 p-2 text-2xl text-black dark:text-white">
-        <ModeToggle />
+      <div className="z-50 flex cursor-pointer items-center justify-center gap-x-3 p-2 text-2xl text-black dark:text-white">
+        <ModeToggle className={""}/>
         <MenuButton
           isOpen={open}
           onClick={() => setOpen(!open)}
@@ -41,6 +39,7 @@ const Navbar = ({ className }) => {
           transition={{ ease: "easeOut", duration: 0.2 }}
           width="64"
           height="24"
+          className="h-[24] max-sm:w-[34]"
         />
       </div>
 
@@ -53,18 +52,18 @@ const Navbar = ({ className }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="flex w-screen flex-col items-center justify-center px-4 md:mx-auto md:max-w-7xl">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-sm font-semibold">
+            <div className="mt-28 flex w-screen flex-col items-center justify-center px-4 md:mx-auto md:max-w-7xl">
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-sm font-semibold dark:bg-black dark:text-white">
                 logo
               </div>
 
               <div className="mt-12 flex w-full flex-col items-start justify-center gap-y-3 p-4 md:flex-row md:items-center md:justify-center md:gap-x-6">
                 {navItems.map((item) => (
                   <Link
-                  href={item.href}
+                    href={item.href}
                     key={item.title}
                     onClick={() => setOpen(false)}
-                    className="hover:text-persian-green-600 flex w-full cursor-pointer items-center justify-between p-2 text-2xl font-semibold text-neutral-700 transition-all duration-200 hover:scale-105 md:w-auto md:justify-center md:text-xl  dark:text-neutral-100"
+                    className="hover:text-persian-green-600 flex w-full cursor-pointer items-center justify-between p-2 text-2xl font-semibold text-neutral-700 transition-all duration-200 hover:scale-105 md:w-auto md:justify-center md:text-xl dark:text-neutral-100"
                   >
                     {item.title}
                     <SlArrowRight className="ml-2 inline md:hidden" />
@@ -76,19 +75,21 @@ const Navbar = ({ className }) => {
                 <Link
                   href="#"
                   className="flex items-center justify-start gap-x-3 text-base font-medium text-neutral-700 transition-transform duration-200 hover:scale-105"
-                  onclick={() => setOpen(false)}
+                  onClick={() => setOpen(false)}
                 >
                   <FaMessage className="text-persian-green-700 dark:text-persian-green-100 text-xl" />
-                  <span className="md:text-2xl text-persian-green-700 dark:text-persian-green-100 text-xl">Contact Us By Email</span>
+                  <span className="text-persian-green-700 dark:text-persian-green-100 text-xl md:text-2xl">
+                    Contact Us By Email
+                  </span>
                 </Link>
 
                 <Link
                   href="#"
                   className="flex flex-col items-center justify-center p-2 text-base font-medium text-neutral-700 transition-transform duration-200 hover:scale-105 md:items-start md:text-lg"
                 >
-                  <p className="text-persian-green-600 flex items-center gap-x-2 text-xl font-semibold md:text-4xl  dark:text-persian-green-100 ">
+                  <p className="text-persian-green-600 dark:text-persian-green-100 flex items-center gap-x-2 text-xl font-semibold md:text-4xl">
                     TEL{" "}
-                    <span className="text-neutral-700  dark:text-neutral-100 md:text-4xl">
+                    <span className="text-neutral-700 md:text-4xl dark:text-neutral-100">
                       99999999999
                     </span>
                   </p>

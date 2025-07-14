@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, Transition, SVGMotionProps } from "framer-motion";
+import cn from "../utils/cn";
 
 
 const MenuButton = ({
@@ -10,7 +11,8 @@ const MenuButton = ({
   color = "#000",
   transition = null,
   lineProps = null,
-  ...props
+ className,
+ ...props
 }) => {
   const variant = isOpen ? "opened" : "closed";
   const top = {
@@ -61,6 +63,7 @@ const MenuButton = ({
       width={width}
       height={height}
       {...props}
+      className= {cn("",className)}
     >
       <motion.line
         x1="0"

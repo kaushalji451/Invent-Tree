@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { string } from "zod";
 
 const blogSchema = new mongoose.Schema(
   {
     title: {
-      en: { type: String, required: true },
-      hi: { type: String },
+      type: String,
+      required: true,
     },
     slug: {
       type: String,
@@ -12,15 +13,12 @@ const blogSchema = new mongoose.Schema(
       unique: true,
     },
     content: {
-      en: { type: String, required: true }, // Markdown
-      hi: { type: String },
-    },
-    excerpt: {
-      en: { type: String },
-      hi: { type: String },
+      type: String,
+      required: true, // Markdown
     },
     image: {
-      type: String, // Cloudinary URL or Firebase URL
+      type:string,
+      required:true, // Cloudinary URL or Firebase URL
     },
     category: {
       type: String,
@@ -35,13 +33,14 @@ const blogSchema = new mongoose.Schema(
     },
     publishedAt: {
       type: Date,
+      default: Date.now(),
     },
     language: {
       type: String, // 'en', 'hi', or 'both'
       default: "en",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
-
-export default mongoose.models.Blog || mongoose.model("Blog", blogSchema);
+const blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
+export default blog;

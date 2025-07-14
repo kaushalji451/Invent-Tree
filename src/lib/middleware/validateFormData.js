@@ -12,8 +12,7 @@ export async function validateFormData(req) {
     };
   }
 
-  const formData = await req.formData();
-  const dataObj = Object.fromEntries(formData.entries());
+  const dataObj = await req.json();
 
   if (Object.keys(dataObj).length === 0) {
     return {

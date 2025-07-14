@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "axios": "^1.10.0",
+    "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.0",
+    "froala-editor": "^4.5.2",
     "mongoose": "^8.16.3",
     "motion": "^12.23.3",
     "next": "15.3.5",
@@ -20,8 +23,15 @@
     "nodemailer": "^7.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.3.1"
+    "react-markdown": "^10.1.0",
+    "react-mde": "^11.5.0",
+    "server-only": "^0.0.1",
+    "showdown": "^2.1.0",
+    "tailwind-merge": "^3.3.1",
+    "uuid": "^11.1.0",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
