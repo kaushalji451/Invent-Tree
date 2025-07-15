@@ -29,7 +29,7 @@ export async function GET(req) {
 export async function POST(req) {
   await connectMongo();
   const validationResult = await validateFormData(req);
-
+  
   if (validationResult.error) {
     return NextResponse.json(
       { error: validationResult.message },

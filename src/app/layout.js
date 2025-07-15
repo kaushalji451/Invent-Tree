@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { Oswald } from "next/font/google";
 import { ThemeProviders } from "../components/ThemeProvider";
 import Container from "../components/container";
+import Footer from "../components/Footer";
 
 const OswaldFont = Oswald({
   weight: ["300", "400"],
@@ -25,7 +26,9 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
          {children}
+         <Footer/>
         </ThemeProviders>
       </body>
     </html>

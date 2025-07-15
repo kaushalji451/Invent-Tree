@@ -24,6 +24,7 @@ const Login = () => {
       alert("Login failed");
     }
     if (result?.url) {
+      console.log(result.url);
       router.push("/admin/dashboard");
     }
   };

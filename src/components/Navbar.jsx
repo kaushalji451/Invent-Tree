@@ -7,13 +7,17 @@ import { FaMessage } from "react-icons/fa6";
 import Link from "next/link";
 import { MenuButton } from "./menuButton";
 import { ModeToggle } from "../components/toggle-button";
+import ServicePost from "../app/service/ServicePost";  // Importing the ServicePost component
 const navItems = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },
-  { title: "Services", href: "/services" },
+  { title: "Services", href: "/service" },
   { title: "Case Study", href: "/caseStudy" },
   { title: "Blog", href: "/blogs" },
+  { title: "Projects", href: "/projects" },
 ];
+
+
 
 const Navbar = ({ className }) => {
   const [open, setOpen] = useState(false);
@@ -70,10 +74,16 @@ const Navbar = ({ className }) => {
                   </Link>
                 ))}
               </div>
+
+                <div className="mt-12 flex w-full flex-col items-start justify-center gap-y-3 p-4 md:flex-row md:items-center md:justify-center md:gap-x-6">
+               <ServicePost/>
+              </div>
+
+
               {/* */}
               <div className="mt-8 flex flex-col items-center justify-center gap-y-6 px-4 md:mt-10 md:flex-row md:gap-x-20">
                 <Link
-                  href="#"
+                  href="/contact"
                   className="flex items-center justify-start gap-x-3 text-base font-medium text-neutral-700 transition-transform duration-200 hover:scale-105"
                   onClick={() => setOpen(false)}
                 >

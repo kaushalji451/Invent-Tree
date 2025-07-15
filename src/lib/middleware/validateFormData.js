@@ -1,4 +1,3 @@
-// lib/middleware/validateFormData.js
 export async function validateFormData(req) {
   const contentType = req.headers.get("content-type") || "";
 
@@ -12,7 +11,12 @@ export async function validateFormData(req) {
     };
   }
 
-  const dataObj = await req.json();
+  const formData = await req.formData(); // ✅ instead of req.json()
+
+  const dataObj = {};
+  for (const [key, value] of formData.entries()) {
+    dataObj[key] = value;
+  }
 
   if (Object.keys(dataObj).length === 0) {
     return {
@@ -21,8 +25,7 @@ export async function validateFormData(req) {
     };
   }
 
-  // Optional: Add more field validations here
-
+  // Optional: Add more field validation here
   return {
     error: false,
     data: dataObj,
