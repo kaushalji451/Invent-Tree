@@ -7,7 +7,7 @@ import { FaMessage } from "react-icons/fa6";
 import Link from "next/link";
 import { MenuButton } from "./menuButton";
 import { ModeToggle } from "../components/toggle-button";
-import ServicePost from "../app/service/ServicePost";  // Importing the ServicePost component
+import ServicePost from "../app/[locale]/service/ServicePost";  // Importing the ServicePost component
 const navItems = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },

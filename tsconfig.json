@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/api/contact/route.js", "src/components/menuButton.jsx", "src/app/api/uploadimage/route.js"  ],
+, "src/app/[locale]/api/contact/route.js", "src/components/menuButton.jsx", "src/app/[locale]/api/uploadimage/route.js"  ],
   "exclude": [
     "node_modules"
   ]
