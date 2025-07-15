@@ -25,10 +25,14 @@ export default function CreateBlogPage() {
   const fileInputRef = useRef(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [error, setError] = useState(null);
+  const [tagInput, setTagInput] = useState("");
+  const [tags, setTags] = useState([]);
   const router = useRouter();
 
   const onSubmit = async (data) => {
     try {
+      handletagSubmit()
+      console.log(data)
       const response = await axios.post("/api/blog", data);
       if (response.status === 201) {
         router.push("/admin/dashboard");
@@ -39,6 +43,10 @@ export default function CreateBlogPage() {
       console.error("Error saving blog:", err);
     }
   };
+
+  const handletagSubmit = ()=>{
+    setValue("tag",tags,{ shouldValidate: true })
+  }
 
   const handleImageUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -61,22 +69,45 @@ export default function CreateBlogPage() {
     }
   };
 
+  
+
+  const handleTagKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const trimmed = tagInput.trim();
+
+      if (trimmed && !tags.includes(trimmed)) {
+        const updated = [...tags, trimmed];
+        setTags(updated);
+        setValue("tag", updated, { shouldValidate: true });
+      }
+
+      setTagInput("");
+    }
+  };
+
+  const removeTag = (tagToRemove) => {
+    const updated = tags.filter((t) => t !== tagToRemove);
+    setTags(updated);
+    setValue("tag", updated, { shouldValidate: true });
+  };
+
   return (
     <div className="mx-auto mt-20 max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h1 className="mb-6 text-2xl font-bold text-persian-green-800 dark:text-persian-green-200">
+      <h1 className="text-persian-green-800 dark:text-persian-green-200 mb-6 text-2xl font-bold">
         Create New Blog
       </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Title */}
         <div>
-          <label className="block text-sm font-semibold text-persian-green-700 dark:text-persian-green-200 mb-1">
+          <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
             Title
           </label>
           <input
             type="text"
             {...register("title")}
-            className="w-full rounded-xl border border-persian-green-300 bg-white p-3 text-sm text-gray-800 shadow-sm focus:border-persian-green-500 focus:ring-1 focus:ring-persian-green-400 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 dark:focus:ring-persian-green-600"
+            className="border-persian-green-300 focus:border-persian-green-500 focus:ring-persian-green-400 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 dark:focus:ring-persian-green-600 w-full rounded-xl border bg-white p-3 text-sm text-gray-800 shadow-sm focus:ring-1"
           />
           {errors.title && (
             <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>
@@ -85,12 +116,12 @@ export default function CreateBlogPage() {
 
         {/* Category */}
         <div>
-          <label className="block text-sm font-semibold text-persian-green-700 dark:text-persian-green-200 mb-1">
+          <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
             Category
           </label>
           <select
             {...register("category")}
-            className="w-full rounded-xl border border-persian-green-300 bg-white p-3 text-sm shadow-sm dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100"
+            className="border-persian-green-300 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 w-full rounded-xl border bg-white p-3 text-sm shadow-sm"
           >
             <option value="">Select Category</option>
             <option value="user">User</option>
@@ -105,22 +136,46 @@ export default function CreateBlogPage() {
 
         {/* Tag */}
         <div>
-          <label className="block text-sm font-semibold text-persian-green-700 dark:text-persian-green-200 mb-1">
-            Tag
+          <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
+            Tags
           </label>
+
           <input
             type="text"
-            {...register("tag")}
-            className="w-full rounded-xl border border-persian-green-300 bg-white p-3 text-sm text-gray-800 shadow-sm focus:border-persian-green-500 focus:ring-1 focus:ring-persian-green-400 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 dark:focus:ring-persian-green-600"
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+            onKeyDown={handleTagKeyDown}
+            placeholder="Type a tag and press Enter"
+            className="border-persian-green-300 focus:border-persian-green-500 focus:ring-persian-green-400 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 dark:focus:ring-persian-green-600 w-full rounded-xl border bg-white p-3 text-sm text-gray-800 shadow-sm focus:ring-1"
           />
+
           {errors.tag && (
             <p className="mt-1 text-sm text-red-500">{errors.tag.message}</p>
           )}
+
+          {/* Display tags */}
+          <div className="mt-2 flex flex-wrap gap-2">
+            {tags.map((tag, idx) => (
+              <span
+                key={idx}
+                className="bg-persian-green-100 dark:bg-persian-green-800 text-persian-green-900 dark:text-persian-green-100 flex items-center gap-2 rounded-full px-3 py-1 text-sm"
+              >
+                {tag}
+                <button
+                  type="button"
+                  onClick={() => removeTag(tag)}
+                  className="ml-1 text-red-500 hover:text-red-700"
+                >
+                  &times;
+                </button>
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Content */}
         <div>
-          <label className="block text-sm font-semibold text-persian-green-700 dark:text-persian-green-200 mb-1">
+          <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
             Content
           </label>
           <Controller
@@ -140,7 +195,7 @@ export default function CreateBlogPage() {
 
         {/* Feature Image Upload */}
         <div>
-          <label className="block text-sm font-semibold text-persian-green-700 dark:text-persian-green-200 mb-1">
+          <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
             Feature Image
           </label>
           <input
@@ -156,7 +211,7 @@ export default function CreateBlogPage() {
             whileHover={{ scale: 1.03 }}
             disabled={isUploading}
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-2 rounded-lg bg-persian-green-100 px-5 py-2 text-sm font-medium text-persian-green-900 transition hover:bg-persian-green-200 disabled:opacity-60 dark:bg-persian-green-800 dark:text-persian-green-100 dark:hover:bg-persian-green-700"
+            className="bg-persian-green-100 text-persian-green-900 hover:bg-persian-green-200 dark:bg-persian-green-800 dark:text-persian-green-100 dark:hover:bg-persian-green-700 flex items-center gap-2 rounded-lg px-5 py-2 text-sm font-medium transition disabled:opacity-60"
           >
             {isUploading ? (
               <>
@@ -181,7 +236,7 @@ export default function CreateBlogPage() {
               transition={{ duration: 0.4 }}
               src={uploadedImageUrl}
               alt="Uploaded Preview"
-              className="mt-4 h-40 w-auto rounded-lg border border-persian-green-200 object-cover shadow-md dark:border-persian-green-800"
+              className="border-persian-green-200 dark:border-persian-green-800 mt-4 h-40 w-auto rounded-lg border object-cover shadow-md"
             />
           )}
         </div>
@@ -191,7 +246,7 @@ export default function CreateBlogPage() {
           type="submit"
           whileTap={{ scale: 0.97 }}
           whileHover={{ scale: 1.02 }}
-          className="w-full rounded-xl bg-persian-green-600 px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-persian-green-700"
+          className="bg-persian-green-600 hover:bg-persian-green-700 w-full rounded-xl px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition"
         >
           {isSubmitting ? "Submitting..." : "Submit Blog"}
         </motion.button>

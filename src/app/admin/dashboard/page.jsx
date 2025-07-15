@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import Loading from "../../../components/loading"
+import Loading from "../../../components/loading";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -20,7 +20,7 @@ const cardVariants = {
 };
 
 const AdminDashboard = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -33,6 +33,7 @@ const AdminDashboard = () => {
         console.error(error);
       } finally {
         setLoading(false);
+        console.log(data);
       }
     };
     getUserData();
@@ -40,16 +41,16 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center text-xl">
+      <div className="flex min-h-screen items-center justify-center text-xl">
         <Loading></Loading>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen px-4 py-10 bg-gray-50">
-      <h1 className="text-4xl font-bold text-center mb-10">Blog Articles</h1>
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gray-50 px-4 py-10 dark:bg-neutral-900 dark:text-neutral-300">
+      <h1 className="mb-10 text-center text-4xl font-bold">Blog Articles</h1>
+      <div className="mx-auto max-w-4xl space-y-6">
         {data.map((item, i) => (
           <motion.div
             key={item._id}
@@ -57,30 +58,41 @@ const AdminDashboard = () => {
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row gap-4 p-4 hover:scale-103 transition-all duration-100 ease-in-out cursor-pointer"
-          onClick={()=>{
-            router.push("/admin/dashboard")
-          }}
+            className="flex cursor-pointer flex-col gap-4 overflow-hidden rounded-2xl bg-white p-4 shadow-lg transition-all duration-100 ease-in-out hover:scale-103 active:scale-100 md:flex-row"
+            onClick={() => {
+              router.push(`/admin/blogs/${item.slug}`);
+            }}
           >
             {item.image && (
               <img
                 src={item.image}
                 alt={item.title || "Blog Image"}
-                className="w-full md:w-52 h-40 object-cover rounded-xl"
+                className="h-40 w-full rounded-xl object-cover md:w-52"
               />
             )}
-            <div className="flex flex-col justify-between flex-1">
+            <div className="flex flex-1 flex-col justify-between">
               <div>
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 line-clamp-2">
+                <h2 className="line-clamp-2 text-xl font-semibold text-gray-800 md:text-2xl">
                   {item.title || item.slug}
                 </h2>
-                <p className="text-gray-600 text-sm mt-2 line-clamp-3">
-                  {item.excerpt?.plainText || item.content || "No description available."}
+                <p className="mt-2 line-clamp-3 text-sm text-gray-600">
+                  {item.excerpt?.plainText ||
+                    item.content ||
+                    "No description available."}
                 </p>
               </div>
               <div className="mt-4 text-sm text-gray-500">
-                Category: <span className="font-medium">{item.category || "Uncategorized"}</span>
+                Category:{" "}
+                <span className="font-medium">
+                  {item.category || "Uncategorized"}
+                </span>
               </div>
+              <button
+                className="bg-blue-400"
+                onClick={() => router.push(`/admin/dashboard/${item._id}`)}
+              >
+                Edit
+              </button>
             </div>
           </motion.div>
         ))}

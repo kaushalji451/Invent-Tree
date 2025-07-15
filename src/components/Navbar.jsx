@@ -25,12 +25,15 @@ const Navbar = ({ className }) => {
         className,
       )}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-semibold dark:bg-black dark:text-white">
-        logo
-      </div>
+      <img
+        src="https://www.yuitech.jp/wp/wp-content/themes/standard_sass/images/common/logo-bg.svg"
+        className="absolute top-0 left-0"
+        alt=""
+      />
+      <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-semibold dark:bg-black dark:text-white"></div>
 
       <div className="z-50 flex cursor-pointer items-center justify-center gap-x-3 p-2 text-2xl text-black dark:text-white">
-        <ModeToggle className={""}/>
+        <ModeToggle className={""} />
         <MenuButton
           isOpen={open}
           onClick={() => setOpen(!open)}
