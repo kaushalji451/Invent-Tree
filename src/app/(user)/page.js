@@ -1,17 +1,9 @@
-import Navbar from "../../components/Navbar";
-import React from "react";
-
-const Home = () => {
+const Hero = ({ className }) => {
   return (
-    <div>
-    
-      <div className="flex h-screen w-full items-center justify-center">
-        <h1 className="text-4xl text-center font-regular">
-          OSWALD
-        </h1>
-        </div>
-    </div>
+    <section className={className}>
+     
+    </section>
   );
 };
 
-export default Home;
+export default Hero;

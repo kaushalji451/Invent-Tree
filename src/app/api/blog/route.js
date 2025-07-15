@@ -9,8 +9,8 @@ import { Types } from "mongoose";
 import deleteImage from "../../../utils/destroyImage";
 import { NextResponse } from "next/server";
 import { validateFormData } from "../../../lib/middleware/validateFormData";
-import {  } from "../../../models/blog";
-import{blogPostSchema} from "../../../schema/blog.schema"
+import blog from "../../../models/blog";
+import { blogPostSchema } from "../../../schema/blog.schema";
 function generateSlug(text) {
   return text
     .toLowerCase()
@@ -39,6 +39,7 @@ export async function GET(req) {
 export async function POST(req) {
   await connectMongo();
   const body = await req.json();
+  console.debug(body);
   const parsedData = blogPostSchema.safeParse(body);
   if (!parsedData.success) {
     return NextResponse.json(
@@ -54,7 +55,7 @@ export async function POST(req) {
       slug: slug,
       content: parsedData.data.content,
       category: parsedData.data.category,
-      tags: parsedData.data.tags,
+      tags: parsedData.data.tag,
       author: parsedData.data.author,
       image: parsedData.data.featureImage,
       published: true,
@@ -99,88 +100,60 @@ export async function DELETE(req) {
 
 export async function PATCH(req) {
   await connectMongo();
+  const body = await req.json();
+  console.log(body);
 
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
-  console.error("this is id", id);
-  const validationResult = await validateFormData(req);
-
-  if (validationResult.error) {
-    return NextResponse.json(
-      { error: validationResult.message },
-      { status: 400 },
-    );
-  }
-
-  const formData = validationResult.data;
-  const imageFile = formData.get("image");
-
-
-  let uploadedImageUrl = "";
-
-  // Upload image to Cloudinary if present
-  if (imageFile && imageFile.name) {
-    const bytes = await imageFile.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    const tmpDir = os.tmpdir();
-    const tmpPath = path.join(tmpDir, uuidv4() + "-" + imageFile.name);
-    await writeFile(tmpPath, buffer);
-
-    const uploadRes = await cloudinary.uploader.upload(tmpPath, {
-      folder: "blogs",
-    });
-
-    uploadedImageUrl = uploadRes.secure_url;
-  }
-
-  // Construct updated blog data
-  const blogData = {
-    title: {
-      en: formData.get("titleEn"),
-      hi: formData.get("titleHi"),
-    },
-    slug: formData.get("slug"),
-    content: {
-      en: formData.get("contentEn"),
-      hi: formData.get("contentHi"),
-    },
-    excerpt: {
-      en: formData.get("excerptEn"),
-      hi: formData.get("excerptHi"),
-    },
-    category: formData.get("category"),
-    tags: formData.get("tags")?.split(",") || [],
-    author: formData.get("author"),
-    published: formData.get("published") === "true",
-    publishedAt: new Date(),
-    language: formData.get("language"),
-  };
-
-  if (uploadedImageUrl) {
-    blogData.image = uploadedImageUrl;
-  }
   try {
-    // Get current blog before updating (to access old image)
-    const oldBlog = await Blog.findById(id);
-    if (!oldBlog) {
-      return NextResponse.json({ message: "No Blog Found." }, { status: 404 });
-    }
-
-    // Delete old image if a new one was uploaded
-    if (uploadedImageUrl && oldBlog.image) {
-      await deleteImage(oldBlog.image);
-    }
-
-    const updatedBlog = await Blog.findByIdAndUpdate(id, blogData, {
-      new: true,
+    const exitingBlog = await Blog.findOne({
+      slug: body.slug,
     });
-    return NextResponse.json(
-      { message: "Blog Updated.", data: updatedBlog },
-      { status: 200 },
+    console.log("existing Blog", exitingBlog);
+
+    if (!exitingBlog) {
+      return NextResponse.json(
+        {
+          message: "blog Does not exist",
+        },
+        { status: 501 },
+      );
+    }
+
+    const updatedBlog = await blog.updateOne(
+      {
+        slug: body.slug,
+      },
+      {
+        $set: {
+          title: body.title,
+          tags: body.tags,
+          image: body.featureImage,
+          category: body.category,
+          content: body.content,
+        },
+      },
     );
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    if (!updatedBlog) {
+      return NextResponse.json(
+        {
+          message: "Failed to update blog",
+        },
+        { status: 501 },
+      );
+    }
+    console.log(updatedBlog)
+    return NextResponse.json(
+      {
+        message: "blog updated",
+      },
+      { status: 201 },
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        message: "Error while updating blog",
+      },
+      { status: 502 },
+    );
   }
 }
