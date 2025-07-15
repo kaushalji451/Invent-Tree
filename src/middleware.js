@@ -21,14 +21,15 @@ export async function middleware(req) {
 
   if (
     !token &&
-    url.pathname.startsWith("/admin") &&
-    url.pathname !== "/admin/login"
+    url.pathname.startsWith("/en/admin") &&
+    url.pathname !== "/en/admin/login"
   ) {
+    console.log(true)
     return NextResponse.redirect(new URL("/admin/login", req.url));
   }
 
-  if (token && url.pathname.startsWith("/admin/login")) {
-    return NextResponse.redirect(new URL("/admin/dashboard", req.url));
+  if (token && url.pathname.startsWith("/en/admin/login")) {
+    return NextResponse.redirect(new URL("/en/admin/dashboard", req.url));
   }
 
   return intlMiddleware(req);

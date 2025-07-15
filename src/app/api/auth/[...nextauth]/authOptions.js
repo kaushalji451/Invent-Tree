@@ -1,5 +1,5 @@
-import connectMongo from "../../../../../lib/db";
-import AdminModel from "../../../../../models/Admin";
+import connectMongo from "../../../../lib/db";
+import AdminModel from "../../../../models/Admin";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {

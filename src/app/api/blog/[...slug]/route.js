@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectMongo from "../../../../../lib/db"; // Adjust path if needed
-import Blog from "../../../../../models/blog"; // Capitalized for Mongoose model
+import connectMongo from "../../../../lib/db"; // Adjust path if needed
+import Blog from "../../../../models/blog"; // Capitalized for Mongoose model
 
 export async function GET(req) {
   try {

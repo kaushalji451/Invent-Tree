@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import AdminModel from "../../../../models/Admin";
-import { signupSchema } from "../../../../schema/auth.schema";
-import connectMongo from "../../../../lib/db";
+import AdminModel from "../../../models/Admin";
+import { signupSchema } from "../../../schema/auth.schema";
+import connectMongo from "../../../lib/db";
 
 export async function POST(request) {
   await connectMongo();

@@ -1,30 +1,31 @@
-import connectMongo from "../../../../lib/db";
-import cloudinary from "../../../../lib/cloudinary";
-import Project from "../../../../models/proejct";
+import connectMongo from "../../../lib/db";
+import cloudinary from "../../../lib/cloudinary";
+import Service from "../../../models/service";
 import { writeFile } from "fs/promises";
 import path from "path";
 import os from "os";
 import { v4 as uuidv4 } from "uuid";
 import { Types } from 'mongoose';
-import deleteImage from "../../../../utils/destroyImage"
+import deleteImage from "../../../utils/destroyImage"
 import { NextResponse } from "next/server";
-import { validateFormData } from "../../../../lib/middleware/validateFormData";
+import { validateFormData } from "../../../lib/middleware/validateFormData";
+
 
 export async function GET(req) {
     await connectMongo();
     try {
-        let data = await Project.find({});
+        let data = await Service.find({});
         if (!data) {
             return NextResponse.json({ message: "Not found." }, { status: 404 });
         }
         return NextResponse.json(
-            { message: "Data Fetched Successfully.", data: data },
+            { message: data },
             { status: 200 }
         );
     } catch (err) {
-        console.error("Error While Fetching Project Posts", err);
+        console.error("Fetch blog posts error:", err);
         return NextResponse.json(
-            { error: "Failed to Fetch Project Posts." },
+            { error: "Failed to fetch blog posts." },
             { status: 500 }
         );
     }
@@ -34,7 +35,6 @@ export async function GET(req) {
 
 export async function POST(req) {
     await connectMongo();
-
     const validationResult = await validateFormData(req);
 
     if (validationResult.error) {
@@ -59,13 +59,14 @@ export async function POST(req) {
         await writeFile(tmpPath, buffer);
 
         const uploadRes = await cloudinary.uploader.upload(tmpPath, {
-            folder: "proejcts",
+            folder: "services",
         });
 
         uploadedImageUrl = uploadRes.secure_url;
     }
 
-    const projectData = {
+
+    const serviceData = {
         title: {
             en: formData.get("titleEn"),
             hi: formData.get("titleHi"),
@@ -74,15 +75,17 @@ export async function POST(req) {
             en: formData.get("descriptionEn"),
             hi: formData.get("descriptionHi"),
         },
-        image: uploadedImageUrl,
         category: formData.get("category"),
-        featured: formData.get("featured") === "true",
-    };
+        image: uploadedImageUrl,
+        isActive: formData.get("isActive"),
+    }
+    console.log("this is test ", serviceData);
     try {
-        const saved = await Project.create(projectData);
-        return NextResponse.json({ message: "Project Created Successully.", data: saved }, { status: 200 });
+        const saved = await Service.create(serviceData);
+        console.log("this is saved", saved);
+        return NextResponse.json({ message: "Blog created", data: saved }, { status: 200 });
     } catch (err) {
-        console.error(err);
+        console.log(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
@@ -93,18 +96,19 @@ export async function DELETE(req) {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     if (!Types.ObjectId.isValid(id)) {
-        return NextResponse.json({ message: 'Invalid Project ID' }, { status: 400 });
+        return NextResponse.json({ message: 'Invalid blog ID' }, { status: 400 });
     }
     try {
-        let data = await Project.findByIdAndDelete({ _id: id });
+        let data = await Service.findByIdAndDelete({ _id: id });
+        console.log("this is deleted", data);
         if (data.image == undefined) {
-            console.log("no Project found");
-            return NextResponse.json({ message: "No Project Found. " }, { status: 400 });
+            console.log("no Service found");
+            return NextResponse.json({ message: "No Blog Found. " }, { status: 400 });
         }
         await deleteImage(data.image);
-        return NextResponse.json({ message: "Project Deleted Successfully." }, { status: 200 });
+        return NextResponse.json({ message: "Blog Deleted Successfully." }, { status: 200 });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return NextResponse.json({ error: err.message }, { status: 400 });
     }
 }
@@ -141,50 +145,49 @@ export async function PATCH(req) {
         await writeFile(tmpPath, buffer);
 
         const uploadRes = await cloudinary.uploader.upload(tmpPath, {
-            folder: "projects",
+            folder: "services",
         });
 
         uploadedImageUrl = uploadRes.secure_url;
     }
     console.log("this is upload image", uploadedImageUrl);
 
-    // Construct updated Project data
-    const projectData = {
+    // Construct updated blog data
+    const serviceData = {
         title: {
             en: formData.get("titleEn"),
             hi: formData.get("titleHi"),
         },
         description: {
-            en: formData.get("descriptionEn"),
-            hi: formData.get("descriptionHi"),
+            en: formData.get("titleEn"),
+            hi: formData.get("titleHi"),
         },
-        image: uploadedImageUrl,
         category: formData.get("category"),
-        featured: formData.get("featured") === "true",
-    };
+        isActive: formData.get("isActive"),
+    }
 
     if (uploadedImageUrl) {
-        projectData.image = uploadedImageUrl;
+        serviceData.image = uploadedImageUrl;
     }
-    console.log("this is Project data", projectData);
+    console.log("this is serviceData data", serviceData);
     try {
-        // Get current Project before updating (to access old image)
-        const oldProject = await Project.findById(id);
-        console.log("this is old Project", oldProject);
-        if (!oldProject) {
-            return NextResponse.json({ message: "No Project Found." }, { status: 404 });
+        // Get current serviceData before updating (to access old image)
+        const oldservice = await Service.findById(id);
+        console.log("this is old service", oldservice);
+        if (!oldservice) {
+            return NextResponse.json({ message: "No serviceData Found." }, { status: 404 });
         }
 
         // Delete old image if a new one was uploaded
-        if (uploadedImageUrl && oldProject.image) {
-            await deleteImage(oldProject.image);
+        if (uploadedImageUrl && oldservice.image) {
+            await deleteImage(oldservice.image);
         }
 
-        const updatedProject = await Project.findByIdAndUpdate(id, projectData, { new: true });
-        console.log("this is updatedProject", updatedProject);
-        return NextResponse.json({ message: "Project Updated.", data: updatedProject }, { status: 200 });
+        const updatedserive = await Service.findByIdAndUpdate(id, serviceData, { new: true });
+        console.log("this is updatedserive", updatedserive);
+        return NextResponse.json({ message: "Serive Updated.", data: updatedserive }, { status: 200 });
     } catch (err) {
-        console.error(err);
+        console.log(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }

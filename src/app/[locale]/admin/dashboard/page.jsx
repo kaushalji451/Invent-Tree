@@ -23,6 +23,7 @@ const AdminDashboard = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -38,6 +39,23 @@ const AdminDashboard = () => {
     };
     getUserData();
   }, []);
+
+  const handleDeleteBlog = async (id) => {
+    setIsDeleting(true);
+    try {
+      const response = await axios.delete(`/api/blog?id=${id}`);
+      if (response.status === 200) {
+        setIsDeleting(false);
+      } else {
+        console.error(response.data);
+        setIsDeleting(false);
+      }
+    } catch (error) {
+      console.error(error)
+    }finally{
+      setIsDeleting(false)
+    }
+  };
 
   if (loading) {
     return (
@@ -58,10 +76,7 @@ const AdminDashboard = () => {
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className="flex cursor-pointer flex-col gap-4 overflow-hidden rounded-2xl bg-white p-4 shadow-lg transition-all duration-100 ease-in-out hover:scale-103 active:scale-100 md:flex-row"
-            onClick={() => {
-              router.push(`/admin/blogs/${item.slug}`);
-            }}
+            className="flex flex-col gap-4 overflow-hidden rounded-2xl bg-white p-4 shadow-lg transition-all duration-100 ease-in-out hover:scale-103 active:scale-100 md:flex-row"
           >
             {item.image && (
               <img
@@ -88,10 +103,20 @@ const AdminDashboard = () => {
                 </span>
               </div>
               <button
-                className="bg-blue-400"
-                onClick={() => router.push(`/admin/dashboard/${item._id}`)}
+                className="cursor-pointer bg-blue-400"
+                onClick={() => {
+                  router.push(`/en/admin/blogs/${item.slug}`);
+                }}
               >
                 Edit
+              </button>
+              <button
+                className="cursor-pointer bg-blue-400"
+                onClick={() => {
+                  handleDeleteBlog(item._id);
+                }}
+              >
+                {isDeleting ? "Deleting" : "Delete"}
               </button>
             </div>
           </motion.div>

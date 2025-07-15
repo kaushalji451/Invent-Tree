@@ -1,9 +1,9 @@
 
-import connectMongo from "../../../../lib/db"
-import Contact from "../../../../models/contact"
+import connectMongo from "../../../lib/db"
+import Contact from "../../../models/contact"
 import { NextResponse } from "next/server";
-import sendEmailforContactus from "../../../../utils/email";
-import { validateFormData } from "../../../../lib/middleware/validateFormData"
+import sendEmailforContactus from "../../../utils/email";
+import { validateFormData } from "../../../lib/middleware/validateFormData"
 
 
 export async function GET(req) {

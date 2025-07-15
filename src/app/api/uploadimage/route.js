@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import cloudinary from "../../../../lib/cloudinary";
+import cloudinary from "../../../lib/cloudinary";
 import path from "path";
 import os from "os";
 import { v4 as uuidv4 } from "uuid";

@@ -1,16 +1,16 @@
-import connectMongo from "../../../../lib/db";
-import cloudinary from "../../../../lib/cloudinary";
-import Blog from "../../../../models/blog.js";
+import connectMongo from "../../../lib/db";
+import cloudinary from "../../../lib/cloudinary";
+import Blog from "../../../models/blog.js";
 import { writeFile } from "fs/promises";
 import path from "path";
 import os from "os";
 import { v4 as uuidv4 } from "uuid";
 import { Types } from "mongoose";
-import deleteImage from "../../../../utils/destroyImage";
+import deleteImage from "../../../utils/destroyImage";
 import { NextResponse } from "next/server";
-import { validateFormData } from "../../../../lib/middleware/validateFormData";
-import blog from "../../../../models/blog";
-import { blogPostSchema } from "../../../../schema/blog.schema";
+import { validateFormData } from "../../../lib/middleware/validateFormData";
+import blog from "../../../models/blog";
+import { blogPostSchema } from "../../../schema/blog.schema";
 function generateSlug(text) {
   return text
     .toLowerCase()
@@ -78,13 +78,17 @@ export async function POST(req) {
 export async function DELETE(req) {
   await connectMongo();
   const { searchParams } = new URL(req.url);
+
   const id = searchParams.get("id");
+  console.log("id",id)
   if (!Types.ObjectId.isValid(id)) {
     return NextResponse.json({ message: "Invalid blog ID" }, { status: 400 });
   }
   try {
     let data = await Blog.findByIdAndDelete({ _id: id });
+    console.log("data:",data)
     if (data.image == undefined) {
+      console.log("undefinded loged")
       return NextResponse.json({ message: "No Blog Found. " }, { status: 400 });
     }
     await deleteImage(data.image);
