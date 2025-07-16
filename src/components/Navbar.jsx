@@ -25,7 +25,7 @@ const Navbar = ({ className }) => {
   return (
     <div
       className={cn(
-        "fixed top-0 left-0 z-50 flex h-24 w-full items-center justify-between px-4 md:px-6",
+        "fixed top-0 left-0 z-50 flex h-30 w-full items-center justify-between px-4 md:px-6",
         className,
       )}
     >
@@ -34,7 +34,9 @@ const Navbar = ({ className }) => {
         className="absolute top-0 left-0"
         alt=""
       />
-      <div className="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-semibold dark:bg-black dark:text-white"></div>
+      <div className="z-10 flex items-center justify-center rounded-full bg-white font-semibold dark:bg-black dark:text-white">
+         <img src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752566569/Screenshot_2025-07-15_132958_ecqubp.png" alt="" className="w-30 h-15" />
+      </div>
 
       <div className="z-50 flex cursor-pointer items-center justify-center gap-x-3 p-2 text-2xl text-black dark:text-white">
         <ModeToggle className={""} />
