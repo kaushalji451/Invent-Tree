@@ -1,13 +1,13 @@
 "use client";
 
 import { useForm, Controller } from "react-hook-form";
-import MarkdownEditor from "../../../../components/MarkdownEditor";
+import MarkdownEditor from "../../../../../components/MarkdownEditor";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FaSpinner } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { blogPostSchema } from "../../../../schema/blog.schema";
+import { blogPostSchema } from "../../../../../schema/blog.schema";
 import { useRouter, useParams } from "next/navigation";
 
 export default function BlogAdminPage({ params }) {

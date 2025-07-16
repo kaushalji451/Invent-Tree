@@ -1,13 +1,13 @@
 "use client";
 
 import { useForm, Controller } from "react-hook-form";
-import MarkdownEditor from "../../../components/MarkdownEditor";
+import MarkdownEditor from "../../../../components/MarkdownEditor";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { FaSpinner } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { blogPostSchema } from "../../../schema/blog.schema";
+import { blogPostSchema } from "../../../../schema/blog.schema";
 import { useRouter } from "next/navigation";
 
 export default function CreateBlogPage() {
@@ -30,6 +30,7 @@ export default function CreateBlogPage() {
   const router = useRouter();
 
   const onSubmit = async (data) => {
+    console.log("on submit clicked ",data)
     try {
       handletagSubmit()
       console.log(data)
@@ -79,7 +80,7 @@ export default function CreateBlogPage() {
       if (trimmed && !tags.includes(trimmed)) {
         const updated = [...tags, trimmed];
         setTags(updated);
-        setValue("tag", updated, { shouldValidate: true });
+        setValue("tags", updated, { shouldValidate: true });
       }
 
       setTagInput("");
@@ -89,7 +90,7 @@ export default function CreateBlogPage() {
   const removeTag = (tagToRemove) => {
     const updated = tags.filter((t) => t !== tagToRemove);
     setTags(updated);
-    setValue("tag", updated, { shouldValidate: true });
+    setValue("tags", updated, { shouldValidate: true });
   };
 
   return (
@@ -149,8 +150,8 @@ export default function CreateBlogPage() {
             className="border-persian-green-300 focus:border-persian-green-500 focus:ring-persian-green-400 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 dark:focus:ring-persian-green-600 w-full rounded-xl border bg-white p-3 text-sm text-gray-800 shadow-sm focus:ring-1"
           />
 
-          {errors.tag && (
-            <p className="mt-1 text-sm text-red-500">{errors.tag.message}</p>
+          {errors.tags && (
+            <p className="mt-1 text-sm text-red-500">{errors.tags.message}</p>
           )}
 
           {/* Display tags */}
@@ -251,9 +252,7 @@ export default function CreateBlogPage() {
           {isSubmitting ? "Submitting..." : "Submit Blog"}
         </motion.button>
 
-        {error && (
-          <p className="mt-4 text-center text-sm text-red-600">{error}</p>
-        )}
+        {errors && console.log(errors)}
       </form>
     </div>
   );
