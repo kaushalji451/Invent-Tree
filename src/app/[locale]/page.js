@@ -27,6 +27,7 @@ const Page = () => {
                  snap-y snap-mandatory flex flex-col 
                  md:snap-x md:flex-row md:overflow-y-hidden md:overflow-x-auto"
     >
+
       {/* Slides Wrapper */}
       <div className="flex flex-col md:flex-row w-screen h-[400vh] md:w-[400vw] md:h-screen">
         {/* Slide 1 */}
