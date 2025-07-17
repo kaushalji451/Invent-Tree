@@ -10,8 +10,9 @@ import { signOut, useSession } from "next-auth/react";
 const AdminNavitems = [
   { title: "Home", href: "/" },
   { title: "About", href: "/about" },
-  { title: "Services", href: "/services" },
+  { title: "Services", href: "/service" },
   { title: "Case Study", href: "/caseStudy" },
+  { title: "Projects", href: "/projects" },
   { title: "Blog", href: "/blogs" },
 ];
 
@@ -27,9 +28,14 @@ const AdminNavbar = ({ className }) => {
         className,
       )}
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-sm font-semibold dark:bg-black dark:text-white">
-        logo
-      </div>
+      <img
+        src="https://www.yuitech.jp/wp/wp-content/themes/standard_sass/images/common/logo-bg.svg"
+        className="absolute top-0 left-0"
+        alt=""
+      />
+      <Link  href={"/"} className="z-10 flex items-center justify-center rounded-full bg-white font-semibold dark:bg-black dark:text-white">
+        <img src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752566569/Screenshot_2025-07-15_132958_ecqubp.png" alt="" className="w-30 h-15" />
+      </Link>
 
       <div className="z-50 flex cursor-pointer items-center justify-center gap-x-3 p-2 text-2xl text-black dark:text-white">
         <ModeToggle className={""} />
@@ -74,7 +80,7 @@ const AdminNavbar = ({ className }) => {
               </div>
               {/* */}
               <div className="mt-8 flex flex-col items-center justify-center gap-y-6 px-4 md:mt-10 md:flex-row md:gap-x-20">
-                {session.status ==="authenticated" ? (
+                {session.status === "authenticated" ? (
                   <button
                     className="bg-persian-green-200 dark:bg-persian-green-800 dark:hover:bg-persian-green-900 hover:bg-persian-green-300 cursor-pointer rounded-full px-6 py-2 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 dark:text-white"
                     onClick={() => {
@@ -84,7 +90,7 @@ const AdminNavbar = ({ className }) => {
                     Log out
                   </button>
                 ) : (
-                   <></>
+                  <></>
                 )}
               </div>
 

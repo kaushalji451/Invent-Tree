@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-
+import Navbar from '../../components/Navbar';
 const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s',
@@ -18,6 +18,8 @@ const images = [
 
 const Page = () => {
    return (
+    <>
+      <Navbar />
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -174,6 +176,7 @@ const Page = () => {
         </div>
       </div>
     </motion.div>
+  </>
   );
 };
 

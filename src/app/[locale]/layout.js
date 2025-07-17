@@ -1,6 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import Navbar from "../../components/Navbar";
 import { Oswald } from "next/font/google";
 import { ThemeProviders } from "../../components/ThemeProvider";
 import Container from "../../components/container";
@@ -8,7 +7,6 @@ import Footer from "../../components/Footer";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
-
 const OswaldFont = Oswald({
   weight: ["300", "400"],
   subsets: ["latin"],
@@ -35,7 +33,6 @@ export default async function LocaleLayout({ children, params }) {
           disableTransitionOnChange
         >
           <NextIntlClientProvider>
-            <Navbar />
             {children}
             <Footer />
           </NextIntlClientProvider>

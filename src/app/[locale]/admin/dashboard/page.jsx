@@ -5,7 +5,10 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Loading from "../../../../components/loading";
-
+import EditProject from "../../projects/EditProject";
+import CreateBlogPage from "../editor/page"; // Assuming this is the component for creating a blog post
+import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
@@ -18,12 +21,10 @@ const cardVariants = {
     },
   }),
 };
-
 const AdminDashboard = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -43,9 +44,13 @@ const AdminDashboard = () => {
   const handleDeleteBlog = async (id) => {
     setIsDeleting(true);
     try {
-      const response = await axios.delete(`/api/blog?id=${id}`);
+      const response = await fetch(`/api/blog?id=${id}`, {
+        method: "DELETE",
+      });
       if (response.status === 200) {
         setIsDeleting(false);
+        alert("Blog deleted successfully");
+        location.reload();
       } else {
         console.error(response.data);
         setIsDeleting(false);
@@ -67,7 +72,14 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-10 dark:bg-neutral-900 dark:text-neutral-300">
-      <h1 className="mb-10 text-center text-4xl font-bold">Blog Articles</h1>
+     <div>
+       <h1 className="mb-10 text-center text-4xl font-bold">Blog Articles</h1>
+      <div className="w-full flex justify-end ">
+        <div className="w-2/4 ms-5 flex justify-center">
+        <CreateBlogPage/>
+      </div>
+      </div>
+     </div>
       <div className="mx-auto max-w-4xl space-y-6">
         {data.map((item, i) => (
           <motion.div
@@ -96,29 +108,18 @@ const AdminDashboard = () => {
                     "No description available."}
                 </p>
               </div>
+
               <div className="mt-4 text-sm text-gray-500">
                 Category:{" "}
                 <span className="font-medium">
                   {item.category || "Uncategorized"}
                 </span>
               </div>
-              <button
-                className="cursor-pointer bg-blue-400"
-                onClick={() => {
-                  router.push(`/en/admin/blogs/${item.slug}`);
-                }}
-              >
-                Edit
-              </button>
-              <button
-                className="cursor-pointer bg-blue-400"
-                onClick={() => {
-                  handleDeleteBlog(item._id);
-                }}
-              >
-                {isDeleting ? "Deleting" : "Delete"}
-              </button>
             </div>
+             <div className="flex  h-12 gap-2">
+                <EditProject />
+                <button type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => handleDeleteBlog(item._id)}>Delete </button>
+              </div>
           </motion.div>
         ))}
       </div>
