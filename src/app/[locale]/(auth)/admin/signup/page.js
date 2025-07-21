@@ -12,6 +12,17 @@ const SignUp = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  // ✅ Moved useForm to top-level (no conditions before)
+  const form = useForm({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      username: "",
+      password: "",
+    },
+  });
+
   // 🟡 Guard: Redirect unauthenticated users to login
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -28,16 +39,6 @@ const SignUp = () => {
   if (status !== "authenticated") {
     return null;
   }
-
-  const form = useForm({
-    resolver: zodResolver(signupSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      username: "",
-      password: "",
-    },
-  });
 
   async function onSubmit(values) {
     try {
