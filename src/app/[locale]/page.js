@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-
+import Image from 'next/image';
 const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s',
@@ -131,9 +131,11 @@ const Page = () => {
             {/* Left Content */}
             <div className="w-full h-full flex justify-center items-center ">
               <div className="flex flex-col items-center gap-5 px-4">
-                <img
+                <Image
                   src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599604/Screenshot_2025-07-15_224405_ku0qio.png"
                   alt="Campaign"
+                  width={150}
+                  height={150}
                 />
                 <h1 className="font-bold text-3xl text-[#20998e] text-center">
                   End-to-End Campaign Management
@@ -156,11 +158,13 @@ const Page = () => {
                   }}
                 >
                   {[...images, ...images].map((img, i) => (
-                    <img
+                    <Image
                       key={i}
                       src={img}
                       alt={`scroll-img-left-${i}`}
                       className="w-full h-[150px] object-cover"
+                      width={150}
+                      height={150}
                     />
                   ))}
                 </motion.div>
@@ -178,11 +182,13 @@ const Page = () => {
                   }}
                 >
                   {[...images, ...images].map((img, i) => (
-                    <img
+                    <Image
                       key={i}
                       src={img}
                       alt={`scroll-img-right-${i}`}
                       className="w-full h-[150px] object-cover"
+                      width={150}
+                      height={150}
                     />
                   ))}
                 </motion.div>

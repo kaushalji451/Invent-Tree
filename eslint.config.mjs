@@ -11,13 +11,6 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals"),
-  {
-    // Custom rule overrides
-    rules: {
-      "@next/next/no-img-element": "off", 
-       "react/no-unescaped-entities": "off",
-    },
-  },
 ];
 
 export default eslintConfig;

@@ -9,7 +9,7 @@ import EditProject from "../projects/EditProject";
 import CreateBlogPage from "../admin/editor/page"; // Assuming this is the component for creating a blog post
 import Footer from "../../../components/Footer"; // Importing Footer component
 import { useSession } from "next-auth/react";
-
+import Image from "next/image";
 const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i) => ({
@@ -91,7 +91,10 @@ const Page = () => {
                             className="flex flex-col gap-4 overflow-hidden rounded-2xl bg-white p-4 shadow-lg transition-all duration-100 ease-in-out hover:shadow-xl hover:scale-105 md:flex-row"
                         >
                             {item.image && (
-                                <img
+                                <Image
+                                    width={200}
+                                    height={200}
+                                    loading="lazy"
                                     src={item.image}
                                     alt={item.title || "Blog Image"}
                                     className="h-40 w-full rounded-xl object-cover md:w-52"

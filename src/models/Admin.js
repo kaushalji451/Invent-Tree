@@ -14,7 +14,11 @@ const AdminSchema = new mongoose.Schema({
     enum: ["superadmin", "admin"],
     default: "admin",
   },
-});
+}
+  , {
+    timestamps: true, // Adds createdAt and updatedAt fields
+  }
+);
 
 const AdminModel =
   mongoose.models.Admin || mongoose.model("Admin", AdminSchema);

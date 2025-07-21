@@ -19,12 +19,17 @@ export async function middleware(req) {
     console.error("Error retrieving token:", error);
   }
 
+  // Public admin paths that should NOT redirect to /login
+  const publicAdminPaths = [
+    "/en/admin/login",
+    "/en/admin/signup",
+  ];
+
   if (
     !token &&
     url.pathname.startsWith("/en/admin") &&
-    url.pathname !== "/en/admin/login"
+    !publicAdminPaths.includes(url.pathname)
   ) {
-    console.log(true)
     return NextResponse.redirect(new URL("/admin/login", req.url));
   }
 
@@ -34,6 +39,7 @@ export async function middleware(req) {
 
   return intlMiddleware(req);
 }
+
 export const config = {
   matcher: [
     "/((?!api|trpc|_next|_vercel|.*\\..*).*)",

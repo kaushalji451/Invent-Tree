@@ -1,3 +1,10 @@
+import './globals.css';
+
+
 export default function RootLayout({ children }) {
-  return children;
+  return <html>
+    <body>
+      {children}
+    </body>
+  </html>;
 }

@@ -1,5 +1,6 @@
 import Container from "../../../../components/container";
 import React from "react";
+import Image from "next/image";
 const Blogs = () => {
   return (
     <Container>
@@ -10,10 +11,12 @@ const Blogs = () => {
         </p>
         <p className="text-md mt-2">Stay tuned for more updates!</p>
         <div className="mt-8">
-          <img
+          <Image 
             src="https://via.placeholder.com/400"
             alt="Placeholder Image"
             className="rounded-lg shadow-lg"
+            width={400}
+            height={400}
           />
         </div>
         <p className="mt-4 text-sm text-gray-500">
