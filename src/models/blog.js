@@ -17,8 +17,8 @@ const blogSchema = new mongoose.Schema(
       required: true, // Markdown
     },
     image: {
-      type:string,
-      required:true, // Cloudinary URL or Firebase URL
+      type: String,
+      required: true, // Cloudinary URL or Firebase URL
     },
     category: {
       type: String,

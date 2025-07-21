@@ -14,7 +14,8 @@ const eslintConfig = [
   {
     // Custom rule overrides
     rules: {
-      "@next/next/no-img-element": "off",  // ✅ Disable the <img> warning
+      "@next/next/no-img-element": "off", 
+       "react/no-unescaped-entities": "off",
     },
   },
 ];
