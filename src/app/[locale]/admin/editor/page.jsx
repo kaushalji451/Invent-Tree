@@ -11,6 +11,8 @@ import { blogPostSchema } from "../../../../schema/blog.schema";
 import { useRouter } from "next/navigation";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
+
+
 export default function CreateBlogPage() {
   const {
     handleSubmit,
