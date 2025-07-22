@@ -52,17 +52,9 @@ const Page = () => {
             </div>
             <div className="max-w-xl">
               <p className="pb-10 max-md:px-5 max-md:text-center text-sm text-gray-700 leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, libero saepe doloribus,
-                nemo esse omnis quo ad aliquam enim culpa ex voluptas officiis accusamus laudantium
-                veritatis quae excepturi magnam repudiandae.
-                <br />
-                <br />
-                Atque soluta modi facilis hic vitae, est tempora nisi porro, perspiciatis, a
-                voluptatibus.
-                <br />
-                <br />
-                Quod ab aperiam, accusantium soluta totam laudantium odio exercitationem nemo non
-                earum laboriosam omnis ipsa esse nostrum.
+              Welcome to your trusted partner in political transformation. We provide end-to-end consultancy services that combine data-driven strategies, cutting-edge digital solutions, and deep political expertise to help candidates, parties, and organizations win elections and govern effectively.
+              <br /><br />
+               From campaign management and voter outreach to app development, branding, and war room operations — we deliver the tools and support you need to lead with confidence, connect with the public, and achieve lasting impact.
               </p>
               <div className='max-md:flex max-md:justify-center'>
                 <Link href="/blog" className="rounded-md border border-slate-300 shadow-xl w-50 px-6 py-3 hover:bg-[#20998e] hover:text-white transition duration-300 dark:bg-slate-400 dark:text-white">
