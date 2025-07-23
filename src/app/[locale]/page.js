@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+ import { useTranslations } from 'next-intl';
+
 const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s',
@@ -20,6 +22,9 @@ const images = [
 
 
 const Page = () => {
+
+  const t = useTranslations('Home');
+
   return (
     <>
       <motion.div
@@ -47,18 +52,16 @@ const Page = () => {
             className="w-screen h-screen flex max-md:flex-col items-center justify-center bg-cover bg-center bg-slate-200 min-md:gap-20 snap-start"
           >
             <div className="flex flex-col items-center gap-5 min-md:h-1/2">
-              <h1 className="text-5xl text-[#20998e] max-md:text-center max-md:mt-10">Political Consultancy Services</h1>
-              <p className="text-[#20998e] border-t w-[120px] text-center">Message</p>
+              <h1 className="text-5xl text-[#20998e] max-md:text-center max-md:mt-10">{t('slide1title')}</h1>
+              <p className="text-[#20998e] border-t w-[120px] text-center">{t('slide1msg')}</p>
             </div>
             <div className="max-w-xl">
               <p className="pb-10 max-md:px-5 max-md:text-center text-sm text-gray-700 leading-relaxed">
-              Welcome to your trusted partner in political transformation. We provide end-to-end consultancy services that combine data-driven strategies, cutting-edge digital solutions, and deep political expertise to help candidates, parties, and organizations win elections and govern effectively.
-              <br /><br />
-               From campaign management and voter outreach to app development, branding, and war room operations — we deliver the tools and support you need to lead with confidence, connect with the public, and achieve lasting impact.
+             {t('slide1description')}
               </p>
               <div className='max-md:flex max-md:justify-center'>
                 <Link href="/blog" className="rounded-md border border-slate-300 shadow-xl w-50 px-6 py-3 hover:bg-[#20998e] hover:text-white transition duration-300 dark:bg-slate-400 dark:text-white">
-                  MORE
+                  {t('slide1CTA')}
                 </Link>
               </div>
             </div>
@@ -76,10 +79,7 @@ const Page = () => {
             className="w-screen h-screen flex items-center bg-cover bg-center bg-slate-200 gap-20 snap-start"
           >
             <p className="w-1/2 text-white text-xl px-10 max-md:w-full">
-              Our firm is dedicated to empowering political candidates, parties, and organizations
-              with strategic, data-driven, and innovative solutions to achieve electoral success and
-              effective governance. Below is a detailed catalogue of our services, each designed to
-              address the multifaceted challenges of modern political campaigns.
+              {t('slide2description')}
             </p>
           </motion.div>
 
@@ -96,15 +96,15 @@ const Page = () => {
           >
             <div className="flex flex-col items-center gap-5 w-1/2 max-md:w-full justify-center">
               <h1 className="text-5xl bg-gradient-to-b from-blue-50 to-blue-200 py-2 mx-10 max-md:text-3xl text-center">
-                Website/App Development & Upkeep
+                {t('slide3title')}
               </h1>
               <ul className="text-[#20998e] w-1/2 max-md:w-full max-md:text-2xl max-md:px-5 overflow-auto text-center">
-                <li>● Custom Website Design: Tailored to reflect your campaign’s branding.</li>
-                <li>● Mobile App Development: Push notifications, event updates, donations.</li>
-                <li>● Content Management: Easy-to-use systems for multimedia updates.</li>
+                <li>{t('slide2li1')}</li>
+                <li>{t('slide2li2')}</li>
+                <li>{t('slide2li3')}</li>
               </ul>
               <Link href="/services" className="text-center rounded-md border border-slate-300 shadow-xl w-50 px-6 py-3 max-md:mt-10 hover:bg-[#20998e] dark:bg-slate-300 hover:text-white transition duration-300">
-                LEARN MORE
+                {t('slide3CTA')}
               </Link>
             </div>
           </motion.div>
@@ -130,9 +130,9 @@ const Page = () => {
                   height={150}
                 />
                 <h1 className="font-bold text-3xl text-[#20998e] text-center">
-                  End-to-End Campaign Management
+                 {t('slide4title')}
                 </h1>
-                <p className="text-2xl text-center dark:text-black">Strategic Planning</p>
+                <p className="text-2xl text-center dark:text-black">{t('slide4description')}</p>
               </div>
             </div>
 

@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
+import { useTranslations } from 'next-intl';
 
 const EditProject = ({ id, initialData }) => {
+  const t = useTranslations('ProjectEdit');
+
   const [titleEn, setTitleEn] = useState(initialData?.title?.en || "");
   const [titleHi, setTitleHi] = useState(initialData?.title?.hi || "");
   const [descEn, setDescEn] = useState(initialData?.description?.en || "");
@@ -36,15 +39,15 @@ const EditProject = ({ id, initialData }) => {
 
       const data = await res.json();
       if (data.data) {
-        alert("Project updated successfully");
+        alert(t("successMessage"));
         close();
-        location.reload(); // reload to reflect changes
+        location.reload();
       } else {
-        alert("Update failed");
+        alert(t("failMessage"));
       }
     } catch (err) {
       console.error("Update error:", err);
-      alert("Error updating project");
+      alert(t("errorMessage"));
     }
   };
 
@@ -52,7 +55,7 @@ const EditProject = ({ id, initialData }) => {
     <Popup
       trigger={
         <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-          Edit
+          {t("editButton")}
         </button>
       }
       modal
@@ -66,10 +69,10 @@ const EditProject = ({ id, initialData }) => {
     >
       {(close) => (
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-2xl font-semibold mb-4 text-center text-[#08807a]">Edit Project</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-center text-[#08807a]">{t("modalTitle")}</h2>
           <form onSubmit={(e) => handleUpdate(e, close)} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium">Title (English)</label>
+              <label className="block text-sm font-medium">{t("titleEn")}</label>
               <input
                 type="text"
                 value={titleEn}
@@ -79,7 +82,7 @@ const EditProject = ({ id, initialData }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Title (Hindi)</label>
+              <label className="block text-sm font-medium">{t("titleHi")}</label>
               <input
                 type="text"
                 value={titleHi}
@@ -88,7 +91,7 @@ const EditProject = ({ id, initialData }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Description (English)</label>
+              <label className="block text-sm font-medium">{t("descriptionEn")}</label>
               <textarea
                 value={descEn}
                 onChange={(e) => setDescEn(e.target.value)}
@@ -97,7 +100,7 @@ const EditProject = ({ id, initialData }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Description (Hindi)</label>
+              <label className="block text-sm font-medium">{t("descriptionHi")}</label>
               <textarea
                 value={descHi}
                 onChange={(e) => setDescHi(e.target.value)}
@@ -105,7 +108,7 @@ const EditProject = ({ id, initialData }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Category</label>
+              <label className="block text-sm font-medium">{t("category")}</label>
               <input
                 type="text"
                 value={category}
@@ -114,13 +117,13 @@ const EditProject = ({ id, initialData }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Upload New Image</label>
+              <label className="block text-sm font-medium">{t("uploadNewImage")}</label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImageFile(e.target.files[0])}
                 className="w-full border px-3 py-2 rounded"
-                required={!initialData?.image} // require if no initial image
+                required={!initialData?.image}
               />
             </div>
             <div className="flex items-center space-x-2">
@@ -129,7 +132,7 @@ const EditProject = ({ id, initialData }) => {
                 checked={featured}
                 onChange={(e) => setFeatured(e.target.checked)}
               />
-              <label>Featured</label>
+              <label>{t("featured")}</label>
             </div>
             <div className="flex justify-end space-x-3">
               <button
@@ -137,13 +140,13 @@ const EditProject = ({ id, initialData }) => {
                 onClick={close}
                 className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-200"
               >
-                Cancel
+                {t("cancel")}
               </button>
               <button
                 type="submit"
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
-                Update
+                {t("update")}
               </button>
             </div>
           </form>

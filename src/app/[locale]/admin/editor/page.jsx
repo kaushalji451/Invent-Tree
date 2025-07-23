@@ -11,9 +11,12 @@ import { blogPostSchema } from "../../../../schema/blog.schema";
 import { useRouter } from "next/navigation";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
+ import { useTranslations } from 'next-intl';
 
 
 export default function CreateBlogPage() {
+
+  const t = useTranslations('BlogPost');
   const {
     handleSubmit,
     register,
@@ -100,7 +103,7 @@ export default function CreateBlogPage() {
      <Popup
               trigger={
                 <button className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                  Create a New Blog
+                  {t('create')}
                 </button>
               }
               modal
@@ -114,13 +117,13 @@ export default function CreateBlogPage() {
             >
               {(close) => (
                 <div className="bg-white p-6 rounded-lg shadow">
-                  <h2 className="text-2xl font-semibold mb-4 text-center text-[#08807a]">Edit Project</h2>
+                  <h2 className="text-2xl font-semibold mb-4 text-center text-[#08807a]">{t('edit')}</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Title */}
         <div>
           <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
-            Title
+            {t('title')}
           </label>
           <input
             type="text"
@@ -135,15 +138,15 @@ export default function CreateBlogPage() {
         {/* Category */}
         <div>
           <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
-            Category
+            {t('category')}
           </label>
           <select
             {...register("category")}
             className="border-persian-green-300 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 w-full rounded-xl border bg-white p-3 text-sm shadow-sm"
           >
-            <option value="">Select Category</option>
-            <option value="user">User</option>
-            <option value="name">Name</option>
+            <option value="">{t('SelectCategory')}</option>
+            <option value="user">{t('categoryUser')}</option>
+            <option value="name">{t('categoryName')}</option>
           </select>
           {errors.category && (
             <p className="mt-1 text-sm text-red-500">
@@ -155,7 +158,7 @@ export default function CreateBlogPage() {
         {/* Tag */}
         <div>
           <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
-            Tags
+            {t('tags')}
           </label>
 
           <input
@@ -163,7 +166,7 @@ export default function CreateBlogPage() {
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={handleTagKeyDown}
-            placeholder="Type a tag and press Enter"
+            placeholder={t('tagPlaceholder')}
             className="border-persian-green-300 focus:border-persian-green-500 focus:ring-persian-green-400 dark:border-persian-green-800 dark:bg-persian-green-950 dark:text-persian-green-100 dark:focus:ring-persian-green-600 w-full rounded-xl border bg-white p-3 text-sm text-gray-800 shadow-sm focus:ring-1"
           />
 
@@ -194,7 +197,7 @@ export default function CreateBlogPage() {
         {/* Content */}
         <div>
           <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
-            Content
+            {t('content')}
           </label>
           <Controller
             name="content"
@@ -214,7 +217,7 @@ export default function CreateBlogPage() {
         {/* Feature Image Upload */}
         <div>
           <label className="text-persian-green-700 dark:text-persian-green-200 mb-1 block text-sm font-semibold">
-            Feature Image
+            {t('featureImage')}
           </label>
           <input
             type="file"
@@ -234,7 +237,7 @@ export default function CreateBlogPage() {
             {isUploading ? (
               <>
                 <FaSpinner className="h-4 w-4 animate-spin" />
-                Uploading...
+               {t('uploading')}
               </>
             ) : (
               "Upload Image"
@@ -266,7 +269,7 @@ export default function CreateBlogPage() {
           whileHover={{ scale: 1.02 }}
           className="bg-persian-green-600 hover:bg-persian-green-700 w-full rounded-xl px-6 py-3 text-center text-sm font-semibold text-white shadow-md transition"
         >
-          {isSubmitting ? "Submitting..." : "Submit Blog"}
+          {isSubmitting ? t("submitting") : t('submit')}
         </motion.button>
 
         {errors && console.log(errors)}

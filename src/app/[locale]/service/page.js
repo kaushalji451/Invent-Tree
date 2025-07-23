@@ -9,7 +9,11 @@ import Footer from "../../../components/Footer";
 import Loading from "../../../components/loading";
 import { useSession } from "next-auth/react";
 
+
+import { useTranslations } from 'next-intl';
 const Page = () => {
+    const t = useTranslations('ServicesPage');
+
     // Animation variants
     const imageVariants = {
         hidden: { opacity: 0, y: 50 },
@@ -82,7 +86,7 @@ const Page = () => {
                     <div className="max-w-7xl mx-auto px-6 -mt-29 pb-30 flex justify-end pe-50 text-[#08807a] font-bold select-none">
                         <div className="flex items-center gap-4 flex-col absolute  z-50">
                             <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
-                                Home Services
+                                {t('title')}
                             </span>
                             {session?.status === "authenticated" && <ServicePost />}
                         </div>
@@ -100,7 +104,7 @@ const Page = () => {
                     >
                         <div className="flex justify-between items-center mb-6 max-md:flex-col max-md:gap-5">
                             <h2 className="flex items-start text-4xl text-[#08807a] font-light">
-                                <span className="border-l-4 border-[#08807a] pl-2">Service {index + 1}</span>
+                                <span className="border-l-4 border-[#08807a] pl-2">{t('serviceLabel')} {index + 1}</span>
                                 <span className="ml-4 text-lg font-normal">{service.title.en}</span>
                                 <span className="inline-block ml-2 text-sm text-[#08807a]">»</span>
                             </h2>
@@ -112,7 +116,7 @@ const Page = () => {
                                         className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                                         onClick={() => handleDelete(service._id)}
                                     >
-                                        Delete
+                                        {t('delete')}
                                     </button>
                                 </div>
                             )}
@@ -138,7 +142,7 @@ const Page = () => {
                             >
                                 <p className="mb-3 text-xl font-semibold text-indigo-600">{service.description.en}</p>
                                 {service.category && (
-                                    <p className="mb-2 text-sm text-gray-500">Category: {service.category}</p>
+                                    <p className="mb-2 text-sm text-gray-500">{t('category')}: {service.category}</p>
                                 )}
                             </motion.div>
                         </div>
@@ -152,35 +156,35 @@ const Page = () => {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-7xl mx-auto px-6 py-10 rounded-xl bg-[#f0f4ff] text-gray-700 mt-10 shadow-lg"
                 >
-                    <h3 className="text-center mb-6 font-semibold text-2xl text-[#08807a]">Our Core Service Comparison</h3>
+                    <h3 className="text-center mb-6 font-semibold text-2xl text-[#08807a]">{t('coreComparison')}</h3>
                     <div className="overflow-auto">
                         <table className="w-full table-fixed border-collapse border border-gray-300">
                             <thead className="bg-[#08807a] text-white text-center">
                                 <tr>
-                                    <th className="w-1/4 border border-gray-300 py-4">Service</th>
-                                    <th className="border border-gray-300 py-4">Political Consulting</th>
-                                    <th className="border border-gray-300 py-4">Geospatial Analysis</th>
-                                    <th className="border border-gray-300 py-4">Survey Research</th>
+                                    <th className="w-1/4 border border-gray-300 py-4">{t('serviceLabel')}</th>
+                                    <th className="border border-gray-300 py-4">{t('services.0')}</th>
+                                    <th className="border border-gray-300 py-4">{t('services.1')}</th>
+                                    <th className="border border-gray-300 py-4">{t('services.2')}</th>
                                 </tr>
                             </thead>
                             <tbody className="text-center text-gray-800">
                                 <tr>
-                                    <td className="border border-gray-300 bg-[#08807a] text-white font-semibold py-3">Focus Areas</td>
-                                    <td className="border border-gray-300 py-3">Campaign strategy, voter profiling, media management</td>
-                                    <td className="border border-gray-300 py-3">GIS mapping, satellite data, location intelligence</td>
-                                    <td className="border border-gray-300 py-3">Public opinion surveys, exit polls, demographic insights</td>
+                                    <td className="border border-gray-300 bg-[#08807a] text-white font-semibold py-3">{t('comparison.focus')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.focus.0')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.focus.1')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.focus.2')}</td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 bg-[#08807a] text-white font-semibold py-3">Key Tools</td>
-                                    <td className="border border-gray-300 py-3">CRM, analytics dashboards</td>
-                                    <td className="border border-gray-300 py-3">QGIS, Google Earth Engine</td>
-                                    <td className="border border-gray-300 py-3">Custom forms, mobile data collection apps</td>
+                                    <td className="border border-gray-300 bg-[#08807a] text-white font-semibold py-3">{t('comparison.tools')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.tools.0')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.tools.1')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.tools.2')}</td>
                                 </tr>
                                 <tr>
-                                    <td className="border border-gray-300 bg-[#08807a] text-white font-semibold py-3">Client Impact</td>
-                                    <td className="border border-gray-300 py-3">Increased vote share, targeted outreach</td>
-                                    <td className="border border-gray-300 py-3">Improved planning, real-time insights</td>
-                                    <td className="border border-gray-300 py-3">Accurate feedback, data-driven decisions</td>
+                                    <td className="border border-gray-300 bg-[#08807a] text-white font-semibold py-3">{t('comparison.impact')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.impact.0')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.impact.1')}</td>
+                                    <td className="border border-gray-300 py-3">{t('details.impact.2')}</td>
                                 </tr>
                             </tbody>
                         </table>

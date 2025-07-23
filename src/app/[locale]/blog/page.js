@@ -10,6 +10,8 @@ import CreateBlogPage from "../admin/editor/page"; // Assuming this is the compo
 import Footer from "../../../components/Footer"; // Importing Footer component
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useTranslations } from 'next-intl';
+
 const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i) => ({
@@ -24,6 +26,9 @@ const cardVariants = {
 };
 
 const Page = () => {
+
+    const t = useTranslations('BlogPage');
+
     const router = useRouter();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -69,9 +74,9 @@ const Page = () => {
 
     return (
         <>
-            <div className="min-h-screen max-md:mt-20 bg-gray-50 px-4 py-10 dark:bg-gray-900  dark:text-neutral-300">
+            <div className="min-h-screen max-md:mt-20 bg-gray-50 px-4 py-10 dark:bg-gray-900 dark:text-neutral-300">
                 <div>
-                    <h1 className="mb-10 text-center text-4xl font-bold text-[#08807a]">Blog Articles</h1>
+                    <h1 className="mb-10 text-center text-4xl font-bold text-[#08807a]">{t('heading')}</h1>
                     <div className="w-full flex justify-end">
                         {session?.status === "authenticated" && (
                             <div className="w-2/4 ms-5 flex justify-center">
@@ -80,6 +85,7 @@ const Page = () => {
                         )}
                     </div>
                 </div>
+
                 <div className="mx-auto max-w-4xl space-y-6">
                     {data.map((item, i) => (
                         <motion.div
@@ -106,13 +112,13 @@ const Page = () => {
                                         {item.title || item.slug}
                                     </h2>
                                     <p className="mt-2 line-clamp-3 text-sm text-gray-600">
-                                        {item.excerpt?.plainText || item.content || "No description available."}
+                                        {item.excerpt?.plainText || item.content || t("noDescription")}
                                     </p>
                                 </div>
                                 <div className="mt-4 text-sm text-gray-500">
-                                    Category:{" "}
+                                    {t("category")}:{" "}
                                     <span className="font-medium">
-                                        {item.category || "Uncategorized"}
+                                        {item.category || t("uncategorized")}
                                     </span>
                                 </div>
                             </div>
@@ -124,7 +130,7 @@ const Page = () => {
                                         className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                                         onClick={() => handleDeleteBlog(item._id)}
                                     >
-                                        Delete
+                                        {t("delete")}
                                     </button>
                                 </div>
                             )}

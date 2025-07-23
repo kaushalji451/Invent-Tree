@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import axios from 'axios';
+import { useTranslations } from 'next-intl';
 
-const ServicePost = ({ }) => {
+const ServicePost = () => {
+  const t = useTranslations('ServicePost');
+
   const [titleEn, setTitleEn] = useState('');
   const [titleHi, setTitleHi] = useState('');
   const [descEn, setDescEn] = useState('');
@@ -26,20 +30,19 @@ const ServicePost = ({ }) => {
     }
 
     try {
-      let data = await fetch(`/api/services`, {
+      const response = await fetch('/api/services', {
         method: 'POST',
         body: formData,
       });
-      let res = await data.json();
-      console.log('Service updated:', res);
-      if (res.message === "Blog created") {
-        close(); // Close the popup after successful submission
-        alert('Service updated successfully');
+      const res = await response.json();
+      if (res.message === 'Blog created') {
+        close();
+        alert(t('alert.success'));
         location.reload();
       }
     } catch (error) {
       console.error('Update failed:', error);
-      alert('Failed to update service');
+      alert(t('alert.failure'));
     }
   };
 
@@ -48,16 +51,16 @@ const ServicePost = ({ }) => {
       <Popup
         trigger={
           <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
-            Post a Service
+            {t('button.trigger')}
           </span>
         }
         modal
         contentStyle={{
           width: '60%',
-          height: '80vh', // set fixed height
+          height: '80vh',
           borderRadius: '10px',
           padding: '20px',
-          overflow: 'auto', // now scrolling works if content exceeds 80vh
+          overflow: 'auto',
         }}
       >
         {(close) => (
@@ -69,22 +72,28 @@ const ServicePost = ({ }) => {
               &times;
             </button>
 
-            <h2 className="text-2xl mb-4 font-bold text-black dark:text-white text-center"> Post a Service</h2>
+            <h2 className="text-2xl mb-4 font-bold text-black dark:text-white text-center">
+              {t('title')}
+            </h2>
 
             <form onSubmit={(e) => handleSubmit(e, close)} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white">Title (English)</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                  {t('form.titleEn')}
+                </label>
                 <input
                   type="text"
                   value={titleEn}
                   onChange={(e) => setTitleEn(e.target.value)}
-                  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
+                  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white">Title (Hindi)</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                  {t('form.titleHi')}
+                </label>
                 <input
                   type="text"
                   value={titleHi}
@@ -94,17 +103,21 @@ const ServicePost = ({ }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white">Description (English)</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                  {t('form.descEn')}
+                </label>
                 <textarea
                   value={descEn}
                   onChange={(e) => setDescEn(e.target.value)}
-                  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
+                  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white">Description (Hindi)</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                  {t('form.descHi')}
+                </label>
                 <textarea
                   value={descHi}
                   onChange={(e) => setDescHi(e.target.value)}
@@ -113,7 +126,9 @@ const ServicePost = ({ }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white">Category</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                  {t('form.category')}
+                </label>
                 <input
                   type="text"
                   value={category}
@@ -123,7 +138,9 @@ const ServicePost = ({ }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white">Upload Image</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                  {t('form.image')}
+                </label>
                 <input
                   type="file"
                   accept="image/*"
@@ -139,7 +156,7 @@ const ServicePost = ({ }) => {
                   onChange={(e) => setIsActive(e.target.checked)}
                   className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-                <label className="text-gray-700 dark:text-white">Active</label>
+                <label className="text-gray-700 dark:text-white">{t('form.active')}</label>
               </div>
 
               <div className="flex justify-end gap-4 mt-6">
@@ -148,13 +165,13 @@ const ServicePost = ({ }) => {
                   onClick={close}
                   className="px-4 py-2 border border-gray-300 rounded text-gray-600 hover:bg-gray-200"
                 >
-                  Cancel
+                  {t('button.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
-                  Save Changes
+                  {t('button.save')}
                 </button>
               </div>
             </form>

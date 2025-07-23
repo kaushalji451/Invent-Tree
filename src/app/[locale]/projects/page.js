@@ -8,8 +8,12 @@ import EditProject from "./EditProject";
 import Loading from "../../../components/loading";
 import Footer from "../../../components/Footer";  // Importing Footer component
 import { useSession } from "next-auth/react";
+import { useTranslations } from 'next-intl';
 
 const Page = () => {
+  
+  const t = useTranslations('ProjectsPage');
+
   // Animation variants
   const imageVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -87,7 +91,7 @@ const Page = () => {
           <div className="max-w-7xl mx-auto px-6 -mt-29 pb-30 flex justify-end pe-50 text-[#08807a] font-bold select-none">
             <div className="flex items-center gap-4 flex-col absolute z-50">
               <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
-                Home Services
+               {t("headerLabel")}
               </span>
               {session?.status === "authenticated" && <ProjectPost />}
             </div>
@@ -105,7 +109,7 @@ const Page = () => {
           >
             <div className="flex justify-between items-center mb-6 max-md:flex-col max-md:gap-5">
               <h2 className="flex items-center text-4xl text-[#08807a] font-light">
-                <span className="border-l-4 border-[#08807a] pl-2">Projects {index + 1}</span>
+                <span className="border-l-4 border-[#08807a] pl-2">{t('projects')} {index + 1}</span>
                 <span className="ml-4 text-lg font-normal">{project.title.en}</span>
                 <span className="inline-block ml-2 text-sm text-[#08807a]">»</span>
               </h2>
@@ -117,7 +121,7 @@ const Page = () => {
                     className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                     onClick={() => handleDelete(project._id)}
                   >
-                    Delete
+                    {t('delete')}
                   </button>
                 </div>
               )}
@@ -143,7 +147,7 @@ const Page = () => {
               >
                 <p className="mb-3 text-xl font-semibold text-indigo-600">{project.description.en}</p>
                 {project.category && (
-                  <p className="mb-2 text-sm text-gray-500">Category: {project.category}</p>
+                  <p className="mb-2 text-sm text-gray-500">{t('category')}: {project.category}</p>
                 )}
               </motion.div>
             </div>

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+ import { useTranslations } from 'next-intl';
 
 const ProjectPost = () => {
+
+  const t = useTranslations('PostProject');
+
     const [titleEn, setTitleEn] = useState('');
     const [titleHi, setTitleHi] = useState('');
     const [descEn, setDescEn] = useState('');
@@ -36,12 +40,12 @@ const ProjectPost = () => {
 
             if (data.data) {
                 close();
-                alert('Project posted successfully');
+                alert(t('successMessage'));
                 location.reload();
             }
         } catch (err) {
             console.error('Error submitting project:', err);
-            alert('Failed to post project');
+            alert(t('errorMessage'));
         }
     };
 
@@ -50,7 +54,7 @@ const ProjectPost = () => {
             <Popup
                 trigger={
                     <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
-                        Post a Project
+                        {t('postProjectButton')}
                     </span>
                 }
                 modal
@@ -71,11 +75,11 @@ const ProjectPost = () => {
                             &times;
                         </button>
 
-                        <h2 className="text-2xl mb-4 font-bold text-black dark:text-white text-center">Post a Project</h2>
+                        <h2 className="text-2xl mb-4 font-bold text-black dark:text-white text-center">{t('modalTitle')}</h2>
 
                         <form onSubmit={(e) => handleSubmit(e, close)} className="space-y-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-white">Title (English)</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-white">{t('titleEn')}</label>
                                 <input
                                     type="text"
                                     value={titleEn}
@@ -86,7 +90,7 @@ const ProjectPost = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-white">Title (Hindi)</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-white">{t('titleHi')}</label>
                                 <input
                                     type="text"
                                     value={titleHi}
@@ -96,7 +100,7 @@ const ProjectPost = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-white">Description (English)</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-white">{('descriptionEn')}</label>
                                 <textarea
                                     value={descEn}
                                     onChange={(e) => setDescEn(e.target.value)}
@@ -106,7 +110,7 @@ const ProjectPost = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-white">Description (Hindi)</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-white">{('descriptionHi')}</label>
                                 <textarea
                                     value={descHi}
                                     onChange={(e) => setDescHi(e.target.value)}
@@ -115,7 +119,7 @@ const ProjectPost = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-white">Category</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-white">{t('category')}</label>
                                 <input
                                     type="text"
                                     value={category}
@@ -125,7 +129,7 @@ const ProjectPost = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-white">Upload Image</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-white">{t('uploadImage')}</label>
                                 <input
                                     type="file"
                                     accept="image/*"
@@ -142,7 +146,7 @@ const ProjectPost = () => {
                                     onChange={(e) => setFeatured(e.target.checked)}
                                     className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                 />
-                                <label className="text-gray-700 dark:text-white">Featured</label>
+                                <label className="text-gray-700 dark:text-white">{t('featured')}</label>
                             </div>
 
                             <div className="flex justify-end gap-4 mt-6">
@@ -151,13 +155,13 @@ const ProjectPost = () => {
                                     onClick={close}
                                     className="px-4 py-2 border border-gray-300 rounded text-gray-600 hover:bg-gray-200"
                                 >
-                                    Cancel
+                                    {t('cancel')}
                                 </button>
                                 <button
                                     type="submit"
                                     className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                                 >
-                                    Save Project
+                                    {t('saveProject')}
                                 </button>
                             </div>
                         </form>

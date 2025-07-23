@@ -6,8 +6,14 @@ import { routing } from "./i18n/routing";
 const intlMiddleware = createIntlMiddleware(routing);
 
 export async function middleware(req) {
-  const url = req.nextUrl;
+  const res = intlMiddleware(req); // Run i18n middleware first
+  const url = req.nextUrl.clone(); // Clone to manipulate
+  const locale = url.pathname.split("/")[1]; // e.g., 'en' from /en/admin
 
+  // Remove locale from pathname to check clean path
+  const pathWithoutLocale = url.pathname.replace(`/${locale}`, "");
+
+  // Try getting session token
   let token;
   try {
     token = await getToken({
@@ -19,25 +25,26 @@ export async function middleware(req) {
     console.error("Error retrieving token:", error);
   }
 
-  // Public admin paths that should NOT redirect to /login
-  const publicAdminPaths = [
-    "/en/admin/login",
-    "/en/admin/signup",
-  ];
+  // Define public admin paths (without hardcoding locale)
+  const publicAdminPaths = ["/admin/login", "/admin/signup"];
 
-  if (
-    !token &&
-    url.pathname.startsWith("/en/admin") &&
-    !publicAdminPaths.includes(url.pathname)
-  ) {
-    return NextResponse.redirect(new URL("/admin/login", req.url));
+  const isAdminPath = pathWithoutLocale.startsWith("/admin");
+  const isPublicAdmin = publicAdminPaths.includes(pathWithoutLocale);
+
+  if (isAdminPath) {
+    if (!token && !isPublicAdmin) {
+      url.pathname = `/${locale}/admin/login`;
+      return NextResponse.redirect(url);
+    }
+
+    if (token && pathWithoutLocale === "/admin/login") {
+      url.pathname = `/${locale}/admin/dashboard`;
+      return NextResponse.redirect(url);
+    }
   }
 
-  if (token && url.pathname.startsWith("/en/admin/login")) {
-    return NextResponse.redirect(new URL("/en/admin/dashboard", req.url));
-  }
-
-  return intlMiddleware(req);
+  // Return response from i18n middleware
+  return res;
 }
 
 export const config = {

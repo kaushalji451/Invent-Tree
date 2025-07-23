@@ -1,0 +1,252 @@
+{
+  "Home": {
+    "slide1title": "Political Consultancy Services",
+    "slide1msg":"Message",
+    "slide1description": "Welcome to your trusted partner in political transformation. We provide end-to-end consultancy services that combine data-driven strategies, cutting-edge digital solutions, and deep political expertise to help candidates, parties, and organizations win elections and govern effectively.From management and voter outreach to app development, branding, and war room operations — we deliver the tools and support you need to lead with confidence, connect with the public, and achieve lasting impact.",
+    "slide1CTA" : "MORE",
+
+    "slide2description" : "Our firm is dedicated to empowering political candidates, parties, and organizations with strategic, data-driven, and innovative solutions to achieve electoral success andeffective governance. Below is a detailed catalogue of our services, each designed toaddress the multifaceted challenges of modern political campaigns.",
+
+    "slide3title": "Website/App Development & Upkeep",
+    "slide2li1" : "● Custom Website Design: Tailored to reflect your campaigns branding.",
+    "slide2li2" : "● Mobile App Development: Push notifications, event updates, donations.",
+    "slide2li3" : "● Content Management: Easy-to-use systems for multimedia updates.",
+    "slide3CTA" : "LEARN MORE",
+
+    "slide4title" :  " End-to-End Campaign Management",
+    "slide4description" : "Strategic Planning"
+  },
+
+
+  "Navbar" : {
+      "Homebtn" : "Home",
+      "Aboutbtn" : "About",
+      "Servicesbtn" : "Services",
+      "ContactUsbtn" : "Contact Us",
+      "Projectsbtn" : "Projects",
+      "Blogbtn" : "Blog",
+      "AdminDashboardbtn" : "Admin Dashboard",
+      "AddnewAdmin" : "Add new Admin",
+      "Logout" : "Log out",
+      "Login" : "Login",
+      "©2025": "©2025 Yuitech"
+  },
+  "Footer" :{
+    "link1" : "For Corporates",
+    "link2" : "Business Overview",
+    "link3" : "Delivery Records for Local Govts",
+    "link4" : "SDG Initiatives",
+    "link5" : "Company Profile",
+    "link6" : "What's New",
+    "link7" : "Privacy Policy",
+    "link8" : "Sitemap",
+    "©2025" : "©2024 Yuitech",
+    "PRODUCEDBY" : "PRODUCED BY",
+    "Leapy" : "△ Leapy"
+  },
+  "ProjectsPage": {
+    "headerLabel": "Home Services",
+    "projects": "Projects",
+    "delete": "Delete",
+    "category": "Category",
+    "imageNotAvailable": "Image Not Available"
+  },
+
+  "PostProject" : {
+     "postProjectButton": "Post a Project",
+    "modalTitle": "Post a Project",
+    "titleEn": "Title (English)",
+    "titleHi": "Title (Hindi)",
+    "descriptionEn": "Description (English)",
+    "descriptionHi": "Description (Hindi)",
+    "category": "Category",
+    "uploadImage": "Upload Image",
+    "featured": "Featured",
+    "cancel": "Cancel",
+    "saveProject": "Save Project",
+    "successMessage": "Project posted successfully",
+    "errorMessage": "Failed to post project"
+  },
+  "ProjectEdit" :{
+     "editButton": "Edit",
+    "modalTitle": "Edit Project",
+    "titleEn": "Title (English)",
+    "titleHi": "Title (Hindi)",
+    "descriptionEn": "Description (English)",
+    "descriptionHi": "Description (Hindi)",
+    "category": "Category",
+    "uploadNewImage": "Upload New Image",
+    "featured": "Featured",
+    "cancel": "Cancel",
+    "update": "Update",
+    "successMessage": "Project updated successfully",
+    "failMessage": "Update failed",
+    "errorMessage": "Error updating project"
+  },
+
+  "ServicesPage" : {
+  "title": "Home Services",
+  "edit": "Edit",
+  "delete": "Delete",
+  "coreComparison": "Our Core Service Comparison",
+  "serviceLabel": "Service",
+  "category" : "Category",
+  "comparison": {
+    "focus": "Focus Areas",
+    "tools": "Key Tools",
+    "impact": "Client Impact"
+  },
+  "services": [
+    "Political Consulting",
+    "Geospatial Analysis",
+    "Survey Research"
+  ],
+  "details": {
+    "focus": [
+      "Campaign strategy, voter profiling, media management",
+      "GIS mapping, satellite data, location intelligence",
+      "Public opinion surveys, exit polls, demographic insights"
+    ],
+    "tools": [
+      "CRM, analytics dashboards",
+      "QGIS, Google Earth Engine",
+      "Custom forms, mobile data collection apps"
+    ],
+    "impact": [
+      "Increased vote share, targeted outreach",
+      "Improved planning, real-time insights",
+      "Accurate feedback, data-driven decisions"
+    ]
+  }
+},
+"ServicePost" : {
+   "title": "Post a Service",
+  "form": {
+    "titleEn": "Title (English)",
+    "titleHi": "Title (Hindi)",
+    "descEn": "Description (English)",
+    "descHi": "Description (Hindi)",
+    "category": "Category",
+    "image": "Upload Image",
+    "active": "Active"
+  },
+  "button": {
+    "trigger": "Post a Service",
+    "cancel": "Cancel",
+    "save": "Save Changes"
+  },
+  "alert": {
+    "success": "Service posted successfully!",
+    "failure": "Failed to post service."
+  }
+},
+"ServiceEdit" : {
+  "title": "Edit Service",
+  "form": {
+    "titleEn": "Title (English)",
+    "titleHi": "Title (Hindi)",
+    "descEn": "Description (English)",
+    "descHi": "Description (Hindi)",
+    "category": "Category",
+    "image": "Upload Image",
+    "active": "Active"
+  },
+  "button": {
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save Changes"
+  },
+  "alert": {
+    "success": "Service updated successfully!",
+    "failure": "Failed to update service"
+  }
+},
+
+"BlogPage" : {
+   "heading": "Blog Articles",
+  "category": "Category",
+  "uncategorized": "Uncategorized",
+  "noDescription": "No description available.",
+  "delete": "Delete"
+},
+"BlogPost" : {
+   "create": "Create a New Blog",
+    "edit": "Create Blog",
+    "title": "Title",
+    "category": "Category",
+    "selectCategory": "Select Category",
+    "categoryUser": "User",
+    "categoryName": "Name",
+    "tags": "Tags",
+    "tagPlaceholder": "Type a tag and press Enter",
+    "content": "Content",
+    "featureImage": "Feature Image",
+    "uploadImage": "Upload Image",
+    "uploading": "Uploading...",
+    "submit": "Submit Blog",
+    "submitting": "Submitting..."
+},
+
+
+"Contact" : {
+   "heading": "For help with this scheme, fill in your details",
+    "callText": "Or call us at",
+    "callTime": "(Mon–Fri: 8:30–17:30)",
+    "inquiryLabel": "Inquiry Type",
+    "organizationLabel": "Organization / Vendor Name",
+    "organizationPlaceholder": "Enter your organization name",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Enter subject",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Enter your message",
+    "languageLabel": "Language Preference",
+    "languagePlaceholder": "e.g., English or Hindi",
+    "submitButton": "Submit",
+    "privacyNote": "This site is protected by reCAPTCHA and the Google",
+    "privacyPolicy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "inquiryOptions": {
+      "order": "Current Order",
+      "scheme": "About Scheme",
+      "recruitment": "Recruitment",
+      "other": "Other"
+}
+},
+
+
+"Dashboard" : {
+  "title": "Dashboard",
+    "totalServices": "Total Services",
+    "activeProjects": "Active Projects",
+    "totalBlogs": "Total Blogs",
+    "createTitle": "Create Something",
+    "createBlog": "Create a New Blog Post",
+    "createProject": "Add a New Project",
+    "createService": "Add a New Service",
+    "add": "Add"
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

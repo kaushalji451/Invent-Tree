@@ -8,20 +8,27 @@ import { MenuButton } from "./menuButton";
 import { ModeToggle } from "../components/toggle-button";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-const AdminNavitems = [
-  { title: "Home", href: "/" },
-  { title: "About", href: "/" },
-  { title: "Services", href: "/service" },
-  { title: "Case Study", href: "/" },
-  { title: "Projects", href: "/projects" },
-  { title: "Blog", href: "/blog" },
-  { title: "Admin Dashboard", href: "/admin/dashboard" },
-];
-
+import { useTranslations } from 'next-intl';
+import LanguageToggle from "../components/language-toglebutton";
 const AdminNavbar = ({ className }) => {
+
+  const t = useTranslations('Navbar');
+
   const [open, setOpen] = useState(false);
   const session = useSession();
   console.log(session);
+
+  const AdminNavitems = [
+  { title: t('Homebtn'), href: "/" },
+  { title: t('Aboutbtn'), href: "/" },
+  { title: t('Servicesbtn'), href: "/service" },
+  { title: t('Projectsbtn'), href: "/projects" },
+  { title: t('Blogbtn'), href: "/blog" },
+  { title: t('AdminDashboardbtn'), href: "/admin/dashboard" },
+  { title: t('ContactUsbtn'), href: "/contact" },
+];
+
+
 
   return (
     <div
@@ -49,6 +56,7 @@ const AdminNavbar = ({ className }) => {
       </Link>
 
       <div className="z-50 flex cursor-pointer items-center justify-center gap-x-3 p-2 text-2xl text-black dark:text-white">
+        <LanguageToggle/>
         <ModeToggle className={""} />
         <MenuButton
           isOpen={open}
@@ -95,14 +103,13 @@ const AdminNavbar = ({ className }) => {
                   </Link>
                 ))}
               </div>
-              {/* */}
               <div className="mt-8 flex flex-col items-center justify-center gap-y-6 px-4 md:mt-10 md:flex-row md:gap-x-20">
                 {session.status === "authenticated" ? (
                   <div className="flex items-center justify-center gap-x-4">
                    <Link href={"/admin/signup"}
                       className="bg-persian-green-200 dark:bg-persian-green-800 dark:hover:bg-persian-green-900 hover:bg-persian-green-300 cursor-pointer rounded-full px-6 py-2 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 dark:text-white"
                     >
-                      Add new Admin
+                     {t('AddnewAdmin')}
                     </Link>
                     <button
                     className="bg-persian-green-200 dark:bg-persian-green-800 dark:hover:bg-persian-green-900 hover:bg-persian-green-300 cursor-pointer rounded-full px-6 py-2 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 dark:text-white"
@@ -110,7 +117,7 @@ const AdminNavbar = ({ className }) => {
                       signOut();
                     }}
                   >
-                    Log out
+                    {t('Logout')}
                   </button>
                    
                   </div>
@@ -120,7 +127,7 @@ const AdminNavbar = ({ className }) => {
                       onClick={() => setOpen(false)}
                       className="bg-persian-green-200 dark:bg-persian-green-800 dark:hover:bg-persian-green-900 hover:bg-persian-green-300 cursor-pointer rounded-full px-6 py-2 transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 dark:text-white"
                     >
-                      Login
+                     {t('Login')}
                     </Link>
                   </div>
 
@@ -128,7 +135,7 @@ const AdminNavbar = ({ className }) => {
               </div>
 
               <div className="mt-6 w-full p-2 text-center text-sm font-semibold text-neutral-700 dark:text-neutral-400">
-                ©2024 Yuitech
+                {t('©2025')}
               </div>
             </div>
           </motion.div>
