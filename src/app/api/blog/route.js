@@ -38,42 +38,66 @@ export async function GET(req) {
 
 export async function POST(req) {
   await connectMongo();
+
   const body = await req.json();
   console.debug(body);
+
+  // Validate the input using zod
   const parsedData = blogPostSchema.safeParse(body);
+
   if (!parsedData.success) {
     return NextResponse.json(
       { error: parsedData.error.errors.map((e) => e.message).join(", ") },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
-  const slug = generateSlug(parsedData.data.title);
+  const data = parsedData.data;
+
+  // Generate slug from English title
+  const slug = generateSlug(data.title?.en || "untitled");
+
   try {
-    const blogcreated = await Blog.create({
-      title: parsedData.data.title,
+    const blogCreated = await Blog.create({
+      title: {
+        en: data.title.en,
+        hi: data.title.hi,
+      },
       slug: slug,
-      content: parsedData.data.content,
-      category: parsedData.data.category,
-      tags: parsedData.data.tag,
-      author: parsedData.data.author,
-      image: parsedData.data.featureImage,
+      content: {
+        en: data.content.en,
+        hi: data.content.hi,
+      },
+      category: {
+        en: data.category.en,
+        hi: data.category.hi,
+      },
+      tags: data.tags,
+      author: data.author || "admin",
+      image: data.image,
       published: true,
     });
 
     return NextResponse.json(
       {
-        message: "blog is created",
+        message: "Blog is created successfully.",
+        blog: blogCreated,
       },
-      { status: 201 },
+      { status: 201 }
     );
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({
-      message: "Error white publishing blog",
-    });
+    console.error("Error creating blog:", error);
+    return NextResponse.json(
+      {
+        message: "Error while publishing blog",
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }
+
+
 
 export async function DELETE(req) {
   await connectMongo();
@@ -102,62 +126,63 @@ export async function DELETE(req) {
   }
 }
 
+
 export async function PATCH(req) {
   await connectMongo();
-  const body = await req.json();
-  console.log(body);
+
+  const formData = await req.formData();
+  const slug = formData.get('slug');
 
   try {
-    const exitingBlog = await Blog.findOne({
-      slug: body.slug,
+    const blog = await Blog.findOne({ slug });
+    if (!blog) {
+      return NextResponse.json({ message: 'Blog does not exist' }, { status: 404 });
+    }
+
+    const title = {
+      en: formData.get('titleEn'),
+      hi: formData.get('titleHi'),
+    };
+
+    const content = {
+      en: formData.get('contentEn'),
+      hi: formData.get('contentHi'),
+    };
+
+    const category = {
+      en: formData.get('categoryEn'),
+      hi: formData.get('categoryHi'),
+    };
+
+    const tags = formData.get('tags')?.split(',').map((tag) => tag.trim()) || [];
+    const published = formData.get('published') === 'true';
+
+    let imagePath = blog.image;
+    const imageFile = formData.get('image');
+    if (imageFile && typeof imageFile.name === 'string') {
+      const bytes = await imageFile.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      const fileName = `${Date.now()}-${imageFile.name}`;
+      const filePath = path.join(process.cwd(), 'public/uploads', fileName);
+      await writeFile(filePath, buffer);
+      imagePath = `/uploads/${fileName}`;
+    }
+
+    await Blog.updateOne({ slug }, {
+      $set: {
+        title,
+        content,
+        category,
+        tags,
+        image: imagePath,
+        published,
+      },
     });
-    console.log("existing Blog", exitingBlog);
 
-    if (!exitingBlog) {
-      return NextResponse.json(
-        {
-          message: "blog Does not exist",
-        },
-        { status: 501 },
-      );
-    }
+    return NextResponse.json({ message: 'Blog updated successfully' }, { status: 200 });
 
-    const updatedBlog = await blog.updateOne(
-      {
-        slug: body.slug,
-      },
-      {
-        $set: {
-          title: body.title,
-          tags: body.tags,
-          image: body.featureImage,
-          category: body.category,
-          content: body.content,
-        },
-      },
-    );
-    if (!updatedBlog) {
-      return NextResponse.json(
-        {
-          message: "Failed to update blog",
-        },
-        { status: 501 },
-      );
-    }
-    console.log(updatedBlog)
-    return NextResponse.json(
-      {
-        message: "blog updated",
-      },
-      { status: 201 },
-    );
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      {
-        message: "Error while updating blog",
-      },
-      { status: 502 },
-    );
+  } catch (err) {
+    console.error('Update failed:', err);
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }

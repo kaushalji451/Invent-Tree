@@ -1,31 +1,39 @@
 "use client";
 
-import React from "react";
-import { useRouter, usePathname } from "../i18n/navigation";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "../i18n/navigation";
+import { usePathname } from "next/navigation";
 
 const LanguageToggle = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLocaleChange = (locale) => {
-    router.replace(pathname, { locale });
+  const currentLocale = pathname.split("/")[1]; // 'en' or 'hi'
+  const basePath = pathname.replace(/^\/(en|hi)/, ""); // strip current locale
+  const [isHindi, setIsHindi] = useState(currentLocale === "hi");
+
+  useEffect(() => {
+    setIsHindi(currentLocale === "hi");
+  }, [currentLocale]);
+
+  const handleToggle = () => {
+    const newLocale = isHindi ? "en" : "hi";
+    router.replace(basePath || "/", { locale: newLocale });
   };
 
   return (
-    <div className="flex gap-4 items-center justify-center py-4">
-      <button
-        onClick={() => handleLocaleChange("en")}
-        className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
-      >
-        English
-      </button>
-      <button
-        onClick={() => handleLocaleChange("hi")}
-        className="px-4 py-2 rounded-xl bg-green-600 text-white hover:bg-green-700 transition"
-      >
-        हिंदी
-      </button>
-    </div>
+    <label className="inline-flex cursor-pointer items-center">
+      <input
+        type="checkbox"
+        className="peer sr-only"
+        checked={isHindi}
+        onChange={handleToggle}
+      />
+      <div className="peer relative h-6 w-11 rounded-full bg-persian-green-200 peer-checked:bg-persian-green-600 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-persian-green-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-persian-green-700 dark:peer-checked:bg-persian-green-600" />
+      <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+        {isHindi ? "हिंदी" : "English"}
+      </span>
+    </label>
   );
 };
 

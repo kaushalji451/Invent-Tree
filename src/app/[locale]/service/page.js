@@ -1,58 +1,44 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";  // Importing framer-motion for animations
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import EditService from "./EditService";
-import ServicePost from "./ServicePost"; // Importing the ServicePost component
+import ServicePost from "./ServicePost";
 import Footer from "../../../components/Footer";
 import Loading from "../../../components/loading";
 import { useSession } from "next-auth/react";
-
-
 import { useTranslations } from 'next-intl';
+import { usePathname } from "next/navigation";
+
 const Page = () => {
     const t = useTranslations('ServicesPage');
+    const pathname = usePathname();
 
-    // Animation variants
-    const imageVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-    };
-    const textVariants = {
-        hidden: { opacity: 0, x: -50 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } },
-    };
+    const currentLocale = pathname.split("/")[1]; // 'en' or 'hi'
 
     const [loading, setLoading] = useState(true);
     const [services, setServices] = useState([]);
     const session = useSession();
 
-    let servicesData = async () => {
-        let data = await fetch("/api/services");
-        let res = await data.json();
-        console.log("Services Data:", res.message);
-        return res.message;  // <-- Add this line
+    const servicesData = async () => {
+        const data = await fetch("/api/services");
+        const res = await data.json();
+        return res.message;
     };
 
     useEffect(() => {
         window.scrollTo(0, 0);
         servicesData().then((data) => {
             setServices(data);
-            setLoading(false);  // Set loading to false after data is fetched
+            setLoading(false);
         });
     }, []);
 
-    let handleDelete = async (id) => {
-        let res = await fetch(`/api/services?id=${id}`, {
-            method: "DELETE",
-        });
+    const handleDelete = async (id) => {
+        const res = await fetch(`/api/services?id=${id}`, { method: "DELETE" });
         if (res.ok) {
             setServices(services.filter((service) => service._id !== id));
             alert("Service deleted successfully");
-            servicesData().then((data) => {
-                setServices(data);
-            });
         } else {
             alert("Failed to delete service");
         }
@@ -68,8 +54,8 @@ const Page = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-[#f3f7ff]  dark:bg-gray-900 pb-10 text-gray-900 font-sans ">
-                {/* Header Section */}
+            <div className="min-h-screen bg-[#f3f7ff] dark:bg-gray-900 pb-10 text-gray-900 font-sans">
+                {/* Header */}
                 <motion.header
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -79,12 +65,11 @@ const Page = () => {
                     <div
                         className="min-h-[50vh] bg-cover bg-center bg-no-repeat"
                         style={{
-                            backgroundImage:
-                                "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1753085021/Screenshot_2025-07-21_133220_ywyg2s.png')",
+                            backgroundImage: "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1753085021/Screenshot_2025-07-21_133220_ywyg2s.png')",
                         }}
                     ></div>
                     <div className="max-w-7xl mx-auto px-6 -mt-29 pb-30 flex justify-end pe-50 text-[#08807a] font-bold select-none">
-                        <div className="flex items-center gap-4 flex-col absolute  z-50">
+                        <div className="flex items-center gap-4 flex-col absolute z-50">
                             <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
                                 {t('title')}
                             </span>
@@ -93,19 +78,23 @@ const Page = () => {
                     </div>
                 </motion.header>
 
-                {/* Services Section */}
-                {services && services.map((service, index) => (
+                {/* Services */}
+                {services.map((service, index) => (
                     <motion.section
-                        key={index}
+                        key={service._id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className={`max-w-7xl  mx-auto px-6 py-10 bg-white rounded-xl shadow-md ${index === 0 ? "-mt-12 relative z-10" : "mt-10"}`}
+                        className={`max-w-7xl mx-auto px-6 py-10 bg-white rounded-xl shadow-md ${index === 0 ? "-mt-12 relative z-10" : "mt-10"}`}
                     >
                         <div className="flex justify-between items-center mb-6 max-md:flex-col max-md:gap-5">
                             <h2 className="flex items-start text-4xl text-[#08807a] font-light">
-                                <span className="border-l-4 border-[#08807a] pl-2">{t('serviceLabel')} {index + 1}</span>
-                                <span className="ml-4 text-lg font-normal">{service.title.en}</span>
+                                <span className="border-l-4 border-[#08807a] pl-2">
+                                    {t('serviceLabel')} {index + 1}
+                                </span>
+                                <span className="ml-4 text-lg font-normal">
+                                    {service.title[currentLocale] || service.title["en"]}
+                                </span>
                                 <span className="inline-block ml-2 text-sm text-[#08807a]">»</span>
                             </h2>
                             {session?.status === "authenticated" && (
@@ -124,41 +113,46 @@ const Page = () => {
                         <div className="flex flex-col md:flex-row mt-8 gap-8">
                             <motion.img
                                 src={service.image}
-                                alt={service.title.en}
+                                alt={service.title[currentLocale] || service.title["en"]}
                                 className="rounded-lg shadow-lg w-full md:w-1/2 h-auto object-cover"
                                 onError={(e) => {
                                     e.target.onerror = null;
                                     e.target.src = "https://placehold.co/600x300?text=Image+Not+Available";
                                 }}
-                                variants={imageVariants}
                                 initial="hidden"
                                 animate="visible"
                             />
                             <motion.div
                                 className="flex-1 text-gray-700"
-                                variants={textVariants}
                                 initial="hidden"
                                 animate="visible"
                             >
-                                <p className="mb-3 text-xl font-semibold text-indigo-600">{service.description.en}</p>
+                                <p className="mb-3 text-xl font-semibold text-indigo-600">
+                                    {service.description[currentLocale] || service.description["en"]}
+                                </p>
                                 {service.category && (
-                                    <p className="mb-2 text-sm text-gray-500">{t('category')}: {service.category}</p>
+                                    <p className="mb-2 text-sm text-gray-500">
+                                        {t('category')}: {service.category}
+                                    </p>
                                 )}
                             </motion.div>
                         </div>
                     </motion.section>
                 ))}
 
-                {/* PE and PP Difference Table Section */}
+                {/* Table (no change needed, stays localized via `t`) */}
                 <motion.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-7xl mx-auto px-6 py-10 rounded-xl bg-[#f0f4ff] text-gray-700 mt-10 shadow-lg"
                 >
-                    <h3 className="text-center mb-6 font-semibold text-2xl text-[#08807a]">{t('coreComparison')}</h3>
+                    <h3 className="text-center mb-6 font-semibold text-2xl text-[#08807a]">
+                        {t('coreComparison')}
+                    </h3>
                     <div className="overflow-auto">
-                        <table className="w-full table-fixed border-collapse border border-gray-300">
+                        {/* table content here (unchanged) */}
+                         <table className="w-full table-fixed border-collapse border border-gray-300">
                             <thead className="bg-[#08807a] text-white text-center">
                                 <tr>
                                     <th className="w-1/4 border border-gray-300 py-4">{t('serviceLabel')}</th>
@@ -197,3 +191,4 @@ const Page = () => {
 };
 
 export default Page;
+

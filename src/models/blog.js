@@ -1,46 +1,26 @@
 import mongoose from "mongoose";
-import { string } from "zod";
 
 const blogSchema = new mongoose.Schema(
   {
     title: {
-      type: String,
-      required: true,
+      en: { type: String, required: true },
+      hi: { type: String, required: true },
     },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    slug: { type: String, required: true, unique: true },
     content: {
-      type: String,
-      required: true, // Markdown
-    },
-    image: {
-      type: String,
-      required: true, // Cloudinary URL or Firebase URL
+      en: { type: String, required: true },
+      hi: { type: String, required: true },
     },
     category: {
-      type: String,
+      en: { type: String, required: true },
+      hi: { type: String, required: true },
     },
-    tags: [String],
-    author: {
-      type: String,
-    },
-    published: {
-      type: Boolean,
-      default: false,
-    },
-    publishedAt: {
-      type: Date,
-      default: Date.now(),
-    },
-    language: {
-      type: String, // 'en', 'hi', or 'both'
-      default: "en",
-    },
+    tags: [{ type: String }],
+    author: { type: String, default: "admin" },
+    image: { type: String, required: true },
+    published: { type: Boolean, default: true },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
-const blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
-export default blog;
+
+export default mongoose.models.Blog || mongoose.model("Blog", blogSchema);

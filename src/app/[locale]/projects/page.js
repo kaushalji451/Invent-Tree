@@ -1,19 +1,22 @@
+
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";  // Importing framer-motion for animations
-import { useState, useEffect } from "react";
-import ProjectPost from "./ProejctPost";  // Importing the ProjectPost component
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import ProjectPost from "./ProejctPost";
 import EditProject from "./EditProject";
 import Loading from "../../../components/loading";
-import Footer from "../../../components/Footer";  // Importing Footer component
+import Footer from "../../../components/Footer";
 import { useSession } from "next-auth/react";
 import { useTranslations } from 'next-intl';
+import { usePathname } from "next/navigation";
 
 const Page = () => {
-  
   const t = useTranslations('ProjectsPage');
+  const pathname = usePathname();
+  const currentLocale = pathname.split("/")[1]; // 'en' or 'hi'
 
+  
   // Animation variants
   const imageVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -24,29 +27,28 @@ const Page = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } },
   };
 
+
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
 
-  let projectsData = async () => {
+  const projectsData = async () => {
     let data = await fetch("/api/projects");
     let res = await data.json();
-    console.log("Projects Data:", res);
-    return res.data;  // <-- Add this line
+    return res.data;
   };
 
   const session = useSession();
-  console.log("Session Data: project", session);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     projectsData().then((data) => {
       setProjects(data);
-      setLoading(false);  // Set loading to false after data is fetched
+      setLoading(false);
     });
   }, []);
 
-  let handleDelete = async (id) => {
-    let res = await fetch(`/api/projects?id=${id}`, {
+  const handleDelete = async (id) => {
+    const res = await fetch(`/api/projects?id=${id}`, {
       method: "DELETE",
     });
     if (res.ok) {
@@ -56,7 +58,6 @@ const Page = () => {
       projectsData().then((data) => {
         setProjects(data);
       });
-
     } else {
       alert("Failed to delete project");
     }
@@ -72,7 +73,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="min-h-screen pb-10 bg-[#f3f7ff] dark:bg-gray-900  text-gray-900 font-sans">
+      <div className="min-h-screen pb-10 bg-[#f3f7ff] dark:bg-gray-900 text-gray-900 font-sans">
         {/* Header Section */}
         <motion.header
           initial={{ opacity: 0, y: -50 }}
@@ -91,7 +92,7 @@ const Page = () => {
           <div className="max-w-7xl mx-auto px-6 -mt-29 pb-30 flex justify-end pe-50 text-[#08807a] font-bold select-none">
             <div className="flex items-center gap-4 flex-col absolute z-50">
               <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
-               {t("headerLabel")}
+                {t("headerLabel")}
               </span>
               {session?.status === "authenticated" && <ProjectPost />}
             </div>
@@ -99,9 +100,9 @@ const Page = () => {
         </motion.header>
 
         {/* Projects Section */}
-        {projects && projects.map((project, index) => (
+        {projects.map((project, index) => (
           <motion.section
-            key={index}
+            key={project._id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -110,7 +111,9 @@ const Page = () => {
             <div className="flex justify-between items-center mb-6 max-md:flex-col max-md:gap-5">
               <h2 className="flex items-center text-4xl text-[#08807a] font-light">
                 <span className="border-l-4 border-[#08807a] pl-2">{t('projects')} {index + 1}</span>
-                <span className="ml-4 text-lg font-normal">{project.title.en}</span>
+                <span className="ml-4 text-lg font-normal">
+                  {project.title[currentLocale] || project.title["en"]}
+                </span>
                 <span className="inline-block ml-2 text-sm text-[#08807a]">»</span>
               </h2>
               {session?.status === "authenticated" && (
@@ -129,7 +132,7 @@ const Page = () => {
             <div className="flex flex-col md:flex-row mt-8 gap-8">
               <motion.img
                 src={project.image}
-                alt={project.title.en}
+                alt={project.title[currentLocale] || project.title["en"]}
                 className="rounded-lg shadow-lg w-full md:w-1/2 h-auto object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
@@ -145,9 +148,13 @@ const Page = () => {
                 initial="hidden"
                 animate="visible"
               >
-                <p className="mb-3 text-xl font-semibold text-indigo-600">{project.description.en}</p>
+                <p className="mb-3 text-xl font-semibold text-indigo-600">
+                  {project.description[currentLocale] || project.description["en"]}
+                </p>
                 {project.category && (
-                  <p className="mb-2 text-sm text-gray-500">{t('category')}: {project.category}</p>
+                  <p className="mb-2 text-sm text-gray-500">
+                    {t('category')}: {project.category}
+                  </p>
                 )}
               </motion.div>
             </div>
@@ -160,3 +167,4 @@ const Page = () => {
 };
 
 export default Page;
+

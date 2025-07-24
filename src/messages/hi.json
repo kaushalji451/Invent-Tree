@@ -175,22 +175,46 @@
   },
 
   "BlogPost": {
-    "create": "नया ब्लॉग बनाएं",
-    "edit": "ब्लॉग बनाएं",
-    "title": "शीर्षक",
-    "category": "श्रेणी",
-    "selectCategory": "श्रेणी चुनें",
-    "categoryUser": "उपयोगकर्ता",
-    "categoryName": "नाम",
-    "tags": "टैग्स",
-    "tagPlaceholder": "एक टैग टाइप करें और एंटर दबाएं",
-    "content": "सामग्री",
-    "featureImage": "फीचर छवि",
-    "uploadImage": "छवि अपलोड करें",
-    "uploading": "अपलोड हो रहा है...",
-    "submit": "ब्लॉग सबमिट करें",
-    "submitting": "सबमिट किया जा रहा है..."
+    "create": "ब्लॉग बनाएं",
+  "edit": "नया ब्लॉग पोस्ट बनाएं",
+  "titleEnglish": "शीर्षक (अंग्रेज़ी)",
+  "titleHindi": "शीर्षक (हिंदी)",
+  "categoryEnglish": "श्रेणी (अंग्रेज़ी)",
+  "categoryHindi": "श्रेणी (हिंदी)",
+  "tags": "टैग्स",
+  "tagPlaceholder": "टैग टाइप करें और Enter दबाएं",
+  "contentEnglish": "सामग्री (अंग्रेज़ी)",
+  "contentHindi": "सामग्री (हिंदी)",
+  "featureImage": "फीचर इमेज",
+  "uploading": "अपलोड हो रहा है...",
+  "submit": "ब्लॉग सबमिट करें",
+  "submitting": "सबमिट किया जा रहा है...",
+  "uploadImage": "छवि अपलोड करें"
   },
+  "BlogEdit": {
+  "title": "ब्लॉग संपादित करें",
+  "button": {
+    "edit": "संपादित करें",
+    "save": "सहेजें",
+    "cancel": "रद्द करें"
+  },
+  "form": {
+    "titleEn": "शीर्षक (अंग्रेज़ी)",
+    "titleHi": "शीर्षक (हिंदी)",
+    "contentEn": "सामग्री (अंग्रेज़ी)",
+    "contentHi": "सामग्री (हिंदी)",
+    "categoryEn": "श्रेणी (अंग्रेज़ी)",
+    "categoryHi": "श्रेणी (हिंदी)",
+    "tags": "टैग्स",
+    "image": "फीचर इमेज",
+    "published": "प्रकाशित"
+  },
+  "alert": {
+    "success": "ब्लॉग सफलतापूर्वक अपडेट हुआ!",
+    "failure": "ब्लॉग अपडेट करने में विफल।"
+  }
+},
+
 
   "Contact": {
     "heading": "इस योजना में सहायता के लिए, अपनी जानकारी भरें",

@@ -170,21 +170,44 @@
   "delete": "Delete"
 },
 "BlogPost" : {
-   "create": "Create a New Blog",
-    "edit": "Create Blog",
-    "title": "Title",
-    "category": "Category",
-    "selectCategory": "Select Category",
-    "categoryUser": "User",
-    "categoryName": "Name",
+  "create": "Create Blog",
+  "edit": "Create New Blog Post",
+  "titleEnglish": "Title (English)",
+  "titleHindi": "Title (Hindi)",
+  "categoryEnglish": "Category (English)",
+  "categoryHindi": "Category (Hindi)",
+  "tags": "Tags",
+  "tagPlaceholder": "Type a tag and press Enter",
+  "contentEnglish": "Content (English)",
+  "contentHindi": "Content (Hindi)",
+  "featureImage": "Feature Image",
+  "uploading": "Uploading...",
+  "submit": "Submit Blog",
+  "submitting": "Submitting...",
+  "uploadImage" : "Upload Image"
+},
+  "BlogEdit" : { 
+  "title": "Edit Blog",
+  "button": {
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "form": {
+    "titleEn": "Title (English)",
+    "titleHi": "Title (Hindi)",
+    "contentEn": "Content (English)",
+    "contentHi": "Content (Hindi)",
+    "categoryEn": "Category (English)",
+    "categoryHi": "Category (Hindi)",
     "tags": "Tags",
-    "tagPlaceholder": "Type a tag and press Enter",
-    "content": "Content",
-    "featureImage": "Feature Image",
-    "uploadImage": "Upload Image",
-    "uploading": "Uploading...",
-    "submit": "Submit Blog",
-    "submitting": "Submitting..."
+    "image": "Feature Image",
+    "published": "Published"
+  },
+  "alert": {
+    "success": "Blog updated successfully!",
+    "failure": "Failed to update the blog."
+  }
 },
 
 
