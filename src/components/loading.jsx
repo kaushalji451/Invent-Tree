@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 
 const Loading = () => {
   return (
-    <div className="flex h-screen w-full items-center justify-center gap-x-5 bg-white">
+    <div className="flex h-screen w-full items-center justify-center gap-x-5 bg-white dark:bg-gray-900 transition-colors duration-500">
       {[...Array(3)].map((_, idx) => (
         <motion.div
           key={idx}
@@ -16,7 +16,7 @@ const Loading = () => {
             duration: 0.6,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: idx * 0.2, 
+            delay: idx * 0.2,
           }}
         />
       ))}

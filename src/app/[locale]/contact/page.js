@@ -1,26 +1,27 @@
-"use client"
-import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
+"use client";
+
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ContactForm = () => {
-  const t = useTranslations('Contact');
+  const t = useTranslations("Contact");
 
   const [form, setForm] = useState({
-    inquiryType: '',
-    organization: '',
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-    language: '',
+    inquiryType: "",
+    organization: "",
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+    language: "",
   });
 
   const inquiryOptions = [
-    { key: 'order', label: t('inquiryOptions.order') },
-    { key: 'scheme', label: t('inquiryOptions.scheme') },
-    { key: 'recruitment', label: t('inquiryOptions.recruitment') },
-    { key: 'other', label: t('inquiryOptions.other') }
+    { key: "order", label: t("inquiryOptions.order") },
+    { key: "scheme", label: t("inquiryOptions.scheme") },
+    { key: "recruitment", label: t("inquiryOptions.recruitment") },
+    { key: "other", label: t("inquiryOptions.other") },
   ];
 
   const handleChange = (e) => {
@@ -35,8 +36,9 @@ const ContactForm = () => {
         formData.append(key, form[key]);
       }
       console.log("Submitting Form Data:", Object.fromEntries(formData.entries()));
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
         body: formData,
       });
 
@@ -52,25 +54,31 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f6fd] flex flex-col items-center justify-start py-10 px-4">
+    <div className="min-h-screen bg-[#f4f6fd] dark:bg-gray-900 flex flex-col items-center justify-start py-10 px-4 transition-colors duration-500">
       <div className="text-center mb-6">
-        <h2 className="text-lg text-gray-800">{t('heading')}</h2>
-        <p className="text-sm mt-1 text-gray-600">
-          {t('callText')} <span className="text-green-600 font-semibold">058-322-3322</span> {t('callTime')}
+        <h2 className="text-lg text-gray-800 dark:text-gray-200 transition-colors duration-500">{t("heading")}</h2>
+        <p className="text-sm mt-1 text-gray-600 dark:text-gray-400 transition-colors duration-500">
+          {t("callText")}{" "}
+          <span className="text-green-600 font-semibold dark:text-green-400">058-322-3322</span> {t("callTime")}
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white shadow-md w-full max-w-xl rounded-lg px-8 py-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white dark:bg-gray-800 shadow-md w-full max-w-xl rounded-lg px-8 py-6 transition-colors duration-500"
+      >
         {/* Inquiry Type */}
         <div className="mb-4">
-          <label className="block text-gray-800 font-semibold mb-2">{t('inquiryLabel')} <span className="text-red-600">*</span></label>
+          <label className="block text-gray-800 dark:text-gray-200 font-semibold mb-2 transition-colors duration-500">
+            {t("inquiryLabel")} <span className="text-red-600">*</span>
+          </label>
           <div className="space-y-1">
             {inquiryOptions.map((option) => (
               <div key={option.key}>
-                <label className="inline-flex items-center">
+                <label className="inline-flex items-center text-gray-800 dark:text-gray-300 transition-colors duration-500">
                   <input
                     type="radio"
-                    className="form-radio text-green-600"
+                    className="form-radio text-green-600 dark:text-green-400"
                     checked={form.inquiryType === option.label}
                     onChange={() => setForm({ ...form, inquiryType: option.label })}
                   />
@@ -83,21 +91,25 @@ const ContactForm = () => {
 
         {/* Organization */}
         <div className="mb-4">
-          <label htmlFor="organization" className="block text-gray-800 mb-1">{t('organizationLabel')}</label>
+          <label htmlFor="organization" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("organizationLabel")}
+          </label>
           <input
             type="text"
             name="organization"
             id="organization"
             value={form.organization}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder={t('organizationPlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            placeholder={t("organizationPlaceholder")}
           />
         </div>
 
         {/* Name */}
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-800 mb-1">{t('nameLabel')} <span className="text-red-600">*</span></label>
+          <label htmlFor="name" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("nameLabel")} <span className="text-red-600">*</span>
+          </label>
           <input
             type="text"
             name="name"
@@ -105,14 +117,16 @@ const ContactForm = () => {
             required
             value={form.name}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder={t('namePlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            placeholder={t("namePlaceholder")}
           />
         </div>
 
         {/* Email */}
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-800 mb-1">{t('emailLabel')} <span className="text-red-600">*</span></label>
+          <label htmlFor="email" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("emailLabel")} <span className="text-red-600">*</span>
+          </label>
           <input
             type="email"
             name="email"
@@ -120,14 +134,16 @@ const ContactForm = () => {
             required
             value={form.email}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder={t('emailPlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            placeholder={t("emailPlaceholder")}
           />
         </div>
 
         {/* Phone */}
         <div className="mb-4">
-          <label htmlFor="phone" className="block text-gray-800 mb-1">{t('phoneLabel')} <span className="text-red-600">*</span></label>
+          <label htmlFor="phone" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("phoneLabel")} <span className="text-red-600">*</span>
+          </label>
           <input
             type="tel"
             name="phone"
@@ -135,14 +151,16 @@ const ContactForm = () => {
             required
             value={form.phone}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder={t('phonePlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            placeholder={t("phonePlaceholder")}
           />
         </div>
 
         {/* Subject */}
         <div className="mb-4">
-          <label htmlFor="subject" className="block text-gray-800 mb-1">{t('subjectLabel')} <span className="text-red-600">*</span></label>
+          <label htmlFor="subject" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("subjectLabel")} <span className="text-red-600">*</span>
+          </label>
           <input
             type="text"
             name="subject"
@@ -150,51 +168,60 @@ const ContactForm = () => {
             required
             value={form.subject}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder={t('subjectPlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            placeholder={t("subjectPlaceholder")}
           />
         </div>
 
         {/* Message */}
         <div className="mb-4">
-          <label htmlFor="message" className="block text-gray-800 mb-1">{t('messageLabel')} <span className="text-red-600">*</span></label>
+          <label htmlFor="message" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("messageLabel")} <span className="text-red-600">*</span>
+          </label>
           <textarea
             name="message"
             id="message"
             required
             value={form.message}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2 h-24"
-            placeholder={t('messagePlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 h-24 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300 resize-y"
+            placeholder={t("messagePlaceholder")}
           />
         </div>
 
         {/* Language */}
         <div className="mb-6">
-          <label htmlFor="language" className="block text-gray-800 mb-1">{t('languageLabel')}</label>
+          <label htmlFor="language" className="block text-gray-800 dark:text-gray-200 mb-1 transition-colors duration-500">
+            {t("languageLabel")}
+          </label>
           <input
             type="text"
             name="language"
             id="language"
             value={form.language}
             onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            placeholder={t('languagePlaceholder')}
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            placeholder={t("languagePlaceholder")}
           />
         </div>
 
         {/* Submit */}
         <div className="w-full flex items-center justify-center">
-          <button type="submit" className="bg-[#20998f] p-5 w-[221px] h-[56px] flex items-center justify-center text-white font-semibold rounded-full">
-            {t('submitButton')}
+          <button
+            type="submit"
+            className="bg-[#20998f] dark:bg-teal-600 p-5 w-[221px] h-[56px] flex items-center justify-center text-white font-semibold rounded-full hover:bg-[#187a75] dark:hover:bg-teal-700 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-teal-400/60"
+          >
+            {t("submitButton")}
           </button>
         </div>
 
         {/* reCAPTCHA Footer */}
         <br />
         <div>
-          <p className="text-xs opacity-50 text-center">
-            {t('privacyNote')} <span className="text-blue-500 underline cursor-pointer">{t('privacyPolicy')}</span> and <span className="text-blue-500 underline cursor-pointer">{t('terms')}</span> apply.
+          <p className="text-xs opacity-50 text-center text-gray-600 dark:text-gray-400 transition-colors duration-500">
+            {t("privacyNote")}{" "}
+            <span className="text-blue-500 underline cursor-pointer">{t("privacyPolicy")}</span> and{" "}
+            <span className="text-blue-500 underline cursor-pointer">{t("terms")}</span> apply.
           </p>
         </div>
       </form>

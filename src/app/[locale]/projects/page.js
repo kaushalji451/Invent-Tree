@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -16,7 +15,6 @@ const Page = () => {
   const pathname = usePathname();
   const currentLocale = pathname.split("/")[1]; // 'en' or 'hi'
 
-  
   // Animation variants
   const imageVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -26,7 +24,6 @@ const Page = () => {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.6, delay: 0.2 } },
   };
-
 
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState([]);
@@ -53,19 +50,19 @@ const Page = () => {
     });
     if (res.ok) {
       setProjects(projects.filter((project) => project._id !== id));
-      alert("Project deleted successfully");
+      alert(t("projectDeleteSuccess"));
 
       projectsData().then((data) => {
         setProjects(data);
       });
     } else {
-      alert("Failed to delete project");
+      alert(t("projectDeleteFailed"));
     }
   };
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center text-xl">
+      <div className="flex min-h-screen items-center justify-center text-xl bg-white dark:bg-gray-900 transition-colors duration-500">
         <Loading />
       </div>
     );
@@ -73,13 +70,13 @@ const Page = () => {
 
   return (
     <>
-      <div className="min-h-screen pb-10 bg-[#f3f7ff] dark:bg-gray-900 text-gray-900 font-sans">
+      <div className="min-h-screen pb-10 bg-[#f3f7ff] dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-500">
         {/* Header Section */}
         <motion.header
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative bg-slate-200 bg-top bg-no-repeat bg-contain"
+          className="relative bg-slate-200 dark:bg-gray-800 bg-top bg-no-repeat bg-contain transition-colors duration-500"
         >
           <div
             className="min-h-[50vh] bg-cover bg-center bg-no-repeat"
@@ -89,9 +86,9 @@ const Page = () => {
             }}
           ></div>
 
-          <div className="max-w-7xl mx-auto px-6 -mt-29 pb-30 flex justify-end pe-50 text-[#08807a] font-bold select-none">
+          <div className="max-w-7xl mx-auto px-6 -mt-29 pb-30 flex justify-end pe-50 text-[#08807a] dark:text-[#4fd1c5] font-bold select-none">
             <div className="flex items-center gap-4 flex-col absolute z-50">
-              <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] font-normal relative left-3 select-text bg-white rounded-md shadow-sm cursor-default">
+              <span className="text-lg py-2 px-4 border-l-4 border-[#08807a] dark:border-[#4fd1c5] font-normal relative left-3 select-text bg-white dark:bg-gray-900 rounded-md shadow-sm cursor-default transition-colors duration-500">
                 {t("headerLabel")}
               </span>
               {session?.status === "authenticated" && <ProjectPost />}
@@ -106,22 +103,24 @@ const Page = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`max-w-7xl mx-auto px-6 py-10 bg-white rounded-xl shadow-md ${index === 0 ? "-mt-12 relative z-10" : "mt-10"}`}
+            className={`max-w-7xl mx-auto px-6 py-10 bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-lg ${
+              index === 0 ? "-mt-12 relative z-10" : "mt-10"
+            } transition-colors duration-500`}
           >
             <div className="flex justify-between items-center mb-6 max-md:flex-col max-md:gap-5">
-              <h2 className="flex items-center text-4xl text-[#08807a] font-light">
-                <span className="border-l-4 border-[#08807a] pl-2">{t('projects')} {index + 1}</span>
+              <h2 className="flex items-center text-4xl text-[#08807a] dark:text-[#4fd1c5] font-light transition-colors duration-500">
+                <span className="border-l-4 border-[#08807a] dark:border-[#4fd1c5] pl-2">{t('projects')} {index + 1}</span>
                 <span className="ml-4 text-lg font-normal">
                   {project.title[currentLocale] || project.title["en"]}
                 </span>
-                <span className="inline-block ml-2 text-sm text-[#08807a]">»</span>
+                <span className="inline-block ml-2 text-sm text-[#08807a] dark:text-[#4fd1c5]">»</span>
               </h2>
               {session?.status === "authenticated" && (
-                <div className="flex justify-center max-md:justify-end gap-2 item-center max-md:w-full max-md:pe-5">
+                <div className="flex justify-center max-md:justify-end gap-2 items-center max-md:w-full max-md:pe-5">
                   <EditProject id={project._id} initialData={project} />
                   <button
                     type="button"
-                    className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                    className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 transition-colors duration-300"
                     onClick={() => handleDelete(project._id)}
                   >
                     {t('delete')}
@@ -133,7 +132,7 @@ const Page = () => {
               <motion.img
                 src={project.image}
                 alt={project.title[currentLocale] || project.title["en"]}
-                className="rounded-lg shadow-lg w-full md:w-1/2 h-auto object-cover"
+                className="rounded-lg shadow-lg w-full md:w-1/2 h-auto object-cover transition-shadow duration-500 dark:shadow-xl dark:shadow-black/60"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "https://placehold.co/600x300?text=Image+Not+Available";
@@ -143,16 +142,16 @@ const Page = () => {
                 animate="visible"
               />
               <motion.div
-                className="flex-1 text-gray-700"
+                className="flex-1 text-gray-700 dark:text-gray-300 transition-colors duration-500"
                 variants={textVariants}
                 initial="hidden"
                 animate="visible"
               >
-                <p className="mb-3 text-xl font-semibold text-indigo-600">
+                <p className="mb-3 text-xl font-semibold text-indigo-600 dark:text-indigo-400 transition-colors duration-500">
                   {project.description[currentLocale] || project.description["en"]}
                 </p>
                 {project.category && (
-                  <p className="mb-2 text-sm text-gray-500">
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400 transition-colors duration-500">
                     {t('category')}: {project.category}
                   </p>
                 )}
@@ -167,4 +166,3 @@ const Page = () => {
 };
 
 export default Page;
-
