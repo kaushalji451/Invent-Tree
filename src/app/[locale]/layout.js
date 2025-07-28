@@ -53,7 +53,6 @@ async function AsyncIntlProvider({ children, locale }) {
 
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;
-    console.log(`[i18n] Loaded messages for locale: ${locale}`);
   } catch (err) {
     console.error(`Missing messages for locale: ${locale}`);
     notFound();

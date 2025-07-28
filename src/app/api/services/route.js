@@ -38,11 +38,6 @@ export async function POST(req) {
   const formData = await req.formData(); // ✅ real FormData
   const imageFile = formData.get("image");
 
-  console.log("formData entries:");
-  for (let [key, val] of formData.entries()) {
-    console.log(`${key}:`, val);
-  }
-
   let uploadedImageUrl = "";
 
   if (imageFile && imageFile.name) {
@@ -74,10 +69,8 @@ export async function POST(req) {
     image: uploadedImageUrl,
     isActive: formData.get("isActive"),
   }
-  console.log("this is test ", serviceData);
   try {
     const saved = await Service.create(serviceData);
-    console.log("this is saved", saved);
     return NextResponse.json({ message: "Blog created", data: saved }, { status: 200 });
   } catch (err) {
     console.log(err);
@@ -95,9 +88,7 @@ export async function DELETE(req) {
   }
   try {
     let data = await Service.findByIdAndDelete({ _id: id });
-    console.log("this is deleted", data);
     if (data.image == undefined) {
-      console.log("no Service found");
       return NextResponse.json({ message: "No Blog Found. " }, { status: 400 });
     }
     await deleteImage(data.image);
@@ -114,15 +105,8 @@ export async function PATCH(req) {
 
   const { searchParams } = new URL(req.url);
   const id = searchParams.get('id');
-  console.log("this is id", id);
-
   const formData = await req.formData(); // ✅ real FormData
   const imageFile = formData.get("image");
-
-  console.log("formData entries:");
-  for (let [key, val] of formData.entries()) {
-    console.log(`${key}:`, val);
-  }
 
   let uploadedImageUrl = "";
 

@@ -10,14 +10,11 @@ import cloudinary from "../../../../lib/cloudinary"
       }
     );
 
-    console.log('✅ Upload successful:', uploadResult.secure_url);
 
     const optimizedUrl = cloudinary.url('demo/shoes', {
       fetch_format: 'auto',
       quality: 'auto',
     });
-
-    console.log('🌐 Optimized URL:', optimizedUrl);
 
     const croppedUrl = cloudinary.url('demo/shoes', {
       crop: 'auto',
@@ -25,8 +22,6 @@ import cloudinary from "../../../../lib/cloudinary"
       width: 500,
       height: 500,
     });
-
-    console.log('🖼 Cropped URL:', croppedUrl);
   } catch (error) {
     console.error('❌ Upload failed:', error);
   }

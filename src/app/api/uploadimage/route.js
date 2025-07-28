@@ -7,7 +7,6 @@ import { writeFile } from "fs/promises";
 export async function POST(request) {
   const data = await request.formData();
   const file = data.get("file");
-  console.log("file", file);
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -17,7 +16,6 @@ export async function POST(request) {
     const uploadRes = await cloudinary.uploader.upload(tmpPath, {
       folder: "blogImages",
     });
-    console.log("uploadRes",uploadRes)
     if (!uploadRes) {
       return NextResponse.json(
         { message: "Image upload failed" },
@@ -27,7 +25,6 @@ export async function POST(request) {
     
 
     const uploadedImageUrl = uploadRes.secure_url;
-    console.log(uploadedImageUrl)
 
     return NextResponse.json(
       {

@@ -106,13 +106,11 @@ export async function GET(req) {
 try {
     await connectMongo();
     await blog.insertMany(blogsData);
-    console.log("done");
      return NextResponse.json(
           { message: "Data Fetched Successfully." },
           { status: 200 }
         );
 } catch (error) {
-    console.log("some error ");
      return NextResponse.json({ message: "Contacts Not found." }, { status: 404 });
        
 }

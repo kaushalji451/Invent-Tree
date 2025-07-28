@@ -61,7 +61,7 @@ const Page = () => {
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">{t('createBlog')}</p>
                       <Link
-                        href="/admin/blog/create"
+                        href="/blog"
                         className="text-sm text-gray-500 dark:text-gray-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-4 py-2 rounded-xl transition-colors duration-300"
                       >
                         {t('add')}
@@ -72,7 +72,7 @@ const Page = () => {
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">{t('createProject')}</p>
                       <Link
-                        href="/admin/projects/create"
+                        href="/projects"
                         className="text-sm text-gray-500 dark:text-gray-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-4 py-2 rounded-xl transition-colors duration-300"
                       >
                         {t('add')}
@@ -83,7 +83,7 @@ const Page = () => {
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">{t('createService')}</p>
                       <Link
-                        href="/admin/services/create"
+                        href="/service"
                         className="text-sm text-gray-500 dark:text-gray-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-4 py-2 rounded-xl transition-colors duration-300"
                       >
                         {t('add')}

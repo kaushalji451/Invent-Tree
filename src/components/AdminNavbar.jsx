@@ -16,8 +16,6 @@ const AdminNavbar = ({ className }) => {
 
   const [open, setOpen] = useState(false);
   const session = useSession();
-  console.log(session);
-
   const AdminNavitems = [
   { title: t('Homebtn'), href: "/" },
   { title: t('Aboutbtn'), href: "/" },

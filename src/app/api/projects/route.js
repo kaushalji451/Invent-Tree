@@ -37,11 +37,6 @@ export async function POST(req) {
   const formData = await req.formData(); // ✅ real FormData
   const imageFile = formData.get("image");
 
-  console.log("formData entries:");
-  for (let [key, val] of formData.entries()) {
-    console.log(`${key}:`, val);
-  }
-
   let uploadedImageUrl = "";
 
     if (imageFile && imageFile.name) {
@@ -92,7 +87,6 @@ export async function DELETE(req) {
     try {
         let data = await Project.findByIdAndDelete({ _id: id });
         if (data.image == undefined) {
-            console.log("no Project found");
             return NextResponse.json({ message: "No Project Found. " }, { status: 400 });
         }
         await deleteImage(data.image);
@@ -108,15 +102,9 @@ export async function PATCH(req) {
 
   const { searchParams } = new URL(req.url);
   const id = searchParams.get('id');
-  console.log("this is id", id);
 
   const formData = await req.formData(); // ✅ real FormData
   const imageFile = formData.get("image");
-
-  console.log("formData entries:");
-  for (let [key, val] of formData.entries()) {
-    console.log(`${key}:`, val);
-  }
 
   let uploadedImageUrl = "";
 
@@ -135,7 +123,6 @@ export async function PATCH(req) {
 
         uploadedImageUrl = uploadRes.secure_url;
     }
-    console.log("this is upload image", uploadedImageUrl);
 
     // Construct updated Project data
     const projectData = {
@@ -155,11 +142,9 @@ export async function PATCH(req) {
     if (uploadedImageUrl) {
         projectData.image = uploadedImageUrl;
     }
-    console.log("this is Project data", projectData);
     try {
         // Get current Project before updating (to access old image)
         const oldProject = await Project.findById(id);
-        console.log("this is old Project", oldProject);
         if (!oldProject) {
             return NextResponse.json({ message: "No Project Found." }, { status: 404 });
         }
@@ -170,7 +155,6 @@ export async function PATCH(req) {
         }
 
         const updatedProject = await Project.findByIdAndUpdate(id, projectData, { new: true });
-        console.log("this is updatedProject", updatedProject);
         return NextResponse.json({ message: "Project Updated.", data: updatedProject }, { status: 200 });
     } catch (err) {
         console.error(err);

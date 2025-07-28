@@ -6,7 +6,6 @@ import cn from "../utils/cn";
 
 export function ModeToggle({className}) {
   const { setTheme, theme } = useTheme();
-  console.log(theme);
   const isDark = theme === "dark";
   const handleToggle = () => {
     setTheme(isDark ? "light" : "dark");

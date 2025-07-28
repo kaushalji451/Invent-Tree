@@ -55,7 +55,6 @@ export default function BlogAdminPage({ params }) {
         const response = await axios.get(`/api/blog?slug=${slug}`);
         const data = response.data.message[0];
 
-        console.log("Fetched blog data:", data);
 
         // Store the fetched data
         setBlogData(data);
@@ -69,10 +68,6 @@ export default function BlogAdminPage({ params }) {
           featureImage: data.image || "", // ← Map from 'image' to 'featureImage'
         };
         setTags(data.tags || []); // ← Should be an array
-
-        console.log("Form data to reset:", formData);
-        console.log("Feature image URL:", data.image);
-
         reset(formData);
 
         // Set uploaded image URL if it exists
@@ -140,7 +135,6 @@ export default function BlogAdminPage({ params }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log("hitting the blog route");
       const response = await axios.patch("/api/blog", {
         ...data,
         slug, // send slug for edit operation

@@ -7,7 +7,6 @@ export async function GET(req) {
     await connectMongo();
 
     const url = new URL(req.url);
-    console.log(url)
     const slug = url.searchParams.get("slug");
 
     if (!slug) {

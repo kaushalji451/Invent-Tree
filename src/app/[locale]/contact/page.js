@@ -35,7 +35,6 @@ const ContactForm = () => {
       for (const key in form) {
         formData.append(key, form[key]);
       }
-      console.log("Submitting Form Data:", Object.fromEntries(formData.entries()));
 
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -46,7 +45,6 @@ const ContactForm = () => {
       if (!response.ok) throw new Error(result.error || "Unknown error");
 
       alert("Message sent successfully!");
-      console.log("Success:", result);
     } catch (err) {
       alert("Failed to submit: " + err.message);
       console.error("Error:", err);

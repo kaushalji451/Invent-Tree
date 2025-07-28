@@ -7,7 +7,6 @@ import { useTranslations } from "next-intl";
 
 const EditBlog = ({ slug, initialData }) => {
   const t = useTranslations("BlogEdit");
-  console.log("this is intitdata", initialData);
 
   const [titleEn, setTitleEn] = useState(initialData?.title?.en || "");
   const [titleHi, setTitleHi] = useState(initialData?.title?.hi || "");

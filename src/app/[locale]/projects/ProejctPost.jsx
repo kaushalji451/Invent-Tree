@@ -39,7 +39,6 @@ const ProjectPost = () => {
       });
 
       const data = await res.json();
-      console.log("Response:", data);
 
       if (data.data) {
         close();

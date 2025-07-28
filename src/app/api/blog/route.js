@@ -104,15 +104,12 @@ export async function DELETE(req) {
   const { searchParams } = new URL(req.url);
 
   const id = searchParams.get("id");
-  console.log("id",id)
   if (!Types.ObjectId.isValid(id)) {
     return NextResponse.json({ message: "Invalid blog ID" }, { status: 400 });
   }
   try {
     let data = await Blog.findByIdAndDelete({ _id: id });
-    console.log("data:",data)
     if (data.image == undefined) {
-      console.log("undefinded loged")
       return NextResponse.json({ message: "No Blog Found. " }, { status: 400 });
     }
     await deleteImage(data.image);
