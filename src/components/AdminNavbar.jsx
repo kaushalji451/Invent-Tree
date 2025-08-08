@@ -10,6 +10,7 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useTranslations } from 'next-intl';
 import LanguageToggle from "../components/language-toglebutton";
+import { IoIosMail } from "react-icons/io";
 const AdminNavbar = ({ className }) => {
 
   const t = useTranslations('Navbar');
@@ -87,20 +88,34 @@ const AdminNavbar = ({ className }) => {
                   className="h-40 w-70"
                 />
               </div>
-
               <div className="mt-12 flex w-full flex-col items-start justify-center gap-y-3 p-4 md:flex-row md:items-center md:justify-center md:gap-x-6">
                 {AdminNavitems.map((item) => (
                   <Link
                     href={item.href}
                     key={item.title}
                     onClick={() => setOpen(false)}
-                    className="hover:text-persian-green-600 flex w-full cursor-pointer items-center justify-between p-2 text-2xl font-semibold text-neutral-700 transition-all duration-200 hover:scale-105 md:w-auto md:justify-center md:text-xl dark:text-neutral-100"
+                    className="hover:text-persian-green-600 flex w-full cursor-pointer items-center justify-between p-2 text-2xl text-neutral-700 transition-all duration-200 hover:scale-105 md:w-auto md:justify-center md:text-xl dark:text-neutral-100"
                   >
                     {item.title}
                     <SlArrowRight className="ml-2 inline md:hidden" />
                   </Link>
                 ))}
               </div>
+              
+              {/* contact */}
+              <div className="w-full flex gap-10 justify-center bg-white py-4 mx-10 rounded-xl">
+                <div className="flex items-center text-xl gap-2">
+                <IoIosMail/>
+                <p>Contact us by email</p>
+                </div>
+                <div>
+                  <p className="text-2xl"><span className="text-persian-green-600">TEL </span>
+                  9999999999
+                  </p>
+                  Reception hours : Weekend 8:30-17:30
+                </div>
+              </div>
+
               <div className="mt-8 flex flex-col items-center justify-center gap-y-6 px-4 md:mt-10 md:flex-row md:gap-x-20">
                 {session.status === "authenticated" ? (
                   <div className="flex items-center justify-center gap-x-4">

@@ -14,3 +14,6 @@
   --color-persian-green-900: #10514c;
   --color-persian-green-950: #023130;
 }
+body {
+    font-family: "A-OTF A1 Gothic M", sans-serif;
+}
