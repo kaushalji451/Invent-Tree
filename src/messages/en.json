@@ -1,22 +1,154 @@
 {
   "Home": {
-    "slide1title": "Political Consultancy Services",
-    "slide1msg":"Message",
-    "slide1description": "Welcome to your trusted partner in political transformation. We provide end-to-end consultancy services that combine data-driven strategies, cutting-edge digital solutions, and deep political expertise to help candidates, parties, and organizations win elections and govern effectively.From management and voter outreach to app development, branding, and war room operations — we deliver the tools and support you need to lead with confidence, connect with the public, and achieve lasting impact.",
-    "slide1CTA" : "MORE",
+     "slide1title": "To empower political leaders, candidates, and parties with strategic, data-driven consultancy and innovative digital tools that enhance voter engagement, streamline campaign management, and drive successful election outcomes.",
+    "slide1msg": "Our Mission",
+    "slide1description": "At Nivesh Jano, we are dedicated to transforming political vision into electoral success. Our comprehensive consultancy services span every aspect of modern campaigning — from strategic planning and voter outreach to app development, branding, and real-time war room operations. With a strong foundation in political science, technology, and analytics, our team brings a unique blend of expertise to the table. We help you craft compelling narratives, engage meaningfully with voters, and make informed decisions using actionable insights.",
+    "slide1CTA": "Learn More",
 
-    "slide2description" : "Our firm is dedicated to empowering political candidates, parties, and organizations with strategic, data-driven, and innovative solutions to achieve electoral success andeffective governance. Below is a detailed catalogue of our services, each designed toaddress the multifaceted challenges of modern political campaigns.",
-
-    "slide3title": "Website/App Development & Upkeep",
-    "slide2li1" : "● Custom Website Design: Tailored to reflect your campaigns branding.",
-    "slide2li2" : "● Mobile App Development: Push notifications, event updates, donations.",
-    "slide2li3" : "● Content Management: Easy-to-use systems for multimedia updates.",
-    "slide3CTA" : "LEARN MORE",
-
-    "slide4title" :  " End-to-End Campaign Management",
-    "slide4description" : "Strategic Planning"
+    "slide3title": "Innovative Political Technology",
+    "slide3description": "Empowering campaigns with AI-driven tools, real-time analytics, and modern digital solutions to connect with voters and ensure impactful election strategies.",
+     "slide4cards": [
+      {
+        "id": "BUSINESS",
+        "title": "We manufacture and sell polyethylene (PE) and polypropylene (PP) products, and are also working on developing environmentally friendly products using biomass materials.",
+        "text": "Yuitec specializes in the manufacture and sale of polyethylene (PE) and polypropylene (PP) products. With a thorough understanding of the materials and a focus on highly versatile products."
+      },
+      {
+        "id": "02",
+        "title": "Manufacture and sale of PE and PP products",
+        "text": "We have a thorough understanding of materials and their properties, and deliver highly versatile products."
+      },
+      {
+        "id": "03",
+        "title": "Manufacturing and sales of custom-made plastic bags",
+        "text": "We offer original plastic bags that can be customized in size, color, material, design, and printing to suit your needs and purposes."
+      }
+    ],
+     "slide5": {
+      "announcement": "ANNOUNCEMENT",
+      "news": [
+        {
+          "tag": "Others",
+          "title": "Golden Week holiday notice",
+          "description": "We will be closed during the Golden Week holidays from Saturday, May 3, 2025 to Tuesday, May 6, 2025. We will resume normal business hours from..."
+        },
+        {
+          "tag": "Others",
+          "title": "Notice of New Year's holiday closure",
+          "description": "We will be closed for the New Year holidays during the following period: Saturday, December 28, 2024 - Sunday, January 5, 2025. We will resume..."
+        }
+      ],
+      "companyName": "Yuitech",
+      "contactEmail": "Contact us by email",
+      "telLabel": "TEL",
+      "receptionHours": "Reception hours: Weekdays 8:30-17:30",
+      "companyFullName": "Yuitec Co., Ltd.",
+      "companyAddress": "2-43-2 Takaya Iseda, Kitakata-cho, Motosu-gun, 501-0455",
+      "companyContact": "TEL.058-322-3322   FAX: 058-322-3321",
+      "footerLinks": [
+        "For corporations",
+        "Business content",
+        "Company Profile",
+        "What's new",
+        "Privacy Policy"
+      ]
+    },
+      "slide2": {
+      "tagline": "To empower political leaders, candidates with data-driven consultancy.",
+      "scenes": {
+  "0": {
+    "label": "Scene 01",
+    "title": "Farmer",
+    "text": "Compost bags and garbage bags are a bridge between the fresh vegetables on your dinner table, gently connecting producers and your dining table."
+  },
+  "1": {
+    "label": "Scene 02",
+    "title": "Supplier",
+    "text": "Suppliers ensure that biodegradable waste is processed efficiently to promote sustainable agriculture."
+  },
+  "2": {
+    "label": "Scene 03",
+    "title": "Distributor",
+    "text": "Distributors handle packaging and transportation of compost bags from waste to farmlands."
+  },
+  "3": {
+    "label": "Scene 04",
+    "title": "Consumer",
+    "text": "Consumers complete the loop by sorting waste responsibly using labeled garbage bags."
+  },
+  "4": {
+    "label": "Scene 05",
+    "title": "Recycler",
+    "text": "Recyclers turn organic waste into compost that rejuvenates the soil."
+  },
+  "5": {
+    "label": "Scene 06",
+    "title": "Government",
+    "text": "Government policies support sustainable practices from farm to table."
+  }
+}
+    }   
   },
 
+    "about": {
+    "title": "About TechNova Solutions",
+    "subtitle": "Your trusted partner in building innovative digital experiences.",
+    "mission": {
+      "title": "Founded in 2021, our mission is to empower businesses by building cutting-edge web and mobile applications.",
+      "highlight": "We specialize in full-stack development, UI/UX design, and scalable cloud-based solutions.",
+      "extra": "At TechNova, we push technology’s boundaries with a user-first approach and a passion for quality."
+    },
+    "teamTitle": "Meet Our Team",
+    "team": [
+      {
+        "name": "Abhishek Kaushal",
+        "role": "Founder & Lead Developer",
+        "desc": "Over 4 years in web technologies (MERN stack). Clean code, efficient systems, building for scale."
+      },
+      {
+        "name": "Priya Sharma",
+        "role": "UI/UX Designer",
+        "desc": "Intuitive user experiences, user psychology & modern design. Balances form & function."
+      },
+      {
+        "name": "Ravi Verma",
+        "role": "Backend Architect",
+        "desc": "Builds robust backend systems using Node.js, Express, MongoDB. Focus on scale, security, and performance."
+      },
+      {
+        "name": "Sneha Patel",
+        "role": "Marketing & Client Relations",
+        "desc": "Drives client communication and marketing. Ensures transparency and smooth collaboration."
+      }
+    ],
+    "privacy": {
+      "title": "Privacy Policy",
+      "points": [
+        "We value your privacy and protect your personal information.",
+        "Data Collection: Only data necessary for improving services is collected.",
+        "Usage: Data is used only for service delivery, communications, and analytics. Not shared or sold without consent.",
+        "Security: Industry-standard encryption secures your data.",
+        "Cookies: Cookies are used for enhancing user experience; manage via your browser."
+      ],
+      "link": "Read full Privacy Policy →"
+    },
+    "companyDetails": {
+      "title": "🧾 Company Details",
+      "name": "Company Name: TechNova Solutions",
+      "founded": "Founded: 2021",
+      "hq": "Headquarters: Bandhua Kalan, Sultanpur, Uttar Pradesh, India",
+      "email": "Email: contact@technovasolutions.com",
+      "phone": "Phone: +91-9876543210",
+      "legal": "Legal Entity: Registered under Indian Companies Act, MSME ID: IN-UP-123456789"
+    },
+    "footer": "© 2024 TechNova Solutions — All Rights Reserved."
+  },
+
+
+
+"Note": {
+   "Note" :  "this data is used when u want to display the other features of the website"
+  },
 
   "Navbar" : {
       "Homebtn" : "Home",

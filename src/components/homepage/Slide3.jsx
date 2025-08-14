@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+
 const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s',
@@ -15,76 +16,87 @@ const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbnUheL6Gz4BOy-uR6-BZ8KFIYVVDn-18ciQ&s',
 ];
 
+const Slide3 = () => {
+  const t = useTranslations('Home');
 
-const Slide3 = ({slideRefs}) => {
-      const t = useTranslations('Home');
-    
-      return (
-        <div ref={slideRefs.current[2]} className="w-[100vw] h-screen flex items-center justify-between bg-cover bg-center bg-slate-200 snap-start"
-            style={{ backgroundImage: "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599877/Screenshot_2025-07-15_224833_mgl78h.png')" }}
-        >
-            <div className="w-full h-full flex justify-center items-center">
-                <div className="flex flex-col items-center gap-5 px-4">
-                    <Image
-                        src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599604/Screenshot_2025-07-15_224405_ku0qio.png"
-                        alt="Campaign"
-                        width={150}
-                        height={150}
-                    />
-                    <h1 className="font-bold text-3xl text-[#20998e] text-center">
-                        {t('slide4title')}
-                    </h1>
-                    <p className="text-2xl text-center dark:text-black">{t('slide4description')}</p>
-                </div>
-            </div>
-            <div className="w-1/4 h-full hidden md:flex">
-                <div className="w-full h-full overflow-hidden">
-                    <motion.div
-                        className="flex flex-col"
-                        animate={{ y: ["5%", "-100%"] }}
-                        transition={{
-                            duration: 60,
-                            ease: "linear",
-                            repeat: Infinity,
-                        }}
-                    >
-                        {[...images, ...images].map((img, i) => (
-                            <Image
-                                key={`left-${i}`}
-                                src={img}
-                                alt={`scroll-img-left-${i}`}
-                                className="w-full h-[150px] object-cover"
-                                width={150}
-                                height={150}
-                            />
-                        ))}
-                    </motion.div>
-                </div>
-                <div className="w-full h-full overflow-hidden">
-                    <motion.div
-                        className="flex flex-col"
-                        animate={{ y: ["0%", "-100%"] }}
-                        transition={{
-                            duration: 60,
-                            ease: "linear",
-                            repeat: Infinity,
-                        }}
-                    >
-                        {[...images, ...images].map((img, i) => (
-                            <Image
-                                key={`right-${i}`}
-                                src={img}
-                                alt={`scroll-img-right-${i}`}
-                                className="w-full h-[150px] object-cover"
-                                width={150}
-                                height={150}
-                            />
-                        ))}
-                    </motion.div>
-                </div>
-            </div>
+  return (
+    <div
+      className="flex items-center justify-between bg-cover bg-center h-full bg-slate-200"
+      style={{
+        backgroundImage:
+          "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599877/Screenshot_2025-07-15_224833_mgl78h.png')",
+      }}
+    >
+      {/* Center content */}
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="flex flex-col items-center gap-5 px-4">
+          <Image
+            src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599604/Screenshot_2025-07-15_224405_ku0qio.png"
+            alt="Campaign"
+            width={150}
+            height={150}
+          />
+          <h1 className="font-bold text-3xl text-[#20998e] text-center">
+            {t('slide3title')}
+          </h1>
+          <p className="text-2xl text-center dark:text-black">
+            {t('slide3description')}
+          </p>
         </div>
-    )
-}
+      </div>
 
-export default Slide3
+      {/* Side scrolling images */}
+      <div className="w-1/4 h-full hidden md:flex">
+        {/* Left column scroll */}
+        <div className="w-full h-full overflow-hidden">
+          <motion.div
+            className="flex flex-col"
+            animate={{ y: ['5%', '-100%'] }}
+            transition={{
+              duration: 60,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+          >
+            {[...images, ...images].map((img, i) => (
+              <Image
+                key={`left-${i}`}
+                src={img}
+                alt={`scroll-img-left-${i}`}
+                className="w-full h-[150px] object-cover"
+                width={150}
+                height={150}
+              />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Right column scroll */}
+        <div className="w-full h-full overflow-hidden">
+          <motion.div
+            className="flex flex-col"
+            animate={{ y: ['0%', '-100%'] }}
+            transition={{
+              duration: 60,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+          >
+            {[...images, ...images].map((img, i) => (
+              <Image
+                key={`right-${i}`}
+                src={img}
+                alt={`scroll-img-right-${i}`}
+                className="w-full h-[150px] object-cover"
+                width={150}
+                height={150}
+              />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Slide3;

@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from "next-intl";
+
+// Just store images in order
+const sceneImages = [
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpAh63HncAuJOC6TxWkGLYpS0WwNXswz9MA&s",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpAh63HncAuJOC6TxWkGLYpS0WwNXswz9MA&s",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpAh63HncAuJOC6TxWkGLYpS0WwNXswz9MA&s",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpAh63HncAuJOC6TxWkGLYpS0WwNXswz9MA&s",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpAh63HncAuJOC6TxWkGLYpS0WwNXswz9MA&s",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPpAh63HncAuJOC6TxWkGLYpS0WwNXswz9MA&s",
+];
+
+const MobileCarousel = () => {
+  const [index, setIndex] = useState(0);
+  const t = useTranslations("Home.slide2.scenes"); // start from scenes namespace
+
+  // Auto-slide every 3 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % sceneImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="w-full h-screen flex items-center justify-center relative overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full px-4"
+        >
+          <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+            <img
+              src={sceneImages[index]}
+              alt={t(`${index}.title`)}
+              className="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            <p className="text-sm text-teal-600 font-semibold">
+              {t(`${index}.label`)}
+            </p>
+            <h2 className="text-xl font-bold text-teal-700">
+              {t(`${index}.title`)}
+            </h2>
+            <p className="mt-2 text-gray-600">
+              {t(`${index}.text`)}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default MobileCarousel;

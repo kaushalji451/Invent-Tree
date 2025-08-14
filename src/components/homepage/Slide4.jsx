@@ -1,75 +1,171 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
 
-const image = [
-  {
-    id: "01",
-    title: "Manufacture and sale of PE and PP products",
-    text: "We manufacture and sell polyethylene (PE) and polypropylene (PP) products, and are also working on developing environmentally friendly products using biomass materials.",
-    image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5a7b0d59-d492-41b6-b281-e8de1d6f27f0.png"
-  },
-  {
-    id: "02",
-    title: "Manufacturing and sales of custom-made plastic bags",
-    text: "We offer original plastic bags that can be customized in size, color, material, design, and printing to suit your needs and purposes.",
-    image: "https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e103c33f-594c-41f8-94eb-0533e98c610a.png"
-  }
-];
-
-const Slide4 = ({ slideRefs }) => {
+const Slide4 = () => {
   const t = useTranslations('Home');
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef(null);
+  const hasOpenedRef = useRef(false);
+  const [disableAnimation, setDisableAnimation] = useState(false);
+
+  // Dynamic image data from translations
+  const image = [
+    {
+      id: t('slide4cards.0.id'),
+      title: t('slide4cards.0.title'),
+      text: t('slide4cards.0.text')
+    },
+    {
+      id: t('slide4cards.1.id'),
+      title: t('slide4cards.1.title'),
+      text: t('slide4cards.1.text'),
+      image:
+        'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5a7b0d59-d492-41b6-b281-e8de1d6f27f0.png'
+    },
+    {
+      id: t('slide4cards.2.id'),
+      title: t('slide4cards.2.title'),
+      text: t('slide4cards.2.text'),
+      image:
+        'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e103c33f-594c-41f8-94eb-0533e98c610a.png'
+    }
+  ];
+
+  // Handle responsive animation toggle
+  useEffect(() => {
+    function checkWidth() {
+      setDisableAnimation(window.innerWidth < 768);
+    }
+    checkWidth();
+    window.addEventListener('resize', checkWidth);
+    return () => window.removeEventListener('resize', checkWidth);
+  }, []);
+
+  // Intersection Observer for animation
+  useEffect(() => {
+    if (disableAnimation) {
+      setInView(false);
+      return;
+    }
+    let timer;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const ratio = entry.intersectionRatio;
+        if (ratio > 0 && !hasOpenedRef.current) {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            setInView(true);
+            hasOpenedRef.current = true;
+          }, 1000);
+        }
+      },
+      { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [disableAnimation]);
 
   return (
-    <div
-      ref={slideRefs.current[3]}
-      className="w-[100vw] h-screen flex items-center justify-center bg-cover bg-center bg-slate-200 gap-20 snap-start"
-    >
-      <div className="min-h-screen bg-[#f1f5fb] flex justify-center px-4 py-8">
-        <main className="max-w-[1200px] mt-10 w-full flex flex-col md:flex-row bg-[#f6f9fe] border-x border-[#298b85]">
-
-          {/* Sidebar */}
-          <aside className="relative text-white font-montserrat md:clip-path-custom px-8 py-8 md:w-1/3 border-[#298b85] bg-[#f6f9fe] z-50">
-            <h1 className="text-[4rem] text-[#148b85] md:text-[5.6rem] font-orbitron font-medium leading-none tracking-tight">BUSINESS</h1>
-            <p className="text-[#158b83] pe-6 text-4xl mt-8 max-w-xs leading-relaxed">
-              We have a thorough understanding of materials and their properties, and deliver highly versatile products.
-            </p>
-            <p className="text-zinc-600 text-lg text-center mt-4 max-w-xs leading-snug font-normal">
-              Yuitec specializes in the manufacture and sale of polyethylene (PE) and polypropylene (PP) products. With a thorough understanding of the materials and a focus on highly versatile products.
-            </p>
-          </aside>
-
-          {/* Animated Cards with overlap and reveal */}
-          <div className="relative flex flex-row flex-grow overflow-hidden md:overflow-visible border-x border-[#298b85]">
-            {image.map(({ id, title, text, image }) => (
-              <section
-                key={id}
-                className={`flex flex-col border-t md:border-t-0 md:border-l border-[#298b85] py-8 md:w-1/2`}>
-                <div className="relative px-6 pl-6 bg-white">
-                  {/* Custom vertical border */}
+    <div className="flex items-center bg-center px-4 dark:bg-gray-900 transition-colors duration-300">
+      <div className="min-h-screen flex justify-center py-8">
+        <main ref={containerRef} className="max-w-[1200px] w-full flex flex-col md:flex-row mt-2">
+          <div
+            className={`relative flex items-start justify-start ${
+              disableAnimation
+                ? 'flex-col space-y-8'
+                : 'overflow-hidden md:overflow-visible border-x border-[#298b85]'
+            }`}
+          >
+            {image.map(({ id, title, text, image: img }, index) =>
+              disableAnimation ? (
+                // Mobile view - static
+                <section
+                  key={id}
+                  className={`relative w-full max-w-[450px] px-6 pb-10 flex flex-col justify-between 
+                  bg-white dark:bg-gray-800 dark:border-gray-700 border-x border-[#298b85] ${
+                    index === image.length - 1 ? 'border-e' : ''
+                  }`}
+                >
                   <div className="absolute left-0 top-0 h-20 w-3 bg-[#148b85]"></div>
-
-                  <div className="mb-4">
-                    <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#148b85] leading-none">{id}</div>
-                    <div className="flex items-center text-sm font-semibold text-[#148b85]">
-                      <span className="text-lg mr-2">▮</span> business
+                  <div className={id === t('slide4cards.0.id') ? 'text-center' : ''}>
+                    <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#148b85] leading-none">
+                      {id}
                     </div>
+                    <div className="flex items-center text-sm font-semibold text-[#148b85] mb-6">
+                      <span className="text-lg mr-2">▮</span>
+                    </div>
+                    <h2 className="text-[#148b85] px-4 text-lg md:text-4xl mb-4 font-montserrat">
+                      {title}
+                    </h2>
+                    <p className="text-[#2a2116] dark:text-gray-300 font-normal px-4 text-xl leading-relaxed">
+                      {text}
+                    </p>
                   </div>
-
-                  <h2 className="text-[#148b85] px-4 text-lg md:text-4xl mb-4 font-montserrat">{title}</h2>
-                  <p className="text-[#2a2116] font-normal mb-6 py-10 px-4 text-xl">{text}</p>
-                  <div className='flex w-full justify-center'>
-                    <img
-                      src={image}
-                      alt={title}
-                      onError={(e) => (e.target.style.display = 'none')}
-                      className="rounded-xl shadow-md w-[85%] h-50 mt-auto"
-                    />
+                  {img && (
+                    <div className="flex w-full justify-center mt-6">
+                      <img
+                        src={img}
+                        alt=""
+                        className="rounded-2xl shadow-md w-full max-h-50 dark:shadow-gray-700"
+                      />
+                    </div>
+                  )}
+                </section>
+              ) : (
+                // Desktop view - animated
+                <motion.section
+                  key={id}
+                  className="absolute top-0 h-full ms-12"
+                  initial={{ left: 0 }}
+                  animate={{
+                    left: inView ? `${index * 30}rem` : 0
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.2,
+                    ease: 'easeInOut'
+                  }}
+                  style={{
+                    zIndex: image.length - index,
+                    width: '450px'
+                  }}
+                >
+                  <div className="relative px-6 h-[94vh] pb-10 flex flex-col justify-between 
+                  bg-slate-100 dark:bg-gray-800 border-x border-[#298b85] dark:border-gray-700">
+                    <div className="absolute left-0 top-0 h-22 w-3 bg-[#148b85]"></div>
+                    <div className={id === t('slide4cards.0.id') ? 'text-center ' : ''}>
+                      <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#148b85] leading-none">
+                        {id}
+                      </div>
+                      <div className="flex items-center text-sm font-semibold text-[#148b85] mb-6">
+                        <span className="text-lg mr-2">▮</span>
+                      </div>
+                      <h2 className="text-[#148b85] px-4 text-lg md:text-4xl mb-4 font-montserrat">
+                        {title}
+                      </h2>
+                      <p className="text-[#2a2116] dark:text-gray-300 font-normal px-4 text-xl leading-relaxed">
+                        {text}
+                      </p>
+                    </div>
+                    {img && (
+                      <div className="flex w-full justify-center mt-6">
+                        <img
+                          src={img}
+                          alt=""
+                          className="rounded-2xl shadow-md w-full max-h-50 dark:shadow-gray-700"
+                        />
+                      </div>
+                    )}
                   </div>
-                </div>
-              </section>
-            ))}
+                </motion.section>
+              )
+            )}
           </div>
         </main>
       </div>
