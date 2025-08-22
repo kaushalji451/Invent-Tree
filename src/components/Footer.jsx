@@ -13,7 +13,7 @@ const Footer = () => {
             width={150}
             height={100}
             src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752566569/Screenshot_2025-07-15_132958_ecqubp.png"
-            alt="Yuitech Logo"
+            alt="Invent-Tree Logo"
             className="h-20"
             priority
           />

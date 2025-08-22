@@ -41,11 +41,11 @@ const AdminNavbar = ({ className }) => {
         width={250}
         height={250}
         src="https://www.yuitech.jp/wp/wp-content/themes/standard_sass/images/common/logo-bg.svg"
-        className="absolute top-0 left-0 max-sm:w-40  "
+        className="absolute top-0 left-0 max-sm:w-42"
         alt=""
       />
-      <Link href={"/"} className="z-10 flex ps-4 ">
-        <p className="text-3xl max-sm:text-xl max-sm:-mt-6 text-white font-semibold">YUITECH</p>
+      <Link href={"/"} className="z-10 flex min-md:px-2 min-md:pt-3">
+        <img src="/logo/Invent-Tree logo Favicon-08.png" alt="logo" className="max-sm:w-15" />
       </Link>
 
       <div className="z-50 flex cursor-pointer items-center justify-center gap-x-3 p-2 text-2xl text-black dark:text-white">

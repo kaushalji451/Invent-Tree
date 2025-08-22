@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
             height: '100vh',
             background: 'white'
           }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s" alt="Company Logo" style={{ width: '200px' }} />
+            <img src="/logo/Invent-Tree logo-05.webp" alt="Company Logo" />
           </div>
         ) : (
           children

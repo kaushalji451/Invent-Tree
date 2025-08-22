@@ -24,7 +24,7 @@ const RoatedSVG = () => {
           />
         </defs>
         <text
-          className="fill-black "
+          className="fill-black"
           fontSize="20"
           fontFamily="sans-serif"
         >
@@ -36,9 +36,9 @@ const RoatedSVG = () => {
       </motion.svg>
 
       {/* Centered logo */}
-      <div className="absolute text-5xl text-black">
+      <div className="absolute text-5xl ">
         <img
-          src="https://niveshjano.in/assets/logo-D_wrZTeL.png"
+          src="/logo/Invent-Tree logo Favicon-08.png"
           alt="nj logo"
           className="w-10 h-10 object-contain"
         />

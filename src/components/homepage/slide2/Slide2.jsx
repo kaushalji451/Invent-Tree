@@ -27,11 +27,10 @@ const Slide2 = () => {
                 "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754898561/Screenshot_2025-08-10_144825-removebg-preview_emlftp.png')",
             }}
           >
-            <p className="z-50 text-white text-4xl ps-4 font-bold">
+            <p className="z-50 text-[#dae7ef] text-4xl ps-4 font-bold">
               {t('slide2.tagline')}
             </p>
           </div>
-
           {scenes.map((scene, idx) => (
             <SceneCard
               key={idx}

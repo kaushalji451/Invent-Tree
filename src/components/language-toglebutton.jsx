@@ -29,7 +29,8 @@ const LanguageToggle = () => {
         checked={isHindi}
         onChange={handleToggle}
       />
-      <div className="peer relative h-6 w-11 rounded-full bg-persian-green-200 peer-checked:bg-persian-green-600 peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-persian-green-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-persian-green-700 dark:peer-checked:bg-persian-green-600" />
+      <div className="peer relative h-6 w-11 rounded-full bg-[#e995b7] peer-checked:bg-[#604e84] peer-focus:outline-none after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-persian-green-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full dark:bg-[#604e84]
+        dark:peer-checked:bg-[#604e84]" />
       <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
         {isHindi ? "हिंदी" : "English"}
       </span>

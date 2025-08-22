@@ -35,19 +35,19 @@ const MobileCarousel = () => {
           transition={{ duration: 0.6 }}
           className="w-full px-4"
         >
-          <div className="bg-white dark:bg-[#2e2d2d] p-6 rounded-2xl shadow-lg text-center">
+          <div className="bg-white dark:bg-[#2e2d2d]/95 p-6 rounded-2xl shadow-lg text-center">
             <img
               src={sceneImages[index]}
               alt={t(`${index}.title`)}
               className="w-full h-48 object-cover rounded-xl mb-4"
             />
-            <p className="text-sm text-teal-600 font-semibold">
+            <p className="text-sm text-[#8777a9] font-semibold">
               {t(`${index}.label`)}
             </p>
-            <h2 className="text-xl font-bold text-teal-700">
+            <h2 className="text-xl font-bold text-[#8777a9]">
               {t(`${index}.title`)}
             </h2>
-            <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-[#dae7ef ]">
               {t(`${index}.text`)}
             </p>
           </div>

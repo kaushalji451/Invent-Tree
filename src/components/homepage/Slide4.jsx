@@ -88,19 +88,19 @@ const Slide4 = () => {
                 <section
                   key={id}
                   className={`relative w-full max-w-[450px] px-6 pb-10 flex flex-col justify-between 
-                  bg-white dark:bg-[#2e2d2d] dark:border-gray-700 border-x border-[#298b85] ${
+                  bg-white dark:bg-[#2e2d2d] dark:border-gray-700 border-x border-[#8777a9] ${
                     index === image.length - 1 ? 'border-e' : ''
                   }`}
                 >
-                  <div className="absolute left-0 top-0 h-20 w-3 bg-[#148b85]"></div>
+                  <div className="absolute left-0 top-0 h-20 w-3 bg-[#8777a9]"></div>
                   <div className={id === t('slide4cards.0.id') ? 'text-center' : ''}>
-                    <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#148b85] leading-none">
+                    <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#8777a9] leading-none">
                       {id}
                     </div>
-                    <div className="flex items-center text-sm font-semibold text-[#148b85] mb-6">
+                    <div className="flex items-center text-sm font-semibold text-[#8777a9] mb-6">
                       <span className="text-lg mr-2">▮</span>
                     </div>
-                    <h2 className="text-[#148b85] px-4 text-lg md:text-4xl mb-4 font-montserrat">
+                    <h2 className="text-[#8777a9] px-4 text-lg md:text-4xl mb-4 font-montserrat">
                       {title}
                     </h2>
                     <p className="text-[#2a2116] dark:text-gray-300 font-normal px-4 text-xl leading-relaxed">
@@ -137,19 +137,19 @@ const Slide4 = () => {
                   }}
                 >
                   <div className="relative px-6 h-[94vh] pb-10 flex flex-col justify-between 
-                  bg-slate-100 dark:bg-[#2e2d2d] border-x border-[#298b85] dark:border-gray-700">
-                    <div className="absolute left-0 top-0 h-22 w-3 bg-[#148b85]"></div>
+                  bg-slate-100 dark:bg-[#2e2d2d] border-x  dark:border-gray-700">
+                    <div className="absolute left-0 top-0 h-22 w-3 bg-[#8777a9]"></div>
                     <div className={id === t('slide4cards.0.id') ? 'text-center ' : ''}>
-                      <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#148b85] leading-none">
+                      <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#67577f] leading-none">
                         {id}
                       </div>
-                      <div className="flex items-center text-sm font-semibold text-[#148b85] mb-6">
+                      <div className="flex items-center text-sm font-semibold text-[#67577f] mb-6">
                         <span className="text-lg mr-2">▮</span>
                       </div>
-                      <h2 className="text-[#148b85] px-4 text-lg md:text-4xl mb-4 font-montserrat">
+                      <h2 className="text-[#67577f] px-4 text-lg md:text-4xl mb-4 font-montserrat">
                         {title}
                       </h2>
-                      <p className="text-[#2a2116] dark:text-gray-300 font-normal px-4 text-xl leading-relaxed">
+                      <p className="text-[#455b68] dark:text-[#ededed] font-normal px-4 text-xl leading-relaxed">
                         {text}
                       </p>
                     </div>

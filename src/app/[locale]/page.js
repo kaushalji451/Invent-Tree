@@ -182,8 +182,7 @@ export default function Page() {
 
       {/* Slides */}
       <div className="flex flex-col md:flex-row w-screen md:w-fit h-auto md:h-screen">
-        <div ref={(el) => (slideRefs.current[0] = el)} className="w-[100vw] h-screen max-sm:h-fit flex-shrink-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752593870/Screenshot_2025-07-15_210659_xpsbuf.png')" }}>
+        <div ref={(el) => (slideRefs.current[0] = el)} className="w-[100vw] h-screen max-sm:h-fit flex-shrink-0 bg-cover bg-center bg-[url('/Home-Page-Invent-Tree.png')] dark:bg-[url('/Home-Page-Invent-Tree-Dark.png')]">
           <Slide1 />
         </div>
         <div ref={(el) => (slideRefs.current[1] = el)} className="h-screen flex-shrink-0 bg-cover  bg-center bg-[url('/Final-Illustration-Light-Mode.png')] dark:bg-[url('/Final-Illustration-Dark-Mode.png')]">

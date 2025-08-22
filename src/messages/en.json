@@ -38,7 +38,7 @@
           "description": "We will be closed for the New Year holidays during the following period: Saturday, December 28, 2024 - Sunday, January 5, 2025. We will resume..."
         }
       ],
-      "companyName": "Yuitech",
+      "companyName": "Invent-Tree",
       "contactEmail": "Contact us by email",
       "telLabel": "TEL",
       "receptionHours": "Reception hours: Weekdays 8:30-17:30",
@@ -91,7 +91,7 @@
   },
 
     "about": {
-    "title": "About Ivent-Tree Solutions",
+    "title": "About Invent-Tree Solutions",
     "subtitle": "Your trusted partner in building innovative digital experiences.",
     "mission": {
       "title": "Founded in 2021, our mission is to empower businesses by building cutting-edge web and mobile applications.",
@@ -134,14 +134,14 @@
     },
     "companyDetails": {
       "title": "🧾 Company Details",
-      "name": "Company Name: Ivent-Tree Solutions",
+      "name": "Company Name: Invent-Tree Solutions",
       "founded": "Founded: 2021",
       "hq": "Headquarters: Jankipuram, Lucknow, Uttar Pradesh, India",
       "email": "Email: contact@iventtreesolutions.com",
       "phone": "Phone: +91-9876543210",
       "legal": "Legal Entity: Registered under Indian Companies Act, MSME ID: IN-UP-123456789"
     },
-    "footer": "© 2024 Ivent-Tree Solutions — All Rights Reserved."
+    "footer": "© 2024 Invent-Tree Solutions — All Rights Reserved."
   },
 
 
@@ -161,7 +161,7 @@
       "AddnewAdmin" : "Add new Admin",
       "Logout" : "Log out",
       "Login" : "Login",
-      "©2025": "©2025 Yuitech"
+      "©2025": "©2025 Invent-Tree"
   },
   "Footer" :{
     "link1" : "For Corporates",
@@ -172,7 +172,7 @@
     "link6" : "What's New",
     "link7" : "Privacy Policy",
     "link8" : "Sitemap",
-    "©2025" : "©2024 Yuitech",
+    "©2025" : "©2024 Invent-Tree",
     "PRODUCEDBY" : "PRODUCED BY",
     "Leapy" : "△ Leapy"
   },
