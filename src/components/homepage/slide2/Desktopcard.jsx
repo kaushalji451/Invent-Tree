@@ -29,7 +29,7 @@ const SceneCard = ({ index, setCurrentScene }) => {
     >
       {/* Card */}
       <div className="max-w-md p-6 rounded-2xl text-center shadow-lg 
-                      bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 
+                      bg-white/70 bg-opacity-80 dark:bg-[#2e2d2d]/70 dark:bg-opacity-80 
                       backdrop-blur-md">
         <p className="text-sm font-semibold text-teal-600 dark:text-teal-400">
           {t(`${index}.label`)}

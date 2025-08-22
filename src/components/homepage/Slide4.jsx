@@ -72,7 +72,7 @@ const Slide4 = () => {
   }, [disableAnimation]);
 
   return (
-    <div className="flex items-center bg-center px-4 dark:bg-gray-900 transition-colors duration-300">
+    <div className="flex items-center bg-center px-4 dark:bg-[#1f1f1f] transition-colors duration-300">
       <div className="min-h-screen flex justify-center py-8">
         <main ref={containerRef} className="max-w-[1200px] w-full flex flex-col md:flex-row mt-2">
           <div
@@ -88,7 +88,7 @@ const Slide4 = () => {
                 <section
                   key={id}
                   className={`relative w-full max-w-[450px] px-6 pb-10 flex flex-col justify-between 
-                  bg-white dark:bg-gray-800 dark:border-gray-700 border-x border-[#298b85] ${
+                  bg-white dark:bg-[#2e2d2d] dark:border-gray-700 border-x border-[#298b85] ${
                     index === image.length - 1 ? 'border-e' : ''
                   }`}
                 >
@@ -137,7 +137,7 @@ const Slide4 = () => {
                   }}
                 >
                   <div className="relative px-6 h-[94vh] pb-10 flex flex-col justify-between 
-                  bg-slate-100 dark:bg-gray-800 border-x border-[#298b85] dark:border-gray-700">
+                  bg-slate-100 dark:bg-[#2e2d2d] border-x border-[#298b85] dark:border-gray-700">
                     <div className="absolute left-0 top-0 h-22 w-3 bg-[#148b85]"></div>
                     <div className={id === t('slide4cards.0.id') ? 'text-center ' : ''}>
                       <div className="text-[2.75rem] md:text-[4.4rem] font-orbitron font-medium text-[#148b85] leading-none">

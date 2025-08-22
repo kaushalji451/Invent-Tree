@@ -16,7 +16,7 @@ function Page() {
   const team = t.raw("team");
 
   return (
-    <div className="min-h-screen bg-white text-[#222] dark:bg-gray-900 dark:text-white px-3 pb-16 transition-colors duration-300">
+    <div className="min-h-screen bg-white text-[#222] dark:bg-[#1f1f1f] dark:text-white px-3 pb-16 transition-colors duration-300">
       <motion.div
         className="max-w-4xl mx-auto py-12 max-md:pt-35"
         initial={{ opacity: 0, scale: 0.95 }}
@@ -42,7 +42,7 @@ function Page() {
         </motion.p>
 
         {/* Company Mission */}
-        <div className="p-6 rounded-2xl mb-10 bg-[#f4f7ff] dark:bg-gray-800">
+        <div className="p-6 rounded-2xl mb-10 bg-[#f4f7ff] dark:bg-[#2e2d2d]">
           <motion.div
             className="rounded-lg shadow px-6 py-6 border border-[#c1c7d0]/40 dark:border-gray-600"
             custom={1}
@@ -70,11 +70,11 @@ function Page() {
         >
           {t("teamTitle")}
         </motion.h2>
-        <div className="grid sm:grid-cols-2 gap-6 mb-12 bg-[#f4f7ff] dark:bg-gray-800 p-6 rounded-2xl">
+        <div className="grid sm:grid-cols-2 gap-6 mb-12 bg-[#f4f7ff] dark:bg-[#2e2d2d] p-6 rounded-2xl">
           {team.map((member, i) => (
             <motion.div
               key={member.name}
-              className="rounded-lg p-5 border border-[#c1c7d0]/40 dark:border-gray-600 shadow-lg hover:scale-105 transition-transform bg-white dark:bg-gray-900"
+              className="rounded-lg p-5 border border-[#c1c7d0]/40 dark:border-gray-600 shadow-lg hover:scale-105 transition-transform bg-white dark:bg-[#1f1f1f]"
               custom={i}
               initial="hidden"
               whileInView="visible"
@@ -89,7 +89,7 @@ function Page() {
         </div>
 
         {/* Privacy Policy */}
-        <div className="p-6 mb-8 bg-[#f4f7ff] dark:bg-gray-800 rounded-2xl">
+        <div className="p-6 mb-8 bg-[#f4f7ff] dark:bg-[#2e2d2d] rounded-2xl">
           <motion.div
             className="px-6 py-6 rounded-lg shadow-lg border border-[#c1c7d0]/40 dark:border-gray-600"
             initial={{ opacity: 0, y: 30 }}
@@ -110,7 +110,7 @@ function Page() {
         </div>
 
         {/* Company Details */}
-        <div className="p-6 bg-[#f4f7ff] dark:bg-gray-800 rounded-2xl">
+        <div className="p-6 bg-[#f4f7ff] dark:bg-[#2e2d2d] rounded-2xl">
           <motion.div
             className="rounded-lg px-6 py-6 shadow-lg border border-[#c1c7d0]/40 dark:border-gray-600"
             initial={{ opacity: 0, x: 60 }}

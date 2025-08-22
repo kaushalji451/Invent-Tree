@@ -35,7 +35,7 @@ const MobileCarousel = () => {
           transition={{ duration: 0.6 }}
           className="w-full px-4"
         >
-          <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
+          <div className="bg-white dark:bg-[#2e2d2d] p-6 rounded-2xl shadow-lg text-center">
             <img
               src={sceneImages[index]}
               alt={t(`${index}.title`)}

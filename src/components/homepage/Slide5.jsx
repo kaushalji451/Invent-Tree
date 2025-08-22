@@ -31,10 +31,10 @@ const Slide5 = () => {
 
   return (
     <div>
-     <div className="flex flex-col lg:flex-row min-h-screen h-full w-full font-sans text-sm bg-white text-[#222] dark:bg-gray-900 dark:text-white">
+     <div className="flex flex-col lg:flex-row min-h-screen h-full w-full font-sans text-sm bg-white text-[#222] dark:bg-[#2e2d2d] dark:text-white">
         
   {/* Left Section - NEWS */}
-  <aside className="relative w-full lg:w-1/2 flex-1.1 bg-[#f4f7ff] dark:bg-gray-800 py-8 lg:py-12 px-5 sm:px-10 lg:px-14">
+  <aside className="relative w-full lg:w-1/2 flex-1.1 bg-[#f4f7ff] dark:bg-[#1f1f1f] py-8 lg:py-12 px-5 sm:px-10 lg:px-14">
     <div className="mx-0 sm:mx-5 lg:mx-20 mt-0 sm:mt-5 lg:mt-30">
       <div className="relative z-10 flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 lg:mb-10">
         <h1 className="text-4xl sm:text-5xl max-md:text-center max-md:pt-10 text-teal-700 dark:text-teal-400 tracking-wide">
@@ -75,7 +75,7 @@ const Slide5 = () => {
     </div>
 
     {/* Contact Info */}
-    <section className="flex flex-col md:flex-row items-center justify-between bg-[#f6f9ff] dark:bg-gray-800 rounded-xl p-4 lg:p-3 mb-6 lg:mb-12 gap-2">
+    <section className="flex flex-col md:flex-row items-center justify-between bg-[#f6f9ff] dark:bg-[#1f1f1f] rounded-xl p-4 lg:p-3 mb-6 lg:mb-12 gap-2">
       <div className="flex items-center font-semibold text-lg py-1 text-[#222] dark:text-white">
         <svg className="w-[22px] h-[22px] mr-2" viewBox="0 0 24 24" xmlns="http:www.w3.org/2000/svg">
           <path fill="#13837d" d="M2 6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm2 .4l7.5 4.5a.5.5 0 00.5 0L20 6.4V6H4v.4z" />

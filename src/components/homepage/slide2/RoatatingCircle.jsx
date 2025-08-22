@@ -51,7 +51,7 @@ const RotatingSceneIndicator = ({ current }) => {
               }}
               className="bg-cover bg-center rounded-2xl"
             />
-            <p className="text-6xl text-end -mt-9 text-black font-bold">{activeScene.label}</p>
+            <p className="text-6xl text-end -mt-9 dark:text-white text-black font-bold">{activeScene.label}</p>
           </motion.div>
         </AnimatePresence>
       </div>

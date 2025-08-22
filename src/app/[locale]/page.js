@@ -155,7 +155,7 @@ export default function Page() {
             {steps.map((step, idx) => (
               <div key={step.number} className="relative z-20 flex flex-col items-center mx-4">
                 <div
-                  className={`absolute bottom-10 px-3 py-1 rounded bg-white text-teal-600 shadow transition-all duration-300
+                  className={`absolute bottom-10 px-3 py-1 rounded bg-white dark:text-[#2e2d2d] text-teal-600 shadow transition-all duration-300
                     ${(hoveredStep === idx || (hoveredStep === null && activeStep === idx))
                       ? 'opacity-100 translate-y-0'
                       : 'opacity-0 translate-y-2 pointer-events-none'}`}
@@ -167,7 +167,7 @@ export default function Page() {
                 <button
                   aria-label={`Go to ${step.label}`}
                   className={`w-8 h-8 flex mt-6 items-center justify-center font-light
-                    ${idx <= activeStep ? 'text-teal-600' : 'text-black'}`}
+                    ${idx <= activeStep ? 'text-teal-600' : 'dark:text-white text-black'}`}
                   onMouseEnter={() => setHoveredStep(idx)}
                   onMouseLeave={() => setHoveredStep(null)}
                   onClick={() => handleStepClick(idx)}
@@ -186,10 +186,7 @@ export default function Page() {
           style={{ backgroundImage: "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752593870/Screenshot_2025-07-15_210659_xpsbuf.png')" }}>
           <Slide1 />
         </div>
-        <div ref={(el) => (slideRefs.current[1] = el)} className="h-screen flex-shrink-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752595832/Screenshot_2025-07-15_213828_t4jgvw.png')",
-          }}>
+        <div ref={(el) => (slideRefs.current[1] = el)} className="h-screen flex-shrink-0 bg-cover  bg-center bg-[url('/Final-Illustration-Light-Mode.png')] dark:bg-[url('/Final-Illustration-Dark-Mode.png')]">
           <Slide2 />
         </div>
         <div ref={(el) => (slideRefs.current[2] = el)} className="w-[100vw] h-screen flex-shrink-0">

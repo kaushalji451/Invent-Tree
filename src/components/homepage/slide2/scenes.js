@@ -1,21 +1,27 @@
 const scenes = [
   {
-    img: "https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754815643/Screenshot_2025-08-10_141658_ecdij7.png",
+    img: "/illustration-1.png",
+    label: "Scene 1",
   },
   {
-    img: "https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754815643/Screenshot_2025-08-10_141658_ecdij7.png",
+    img: "/illustration-2.png",
+    label: "Scene 2",
   },
   {
-    img: "https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754815643/Screenshot_2025-08-10_141658_ecdij7.png",
+    img: "/illustration-3.png",
+    label: "Scene 3",
   },
   {
-    img: "https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754815643/Screenshot_2025-08-10_141658_ecdij7.png",
+    img: "/illustration-4.png",
+    label: "Scene 4",
   },
   {
-    img: "https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754815643/Screenshot_2025-08-10_141658_ecdij7.png",
+    img: "/illustration-5.png",
+    label: "Scene 5",
   },
   {
-    img: "https://res.cloudinary.com/dpbpu5b0v/image/upload/v1754815643/Screenshot_2025-08-10_141658_ecdij7.png",
+    img: "/illustration-6.png",
+    label: "Scene 6",
   }
 ];
 export default scenes;

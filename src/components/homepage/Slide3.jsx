@@ -20,35 +20,18 @@ const Slide3 = () => {
   const t = useTranslations('Home');
 
   return (
-    <div
-      className="flex items-center justify-between bg-cover bg-center h-full bg-slate-200"
-      style={{
-        backgroundImage:
-          "url('https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599877/Screenshot_2025-07-15_224833_mgl78h.png')",
-      }}
-    >
-      {/* Center content */}
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="flex flex-col items-center gap-5 px-4">
-          <Image
-            src="https://res.cloudinary.com/dpbpu5b0v/image/upload/v1752599604/Screenshot_2025-07-15_224405_ku0qio.png"
-            alt="Campaign"
-            width={150}
-            height={150}
-          />
-          <h1 className="font-bold text-3xl text-[#20998e] text-center">
-            {t('slide3title')}
-          </h1>
-          <p className="text-2xl text-center dark:text-black">
-            {t('slide3description')}
-          </p>
-        </div>
+    <div className="flex items-center justify-between bg-cover bg-center h-full bg-zinc-100 dark:bg-[#1f1f1f]">
+      
+      {/* Center content - only visible on desktop */}
+      <div className="hidden md:flex w-full h-full justify-center items-center">
+        <img src="/Illustration-7.png" alt="Illustration" />
       </div>
 
-      {/* Side scrolling images */}
-      <div className="w-1/4 h-full hidden md:flex">
+      {/* Side scrolling images - visible on all screens */}
+      <div className="w-full md:w-1/2 h-full flex">
+        
         {/* Left column scroll */}
-        <div className="w-full h-full overflow-hidden">
+        <div className="w-1/2 h-full overflow-hidden">
           <motion.div
             className="flex flex-col"
             animate={{ y: ['5%', '-100%'] }}
@@ -63,7 +46,7 @@ const Slide3 = () => {
                 key={`left-${i}`}
                 src={img}
                 alt={`scroll-img-left-${i}`}
-                className="w-full h-[150px] object-cover"
+                className="w-full h-[120px] md:h-[150px] object-cover"
                 width={150}
                 height={150}
               />
@@ -72,7 +55,7 @@ const Slide3 = () => {
         </div>
 
         {/* Right column scroll */}
-        <div className="w-full h-full overflow-hidden">
+        <div className="w-1/2 h-full overflow-hidden">
           <motion.div
             className="flex flex-col"
             animate={{ y: ['0%', '-100%'] }}
@@ -87,7 +70,7 @@ const Slide3 = () => {
                 key={`right-${i}`}
                 src={img}
                 alt={`scroll-img-right-${i}`}
-                className="w-full h-[150px] object-cover"
+                className="w-full h-[120px] md:h-[150px] object-cover"
                 width={150}
                 height={150}
               />

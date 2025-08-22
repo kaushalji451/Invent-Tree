@@ -52,7 +52,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f6fd] dark:bg-gray-900 flex flex-col items-center justify-start py-10 px-4 transition-colors duration-500">
+    <div className="min-h-screen bg-[#f4f6fd] dark:bg-[#1f1f1f] flex flex-col items-center justify-start py-10 px-4 transition-colors duration-500">
       <div className="text-center mb-6">
         <h2 className="text-lg text-gray-800 dark:text-gray-200 transition-colors duration-500">{t("heading")}</h2>
         <p className="text-sm mt-1 text-gray-600 dark:text-gray-400 transition-colors duration-500">
@@ -63,7 +63,7 @@ const ContactForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white dark:bg-gray-800 shadow-md w-full max-w-xl rounded-lg px-8 py-6 transition-colors duration-500"
+        className="bg-white dark:bg-[#2e2d2d] shadow-md w-full max-w-xl rounded-lg px-8 py-6 transition-colors duration-500"
       >
         {/* Inquiry Type */}
         <div className="mb-4">
@@ -115,7 +115,7 @@ const ContactForm = () => {
             required
             value={form.name}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-[#2e2d2d] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
             placeholder={t("namePlaceholder")}
           />
         </div>
@@ -132,7 +132,7 @@ const ContactForm = () => {
             required
             value={form.email}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-[#2e2d2d] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
             placeholder={t("emailPlaceholder")}
           />
         </div>
@@ -149,7 +149,7 @@ const ContactForm = () => {
             required
             value={form.phone}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-[#2e2d2d] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
             placeholder={t("phonePlaceholder")}
           />
         </div>
@@ -166,7 +166,7 @@ const ContactForm = () => {
             required
             value={form.subject}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-[#2e2d2d] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
             placeholder={t("subjectPlaceholder")}
           />
         </div>
@@ -182,7 +182,7 @@ const ContactForm = () => {
             required
             value={form.message}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 h-24 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300 resize-y"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 h-24 bg-white dark:bg-[#2e2d2d] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300 resize-y"
             placeholder={t("messagePlaceholder")}
           />
         </div>
@@ -198,7 +198,7 @@ const ContactForm = () => {
             id="language"
             value={form.language}
             onChange={handleChange}
-            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+            className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-[#2e2d2d] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
             placeholder={t("languagePlaceholder")}
           />
         </div>
