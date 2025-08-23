@@ -25,7 +25,7 @@ function Page() {
       >
         {/* Header */}
         <motion.h1
-          className="text-4xl font-bold text-center mb-2 text-teal-700 dark:text-teal-400"
+          className="text-4xl font-bold text-center mb-2 text-[#67577f]"
           initial={{ y: -40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1, duration: 1, type: "spring" }}
@@ -53,7 +53,7 @@ function Page() {
           >
             <p>
               <strong>{t("mission.title")}</strong><br />
-              <span className="text-teal-700 dark:text-teal-400 font-semibold">
+              <span className="text-[#8777a9] font-semibold">
                 {t("mission.highlight")}
               </span><br />
               <span>{t("mission.extra")}</span>
@@ -63,7 +63,7 @@ function Page() {
 
         {/* Team */}
         <motion.h2
-          className="text-2xl font-semibold mb-6 text-center tracking-wide text-teal-700 dark:text-teal-400"
+          className="text-2xl font-semibold mb-6 text-center tracking-wide text-[#67577f]"
           initial={{ opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.09, duration: 0.6, type: "spring" }}
@@ -82,7 +82,7 @@ function Page() {
               variants={fadeInUp}
             >
               <h3 className="text-lg font-bold mb-1">{member.name}</h3>
-              <p className="italic mb-1 text-gray-600 dark:text-gray-400">{member.role}</p>
+              <p className="italic mb-1 text-[#8777a9]">{member.role}</p>
               <p>{member.desc}</p>
             </motion.div>
           ))}
@@ -97,13 +97,13 @@ function Page() {
             viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.8 }}
           >
-            <h2 className="text-xl font-semibold mb-2 text-teal-700 dark:text-teal-400">{t("privacy.title")}</h2>
+            <h2 className="text-xl font-semibold mb-2 text-[#67577f]">{t("privacy.title")}</h2>
             <ul className="list-disc pl-5 text-gray-700 dark:text-gray-300">
               {t.raw("privacy.points").map((point, index) => (
                 <li key={index}>{point}</li>
               ))}
             </ul>
-            <div className="mt-3 underline text-teal-700 dark:text-teal-400 cursor-pointer">
+            <div className="mt-3 underline text-[#8777a9] cursor-pointer">
               {t("privacy.link")}
             </div>
           </motion.div>
@@ -118,7 +118,7 @@ function Page() {
             viewport={{ once: true }}
             transition={{ delay: 0.22, duration: 0.8 }}
           >
-            <h2 className="text-xl font-semibold mb-2 text-teal-700 dark:text-teal-400">{t("companyDetails.title")}</h2>
+            <h2 className="text-xl font-semibold mb-2 text-[#67577f]">{t("companyDetails.title")}</h2>
             <div className="space-y-1 text-gray-700 dark:text-gray-300">
               <div>{t("companyDetails.name")}</div>
               <div>{t("companyDetails.founded")}</div>

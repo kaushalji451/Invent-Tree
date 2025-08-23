@@ -1,9 +1,6 @@
 'use client';
-
 import React, { useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 import scenes from "./scenes";
-import RotatingSceneIndicator from "./RoatatingCircle";
 import SceneCard from "./Desktopcard";
 import MobileCarousel from "./MobileCarsole";
 import { useTranslations } from 'next-intl';
@@ -11,15 +8,12 @@ import { useTranslations } from 'next-intl';
 const Slide2 = () => {
   const t = useTranslations('Home');
   const [currentScene, setCurrentScene] = useState(0);
-  const [cardsRef, cardsInView] = useInView({ threshold: 0.2 });
 
   return (
     <>
       {/* Desktop layout */}
       <div className="hidden sm:flex items-center">
-        {cardsInView && <RotatingSceneIndicator current={currentScene} />}
-
-        <div ref={cardsRef} className="flex flex-row gap-20 -mt-11">
+        <div className="flex flex-row gap-20">
           <div
             className="w-[100vw] h-screen flex-shrink-0 bg-cover relative flex items-center"
             style={{
@@ -37,6 +31,7 @@ const Slide2 = () => {
               index={idx}
               {...scene}
               setCurrentScene={setCurrentScene}
+              currentScene={currentScene}
             />
           ))}
         </div>

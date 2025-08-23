@@ -54,7 +54,7 @@ const Slide5 = () => {
               <time className='dark:text-[#cbcfd3]'>{item.date}</time>
               <span className="ml-2 lg:ml-3 bg-[#8777a9]  text-white px-2 py-1 text-[10px] rounded uppercase font-bold">{item.tag}</span>
             </div>
-            <h2 className="text-teal-700 dark:text-[#8777a9] py-1 lg:py-2 text-base lg:text-lg cursor-pointer font-semibold">
+            <h2 className="text-[#8777a9] py-1 lg:py-2 text-base lg:text-lg cursor-pointer font-semibold">
               {item.title}
             </h2>
             <p className="text-sm text-[#c1c7d0]line-clamp-3 max-w-full lg:max-w-[90%]">

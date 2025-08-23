@@ -24,7 +24,7 @@ const RoatedSVG = () => {
           />
         </defs>
         <text
-          className="fill-black"
+          className="fill-black dark:fill-white"
           fontSize="20"
           fontFamily="sans-serif"
         >
