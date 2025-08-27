@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+// Your images
 const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFYqoKTu_o3Zns2yExbst2Co84Gpc2Q1RJbA&s',
@@ -16,8 +17,25 @@ const images = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbnUheL6Gz4BOy-uR6-BZ8KFIYVVDn-18ciQ&s',
 ];
 
+// Helper: insert 3 text boxes randomly in array
+const insertTextBoxes = (arr) => {
+  const words = ['Solve', 'Enhance', 'Accelerate'];
+  const newArr = [...arr];
+
+  words.forEach((word) => {
+    const pos = Math.floor(Math.random() * newArr.length);
+    newArr.splice(pos, 0, { type: 'text', value: word });
+  });
+
+  return newArr;
+};
+
 const Slide3 = () => {
   const t = useTranslations('Home');
+
+  // Left + Right data with text boxes
+  const leftColumnData = insertTextBoxes(images);
+  const rightColumnData = insertTextBoxes(images);
 
   return (
     <div className="flex items-center justify-between bg-cover bg-center h-full bg-zinc-100 dark:bg-[#1f1f1f]">
@@ -27,7 +45,7 @@ const Slide3 = () => {
         <img src="/Illustration-7.png" alt="Illustration" />
       </div>
 
-      {/* Side scrolling images - visible on all screens */}
+      {/* Side scrolling columns */}
       <div className="w-full md:w-1/2 h-full flex">
         
         {/* Left column scroll */}
@@ -41,16 +59,25 @@ const Slide3 = () => {
               repeat: Infinity,
             }}
           >
-            {[...images, ...images].map((img, i) => (
-              <Image
-                key={`left-${i}`}
-                src={img}
-                alt={`scroll-img-left-${i}`}
-                className="w-full h-[120px] md:h-[150px] object-cover"
-                width={150}
-                height={150}
-              />
-            ))}
+            {[...leftColumnData, ...leftColumnData].map((item, i) =>
+              typeof item === 'string' ? (
+                <Image
+                  key={`left-img-${i}`}
+                  src={item}
+                  alt={`scroll-img-left-${i}`}
+                  className="w-full h-[120px] md:h-[150px] object-cover"
+                  width={150}
+                  height={150}
+                />
+              ) : (
+                <div
+                  key={`left-text-${i}`}
+                  className="w-full h-[120px] md:h-[150px] flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-2xl font-bold"
+                >
+                  {item.value}
+                </div>
+              )
+            )}
           </motion.div>
         </div>
 
@@ -65,16 +92,25 @@ const Slide3 = () => {
               repeat: Infinity,
             }}
           >
-            {[...images, ...images].map((img, i) => (
-              <Image
-                key={`right-${i}`}
-                src={img}
-                alt={`scroll-img-right-${i}`}
-                className="w-full h-[120px] md:h-[150px] object-cover"
-                width={150}
-                height={150}
-              />
-            ))}
+            {[...rightColumnData, ...rightColumnData].map((item, i) =>
+              typeof item === 'string' ? (
+                <Image
+                  key={`right-img-${i}`}
+                  src={item}
+                  alt={`scroll-img-right-${i}`}
+                  className="w-full h-[120px] md:h-[150px] object-cover"
+                  width={150}
+                  height={150}
+                />
+              ) : (
+                <div
+                  key={`right-text-${i}`}
+                  className="w-full h-[120px] md:h-[150px] flex items-center justify-center bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white text-2xl font-bold"
+                >
+                  {item.value}
+                </div>
+              )
+            )}
           </motion.div>
         </div>
       </div>

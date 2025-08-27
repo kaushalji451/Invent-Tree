@@ -7,7 +7,7 @@ import scenes from "./scenes";
 // Rotating circle component (desktop only)
 const RotatingSceneIndicator = ({ current }) => {
   const activeScene = scenes[current];
-   
+
   return (
     <div
       style={{
@@ -41,12 +41,12 @@ const RotatingSceneIndicator = ({ current }) => {
             initial={{ x: 120, y: 200, opacity: 0 }}
             animate={{ x: 0, y: 0, opacity: 1 }}
             exit={{ x: -120, y: -200, opacity: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }} // faster, no delay
           >
             <div
               style={{
                 width: 450,
-                height: 300, 
+                height: 300,
                 backgroundImage: `url(${activeScene.img})`,
               }}
               className="bg-cover bg-center rounded-2xl"

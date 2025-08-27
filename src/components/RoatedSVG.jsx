@@ -24,13 +24,12 @@ const RoatedSVG = () => {
           />
         </defs>
         <text
-          className="fill-black dark:fill-white"
+          className="fill-black dark:fill-white tracking-[13px]"
           fontSize="20"
           fontFamily="sans-serif"
         >
           <textPath href="#circlePath" startOffset="0%">
-            SCROLL &nbsp; &nbsp; SCROLL &nbsp; &nbsp; SCROLL &nbsp; &nbsp; SCROLL
-            &nbsp; &nbsp; SCROLL &nbsp; &nbsp; SCROLL
+            SOLVE&nbsp;ENHANCE&nbsp;ACCELERATE
           </textPath>
         </text>
       </motion.svg>

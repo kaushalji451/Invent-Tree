@@ -37,13 +37,6 @@ const AdminNavbar = ({ className }) => {
         className,
       )}
     >
-      <Image
-        width={250}
-        height={250}
-        src="https://www.yuitech.jp/wp/wp-content/themes/standard_sass/images/common/logo-bg.svg"
-        className="absolute top-0 left-0 max-sm:w-42"
-        alt=""
-      />
       <Link href={"/"} className="z-10 flex min-md:px-2 min-md:pt-3">
         <img src="/logo/Invent-Tree logo Favicon-08.png" alt="logo" className="max-sm:w-15" />
       </Link>
