@@ -4,6 +4,7 @@ import scenes from "./scenes";
 import SceneCard from "./Desktopcard";
 import MobileCarousel from "./MobileCarsole";
 import { useTranslations } from 'next-intl';
+import { AnimatePresence } from 'framer-motion';
 
 const Slide2 = () => {
   const t = useTranslations('Home');
@@ -25,6 +26,7 @@ const Slide2 = () => {
               {t('slide2.tagline')}
             </p>
           </div>
+          <AnimatePresence>
           {scenes.map((scene, idx) => (
             <SceneCard
               key={idx}
@@ -34,6 +36,7 @@ const Slide2 = () => {
               currentScene={currentScene}
             />
           ))}
+          </AnimatePresence>
         </div>
       </div>
 

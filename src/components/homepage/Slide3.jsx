@@ -19,13 +19,13 @@ const images = [
 
 // Helper: insert 3 text boxes randomly in array
 const insertTextBoxes = (arr) => {
-  const words = ['Solve', 'Enhance', 'Accelerate'];
+  // const words = ['Solve', 'Enhance', 'Accelerate'];
   const newArr = [...arr];
 
-  words.forEach((word) => {
-    const pos = Math.floor(Math.random() * newArr.length);
-    newArr.splice(pos, 0, { type: 'text', value: word });
-  });
+  // words.forEach((word) => {
+  //   const pos = Math.floor(Math.random() * newArr.length);
+  //   newArr.splice(pos, 0, { type: 'text', value: word });
+  // });
 
   return newArr;
 };

@@ -1,17 +1,17 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from "react";
+import { motion } from "framer-motion";
 const RoatedSVG = () => {
   return (
-    <div className="flex items-center justify-center h-screen relative">
+    <div className="relative flex h-screen items-center justify-center">
       {/* Rotating SVG Circle with text using framer-motion */}
       <motion.svg
         viewBox="0 0 300 300"
-        className="w-[128px] h-[128px]"
+        className="h-[128px] w-[128px]"
         animate={{ rotate: 360 }}
         transition={{
           repeat: Infinity,
           duration: 30,
-          ease: "linear"
+          ease: "linear",
         }}
       >
         <defs>
@@ -24,26 +24,26 @@ const RoatedSVG = () => {
           />
         </defs>
         <text
-          className="fill-black dark:fill-white tracking-[13px]"
+          className="fill-black tracking-[9px] dark:fill-white"
           fontSize="20"
           fontFamily="sans-serif"
         >
           <textPath href="#circlePath" startOffset="0%">
-            SOLVE&nbsp;ENHANCE&nbsp;ACCELERATE
+            &#8226; SOLVE &#8226; ENHANCE &#8226; ACCELERATE
           </textPath>
         </text>
       </motion.svg>
 
       {/* Centered logo */}
-      <div className="absolute text-5xl ">
+      <div className="absolute text-5xl">
         <img
           src="/logo/Invent-Tree logo Favicon-08.png"
           alt="nj logo"
-          className="w-10 h-10 object-contain"
+          className="h-10 w-10 object-contain"
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RoatedSVG
+export default RoatedSVG;

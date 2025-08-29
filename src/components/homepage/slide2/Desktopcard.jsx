@@ -1,5 +1,6 @@
+"use client"
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import { useTranslations } from 'next-intl';
 import RotatingSceneIndicator from './RoatatingCircle';

@@ -9,7 +9,10 @@ const Slide4 = () => {
   const [inView, setInView] = useState(false);
   const containerRef = useRef(null);
   const hasOpenedRef = useRef(false);
-  const [disableAnimation, setDisableAnimation] = useState(false);
+  const [disableAnimation, setDisableAnimation] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(max-width: 767px)').matches;
+  });
 
   // Dynamic image data from translations
   const image = [
@@ -37,7 +40,9 @@ const Slide4 = () => {
   // Handle responsive animation toggle
   useEffect(() => {
     function checkWidth() {
-      setDisableAnimation(window.innerWidth < 768);
+      const flag = window.innerWidth < 768
+      setDisableAnimation(flag);
+      console.log(flag)
     }
     checkWidth();
     window.addEventListener('resize', checkWidth);

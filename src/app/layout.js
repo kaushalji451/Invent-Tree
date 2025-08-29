@@ -1,7 +1,7 @@
 "use client";
 import './globals.css';
 import { useState, useEffect } from 'react';
-
+import SmoothScroolContainer from '../components/smooth-scrool';
 export default function RootLayout({ children }) {
   const [showSplash, setShowSplash] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         {!hydrated ? null : showSplash ? (
           <div style={{
@@ -35,8 +35,11 @@ export default function RootLayout({ children }) {
             <img src="/logo/Invent-Tree logo-05.webp" alt="Company Logo" />
           </div>
         ) : (
-          children
+          <SmoothScroolContainer>
+            {children}
+          </SmoothScroolContainer>
         )}
+       
       </body>
     </html>
   );

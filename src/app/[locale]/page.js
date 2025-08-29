@@ -6,6 +6,7 @@ import Slide2 from "../../components/homepage/slide2/Slide2"
 import Slide3 from "../../components/homepage/Slide3"
 import Slide4 from "../../components/homepage/Slide4"
 import Slide5 from "../../components/homepage/Slide5"
+import SmoothScroolContainer from '../../components/smooth-scrool';
 
 const steps = [
   { number: '01', label: 'Home' },
@@ -24,6 +25,7 @@ export default function Page() {
 
   const rafRef = useRef(null);
   const pendingDeltaRef = useRef(0);
+  const targetScrollLeftRef = useRef(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -40,13 +42,32 @@ export default function Page() {
       e.preventDefault();
       pendingDeltaRef.current += e.deltaY;
 
+      // Smoothly ease towards a target scrollLeft
       if (!rafRef.current) {
-        rafRef.current = requestAnimationFrame(() => {
-          const delta = pendingDeltaRef.current;
+        targetScrollLeftRef.current = container.scrollLeft;
+        const step = () => {
+          // accumulate any wheel deltas since last frame
+          targetScrollLeftRef.current += pendingDeltaRef.current;
           pendingDeltaRef.current = 0;
-          container.scrollLeft += delta;
-          rafRef.current = null;
-        });
+
+          const current = container.scrollLeft;
+          const distance = targetScrollLeftRef.current - current;
+          const eased = current + distance * 0.15; // easing factor
+
+          // clamp target within bounds
+          const maxScroll = container.scrollWidth - container.clientWidth;
+          targetScrollLeftRef.current = Math.max(0, Math.min(maxScroll, targetScrollLeftRef.current));
+
+          container.scrollLeft = eased;
+
+          if (Math.abs(distance) > 0.5) {
+            rafRef.current = requestAnimationFrame(step);
+          } else {
+            container.scrollLeft = targetScrollLeftRef.current;
+            rafRef.current = null;
+          }
+        };
+        rafRef.current = requestAnimationFrame(step);
       }
     }
 
@@ -134,13 +155,14 @@ export default function Page() {
   }, []);
 
   return (
+    <SmoothScroolContainer>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
       ref={containerRef}
-      className="w-screen h-screen overflow-auto md:overflow-hidden md:touch-none"
+      className="w-screen md:h-screen md:overflow-x-auto md:overflow-y-hidden md:touch-none"
       style={{ scrollBehavior: 'auto' }}
     >
       {/* Progress Bar Navigation (Desktop Only) */}
@@ -182,7 +204,7 @@ export default function Page() {
 
       {/* Slides */}
       <div className="flex flex-col md:flex-row w-screen md:w-fit h-auto md:h-screen">
-        <div ref={(el) => (slideRefs.current[0] = el)} className="w-[100vw] h-screen max-sm:h-fit flex-shrink-0 bg-cover bg-center bg-[url('/Home-Page-Invent-Tree.png')] dark:bg-[url('/Home-Page-Invent-Tree-Dark.png')]">
+        <div ref={(el) => (slideRefs.current[0] = el)} className="w-[100vw] h-screen max-sm:h-fit flex-shrink-0 bg-cover bg-center bg-[url('/Home-Page-Invent-Tree.png')] dark:bg-[url('/Home-Page-Invent-Tree-Dark.png')] pt-10">
           <Slide1 />
         </div>
         <div ref={(el) => (slideRefs.current[1] = el)} className="h-screen flex-shrink-0 bg-cover  bg-center bg-[url('/Final-Illustration-Light-Mode.png')] dark:bg-[url('/Final-Illustration-Dark-Mode.png')]">
@@ -199,5 +221,6 @@ export default function Page() {
         </div>
       </div>
     </motion.div>
+    </SmoothScroolContainer>
   );
 }
